@@ -16,9 +16,12 @@
     "@rushstack/eslint-patch": "^1.2.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-prettier": "^7.1.0",
+    "autoprefixer": "^10.4.14",
     "eslint": "^8.34.0",
     "eslint-plugin-vue": "^9.9.0",
+    "postcss": "^8.4.21",
     "prettier": "^2.8.4",
+    "tailwindcss": "^3.2.7",
     "vite": "^4.1.4"
   }
 }
