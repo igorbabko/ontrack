@@ -71,8 +71,6 @@ function addActivity(name) {
 }
 
 watch(() => activities.value.length, () => {
-  console.log('aaaaaaaa');
-
   window.scrollTo(0, document.body.scrollHeight);
 }, { flush: 'post' });
 </script>
@@ -82,9 +80,9 @@ watch(() => activities.value.length, () => {
   <!-- <li v-for="activity in activities">{{ activity.name }}</li> -->
   <!-- </ul> -->
 
-  <TheTimeline v-if="view === 'timeline'" :time-ranges="timeRanges" :activities="activities" />
-  <TheActivities v-else-if="view === 'activities'" :activities="activities" @add="addActivity" />
-  <TheGoals v-else-if="view === 'goals'" />
+  <TheTimeline v-show="view === 'timeline'" :time-ranges="timeRanges" :activities="activities" />
+  <TheActivities v-show="view === 'activities'" :activities="activities" @add="addActivity" />
+  <TheGoals v-show="view === 'goals'" />
 
   <TheNav @go="view = $event" />
 </template>

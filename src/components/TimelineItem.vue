@@ -7,7 +7,7 @@ const timerState = ref('stopped');
 
 let stopwatch = null;
 
-const time = ref(0);
+const time = ref(55);
 
 function start() {
   timerState.value = 'running';
@@ -33,7 +33,7 @@ function stop() {
 const date = new Date(null);
 
 const formattedTime = computed(() => {
-  date.setSeconds(time.value);
+  date.setTime(time.value * 1000);
 
   const utc = date.toUTCString();
 
@@ -47,7 +47,7 @@ const formattedTime = computed(() => {
     <select class="p-4 ml-4 mr-auto">
       <option v-for="activity in activities" :selected="activity.name === hour.activity">{{ activity.name }}</option>
     </select>
-    <div v-if="timerState !== 'stopped'">{{ formattedTime }}</div>
+    <div v-if="timerState !== 'stopped'" class="mr-6 font-mono">{{ formattedTime }}</div>
     <button v-if="timerState !== 'stopped'" @click="stop">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="w-6 h-6">
