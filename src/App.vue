@@ -3,6 +3,7 @@
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
+import TheStats from './components/TheStats.vue'
 import TheGoals from './components/TheGoals.vue'
 
 import { ref, shallowRef, watch } from 'vue';
@@ -80,9 +81,13 @@ watch(() => activities.value.length, () => {
   <!-- <li v-for="activity in activities">{{ activity.name }}</li> -->
   <!-- </ul> -->
 
-  <TheTimeline v-show="view === 'timeline'" :time-ranges="timeRanges" :activities="activities" />
-  <TheActivities v-show="view === 'activities'" :activities="activities" @add="addActivity" />
-  <TheGoals v-show="view === 'goals'" />
+
+  <div class="flex-grow">
+    <TheTimeline v-show="view === 'timeline'" :time-ranges="timeRanges" :activities="activities" />
+    <TheActivities v-show="view === 'activities'" :activities="activities" @add="addActivity" />
+    <TheStats v-show="view === 'stats'" />
+    <TheGoals v-show="view === 'goals'" />
+  </div>
 
   <TheNav @go="view = $event" />
 </template>
