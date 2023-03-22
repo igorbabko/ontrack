@@ -1,14 +1,11 @@
 <script setup>
+import TimelineItem from './TimelineItem.vue';
+
 defineProps(['timeRanges', 'activities'])
 </script>
 
 <template>
   <ul>
-    <li v-for="hour in timeRanges" class="h-24 border m-2 p-4 flex justify-between items-center">
-      {{ hour.id }}
-      <select class="p-4">
-        <option v-for="activity in activities" :selected="activity.name === hour.activity">{{ activity.name }}</option>
-      </select>
-    </li>
+    <TimelineItem v-for="hour in timeRanges" :hour="hour" :activities="activities" />
   </ul>
 </template>
