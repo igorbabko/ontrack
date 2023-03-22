@@ -12,27 +12,27 @@ const view = shallowRef('timeline');
 
 const timeRanges = [
   {
-    id: 0,
+    id: '00',
     activity: 'Coding'
   },
   {
-    id: 1,
+    id: '01',
     activity: 'Training'
   },
   {
-    id: 2,
+    id: '02',
     activity: 'Reading'
   },
   {
-    id: 3,
+    id: '03',
     activity: 'Coding'
   },
   {
-    id: 4,
+    id: '04',
     activity: 'Training'
   },
   {
-    id: 5,
+    id: '05',
     activity: 'Reading'
   },
 ];
