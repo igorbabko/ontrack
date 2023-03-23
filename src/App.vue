@@ -4,7 +4,7 @@ import { activities as activityItems, goals as goalItems, timelineActivities as 
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
-import TheStats from './components/TheStats.vue'
+import TheGoals from './components/TheGoals.vue'
 
 const activities = ref(activityItems);
 const goals = ref(goalItems);
@@ -37,7 +37,7 @@ watch(() => activities.value.length, () => {
       :activities="activities"
       :goals="goals"
       @add="addActivity" />
-    <TheStats
+    <TheGoals
       v-show="view === 'stats'"
       :activities="activities"
       :timeline-activities="timelineActivities"

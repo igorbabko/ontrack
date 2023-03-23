@@ -9,6 +9,8 @@ const a = ref();
 const height = ref();
 
 function b() {
+  console.log('aaaaaa');
+
   const dt = new Date();
 
   var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
