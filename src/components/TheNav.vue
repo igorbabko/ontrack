@@ -8,7 +8,7 @@ const emit = defineEmits(['go']);
       <li><a href="#timeline" @click="emit('go', 'timeline')">Timeline</a></li>
       <li><a href="#activities" @click="emit('go', 'activities')">Activities</a></li>
       <li><a href="#stats" @click="emit('go', 'stats')">Stats</a></li>
-      <li><a href="#goals" @click="emit('go', 'goals')">Goals</a></li>
+      <!-- <li><a href="#goals" @click="emit('go', 'goals')">Goals</a></li> -->
     </ul>
   </nav>
 </template>

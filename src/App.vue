@@ -1,16 +1,15 @@
 <script setup>
-// import TheWelcome from './components/TheWelcome.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
 import TheStats from './components/TheStats.vue'
 import TheGoals from './components/TheGoals.vue'
 
-import { ref, shallowRef, watch } from 'vue';
+import { ref, watch } from 'vue';
 
-const view = shallowRef('timeline');
+const view = ref(window.location.hash.slice(1) || 'timeline');
 
-const timeRanges = [
+const hours = [
   {
     id: '00',
     activity: 'Coding',
@@ -42,6 +41,12 @@ const timeRanges = [
     time: 0
   },
 ];
+
+const goals = {
+  Coding: 60,
+  Training: 120,
+  // reading: 45
+};
 
 const activities = ref([
   {
@@ -83,14 +88,9 @@ watch(() => activities.value.length, () => {
 </script>
 
 <template>
-  <!-- <ul> -->
-  <!-- <li v-for="activity in activities">{{ activity.name }}</li> -->
-  <!-- </ul> -->
-
-
   <div class="flex-grow">
-    <TheTimeline v-show="view === 'timeline'" :time-ranges="timeRanges" :activities="activities" />
-    <TheActivities v-show="view === 'activities'" :activities="activities" @add="addActivity" />
+    <TheTimeline v-show="view === 'timeline'" :hours="hours" :activities="activities" />
+    <TheActivities v-show="view === 'activities'" :activities="activities" :goals="goals" @add="addActivity" />
     <TheStats v-show="view === 'stats'" />
     <TheGoals v-show="view === 'goals'" />
   </div>
