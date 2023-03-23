@@ -16,19 +16,25 @@ function add() {
 </script>
 
 <template>
-  <ul>
-    <li v-for="activity in activities" class="h-24 border m-2 p-4 flex justify-between items-center">
-      {{ activity.name }}
-      <select class="p-1 px-2 rounded">
-        <option v-for="timeRange in [30, 60, 120]" :selected="timeRange === goals[activity.name]">{{ timeRange }} min</option>
-      </select>
-    </li>
-    <li class="h-24 border m-2 flex p-4 items-center">
-      <form @submit.prevent="add" class="w-full flex justify-between">
-        <input type="text" v-model="title" class="border bg-gray-100 p-2 flex-grow" placeholder="Activity name">
-        <button class="bg-purple-900 text-white py-1 px-2 rounded">Add</button>
-      </form>
-    </li>
-  </ul>
-  <!-- <BaseButtonFloating /> -->
+  <div>
+    <ul class="divide-y">
+      <li v-for="activity in activities" class="p-4 flex justify-between items-center">
+        {{ activity.name }}
+        <select class="p-1 px-2 rounded">
+          <option v-for="timeRange in [30, 60, 120]" :selected="timeRange === goals[activity.name]">{{ timeRange }} min
+          </option>
+        </select>
+      </li>
+    </ul>
+    <form @submit.prevent="add" class="p-4 w-full flex justify-between gap-2">
+      <input type="text" v-model="title" class="border flex-grow rounded px-2" placeholder="Activity name">
+      <button class="bg-purple-900 text-white p-1 rounded">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+
+      </button>
+    </form>
+  </div>
 </template>

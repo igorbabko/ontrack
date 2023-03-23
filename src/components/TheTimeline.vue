@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import TimelineItem from './TimelineItem.vue';
 
-defineProps(['timeRanges', 'activities'])
+defineProps(['hours', 'activities'])
 
 const r = ref();
 const a = ref();
@@ -29,9 +29,9 @@ onMounted(() => {
 
 <template>
   <div class="relative" ref="r">
-    <div class="absolute bg-purple-200 w-full" ref="a"></div>
+    <div class="absolute bg-slate-100 border-b-2 border-red-600 w-full" ref="a"></div>
     <ul class="relative z-10 divide-y">
-      <TimelineItem v-for="hour in timeRanges" :hour="hour" :activities="activities" />
+      <TimelineItem v-for="hour in hours" :hour="hour" :activities="activities" />
     </ul>
   </div>
 </template>
