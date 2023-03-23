@@ -29,8 +29,8 @@ onMounted(() => {
 
 <template>
   <div class="relative" ref="r">
-    <div class="absolute bg-slate-100 border-b-2 border-red-600 w-full" ref="a"></div>
-    <ul class="relative z-10 divide-y">
+    <div class="absolute bg-slate-100/70 border-b-2 border-red-600 w-full" ref="a"></div>
+    <ul class="divide-y">
       <TimelineActivity
         v-for="timelineActivity, hour in timelineActivities"
         :hour="hour"
