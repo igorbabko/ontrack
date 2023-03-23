@@ -13,13 +13,9 @@ function b() {
 
   var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
 
-  console.log(secs);
-
   const timePercent = 100 * secs / 86400;
 
   height.value = timePercent * r.value.getBoundingClientRect().height / 100;
-
-  console.log(height.value);
 
   a.value.style.height = height.value + 'px';
 }

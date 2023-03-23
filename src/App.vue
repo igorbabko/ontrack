@@ -3,7 +3,6 @@ import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
 import TheStats from './components/TheStats.vue'
-import TheGoals from './components/TheGoals.vue'
 
 import { ref, watch } from 'vue';
 
@@ -13,7 +12,7 @@ const hours = [
   {
     id: '00',
     activity: 'Coding',
-    time: 100
+    time: 4100
   },
   {
     id: '01',
@@ -51,35 +50,17 @@ const goals = {
 const activities = ref([
   {
     name: 'Coding',
-    time: {
-      start: new Date(),
-      end: new Date()
-    }
   },
   {
     name: 'Training',
-    time: {
-      start: new Date(),
-      end: new Date()
-    }
   },
   {
     name: 'Reading',
-    time: {
-      start: new Date(),
-      end: new Date()
-    }
   }
 ]);
 
 function addActivity(name) {
-  activities.value.push({
-    name,
-    time: {
-      start: new Date(),
-      end: new Date(),
-    }
-  });
+  activities.value.push({ name });
 }
 
 watch(() => activities.value.length, () => {
@@ -91,8 +72,7 @@ watch(() => activities.value.length, () => {
   <div class="flex-grow">
     <TheTimeline v-show="view === 'timeline'" :hours="hours" :activities="activities" />
     <TheActivities v-show="view === 'activities'" :activities="activities" :goals="goals" @add="addActivity" />
-    <TheStats v-show="view === 'stats'" />
-    <TheGoals v-show="view === 'goals'" />
+    <TheStats v-show="view === 'stats'" :activities="activities" :hours="hours" :goals="goals" />
   </div>
 
   <TheNav @go="view = $event" />
