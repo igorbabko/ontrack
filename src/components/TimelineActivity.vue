@@ -1,13 +1,14 @@
 <script setup>
 import { ref, computed } from 'vue';
 
-const props = defineProps(['hour', 'activities'])
+const props = defineProps(['timelineActivity', 'activities', 'hour']);
+const emit = defineEmits(['selectActivity']);
 
 const timerState = ref('paused');
 
 let stopwatch = null;
 
-const time = ref(props.hour.time);
+const time = ref(props.timelineActivity.time);
 
 function start() {
   timerState.value = 'running';
@@ -47,38 +48,35 @@ const formattedTime = computed(() => {
 
 <template>
   <li class="p-4 flex items-center">
-  <div class="flex flex-col items-center">
-    <span
-      class="font-black"
-      :class="[
-        { 'font-black text-purple-500': hour.id === '03' },
-        { 'text-slate-300': ['00', '01', '02'].includes(hour.id) }
-      ]"
-    >{{ hour.id }}</span>
+    <div class="flex flex-col items-center">
+      <span
+        class="font-black"
+        :class="[
+          { 'font-black text-purple-500': hour === 3 },
+          { 'text-slate-300': [0, 1, 2].includes(hour) }
+        ]">{{ hour }}</span>
 
       <!-- <div>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                    class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div> -->
 
       <!-- <div>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                    class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div> -->
     </div>
     <div class="flex gap-2 mr-auto ml-4">
-      <select class="py-1 px-2 rounded">
-        <option v-for="activity in [{ name: 'Rest' }, ...activities]" :selected="activity.name === hour.activity">{{
-          activity.name }}</option>
-      </select>
-      <select v-if="hour.activity !== 'Rest'" class="py-1 px-2 rounded">
-        <option v-for="timeRange in [0, 15, 30, 45]" :selected="timeRange === hour.timeRange">{{ timeRange }}</option>
+      <select class="py-1 px-2 rounded" @change="emit('changeActivity', $event)">
+        <option v-for="name, id in { name: 'Rest', ...activities }"
+          :selected="id === timelineActivity.activityId">{{
+            name }}</option>
       </select>
     </div>
     <div v-if="time || timerState !== 'paused'" class="flex">
@@ -92,12 +90,12 @@ const formattedTime = computed(() => {
       <div class="font-mono mr-6">{{ formattedTime }}</div>
     </div>
     <!-- <button v-if="time || timerState !== 'stopped'" @click="stop">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-              class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z" />
-            </svg>
-          </button> -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                  class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z" />
+                </svg>
+              </button> -->
 
     <button v-if="timerState === 'running'" @click="pause">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

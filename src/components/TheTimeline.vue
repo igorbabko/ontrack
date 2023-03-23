@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import TimelineItem from './TimelineItem.vue';
+import TimelineActivity from './TimelineActivity.vue';
 
-defineProps(['hours', 'activities'])
+defineProps(['timelineActivities', 'activities'])
 
 const r = ref();
 const a = ref();
@@ -31,7 +31,12 @@ onMounted(() => {
   <div class="relative" ref="r">
     <div class="absolute bg-slate-100 border-b-2 border-red-600 w-full" ref="a"></div>
     <ul class="relative z-10 divide-y">
-      <TimelineItem v-for="hour in hours" :hour="hour" :activities="activities" />
+      <TimelineActivity
+        v-for="timelineActivity, hour in timelineActivities"
+        :hour="hour"
+        :timeline-activity="timelineActivity"
+        :activities="activities"
+        @change-activity="emit('changeActivity', $event)" />
     </ul>
   </div>
 </template>

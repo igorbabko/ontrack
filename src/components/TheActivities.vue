@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import BaseButtonFloating from './BaseButtonFloating.vue';
 
 defineProps(['activities', 'goals']);
 
@@ -18,10 +17,10 @@ function add() {
 <template>
   <div>
     <ul class="divide-y">
-      <li v-for="activity in activities" class="p-4 flex justify-between items-center">
-        {{ activity.name }}
+      <li v-for="activityName, activityId in activities" class="p-4 flex justify-between items-center">
+        {{ activityName }}
         <select class="p-1 px-2 rounded">
-          <option v-for="timeRange in [30, 60, 120]" :selected="timeRange === goals[activity.name]">{{ timeRange }} min
+          <option v-for="timeRange in [30, 60, 120]" :selected="timeRange === goals[activityId]">{{ timeRange }} min
           </option>
         </select>
       </li>
@@ -33,7 +32,6 @@ function add() {
           class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
-
       </button>
     </form>
   </div>
