@@ -13,27 +13,33 @@ const view = shallowRef('timeline');
 const timeRanges = [
   {
     id: '00',
-    activity: 'Coding'
+    activity: 'Coding',
+    time: 100
   },
   {
     id: '01',
-    activity: 'Training'
+    activity: 'Rest',
+    time: 200
   },
   {
     id: '02',
-    activity: 'Reading'
+    activity: 'Reading',
+    time: 0
   },
   {
     id: '03',
-    activity: 'Coding'
+    activity: 'Coding',
+    time: 400
   },
   {
     id: '04',
-    activity: 'Training'
+    activity: 'Training',
+    time: 500
   },
   {
     id: '05',
-    activity: 'Reading'
+    activity: 'Reading',
+    time: 0
   },
 ];
 
