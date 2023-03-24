@@ -16,9 +16,7 @@ const time = ref(props.time);
 function start() {
   isRunning.value = true;
 
-  stopwatch = setInterval(() => {
-    time.value++;
-  }, 1000);
+  stopwatch = setInterval(() => time.value++, 1000);
 }
 
 function reset() {
@@ -38,7 +36,7 @@ function pause() {
 //   clearInterval(stopwatch);
 // }
 
-const date = new Date(null);
+const date = new Date();
 
 const formattedTime = computed(() => {
   date.setTime(time.value * 1000);
