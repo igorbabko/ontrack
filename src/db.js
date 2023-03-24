@@ -21,7 +21,7 @@ export const timelineItems = [
     time: 4100,
   },
   {
-    activityId: codingId,
+    activityId: null,
     time: 4100,
   },
   {
