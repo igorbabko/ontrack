@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useProgressIndicator } from '../composables/progressIndicator';
-import TimelineActivity from './TimelineActivity.vue';
+import TimelineItem from './TimelineItem.vue';
 import TheProgressIndicator from './TheProgressIndicator.vue';
-import TheHeader from './TheHeader.vue'
 
 defineProps(['timelineItems', 'activities'])
 
@@ -14,13 +13,12 @@ useProgressIndicator(progressIndicator);
 
 <template>
   <div>
-  <!-- <TheHeader /> -->
     <TheProgressIndicator ref="progressIndicator" />
     <ul class="divide-y">
-      <TimelineActivity
-        v-for="timelineActivity, hour in timelineItems"
+      <TimelineItem
+        v-for="timelineItem, hour in timelineItems"
         :hour="hour"
-        :timeline-activity="timelineActivity"
+        :timeline-item="timelineItem"
         :activities="activities"
         @change-activity="emit('changeActivity', $event)" />
     </ul>

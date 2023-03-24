@@ -3,7 +3,7 @@ const props = defineProps(['time', 'activityId', 'activities', 'timelineItems'])
 
 function currentTime(activityId) {
   return props.timelineItems
-    .filter((timelineActivity) => timelineActivity.activityId === activityId)
+    .filter((timelineItem) => timelineItem.activityId === activityId)
     .reduce((total, hour) => Math.round((hour.time / 60) + total), 0);
 }
 </script>

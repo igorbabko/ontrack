@@ -1,14 +1,14 @@
 <script setup>
 import { ref, computed } from 'vue';
 
-const props = defineProps(['timelineActivity', 'activities', 'hour']);
+const props = defineProps(['timelineItem', 'activities', 'hour']);
 const emit = defineEmits(['selectActivity']);
 
 const timerState = ref('paused');
 
 let stopwatch = null;
 
-const time = ref(props.timelineActivity.time);
+const time = ref(props.timelineItem.time);
 
 function start() {
   timerState.value = 'running';
@@ -75,7 +75,7 @@ const formattedTime = computed(() => {
     <div class="flex gap-2 mr-auto ml-4">
       <select class="py-1 px-2 rounded" @change="emit('changeActivity', $event)">
         <option v-for="name, id in { name: 'Rest', ...activities }"
-          :selected="id === timelineActivity.activityId">{{
+          :selected="id === timelineItem.activityId">{{
             name }}</option>
       </select>
     </div>
