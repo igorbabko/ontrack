@@ -56,5 +56,5 @@ function go(to) {
       :goals="goals" />
   </main>
 
-  <TheNav @go="go($event)" />
+  <TheNav :page="page" @go="go($event)" />
 </template>
