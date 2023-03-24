@@ -1,11 +1,12 @@
 <script setup>
 import BaseSelect from './BaseSelect.vue'
 
-const props = defineProps(['activityId', 'activities']);
+defineProps(['activityId', 'activities']);
+defineEmits(['selectActivity']);
 </script>
 
 <template>
-  <div class="flex gap-2 mr-auto ml-4">
+  <div class="mr-auto ml-4">
     <BaseSelect
       :selected="activityId"
       :options="activities"

@@ -3,13 +3,15 @@ import ActivityItem from './ActivityItem.vue';
 import ActivityForm from './ActivityForm.vue';
 
 defineProps(['activities', 'goals']);
+
+const emit = defineEmits(['add']);
 </script>
 
 <template>
   <div>
     <ul class="divide-y">
-      <ActivityItem v-for="name, id in activities" :id="id" :name="name" :goals="goals" />
+      <ActivityItem v-for="name, id in activities" :activity="{ id, name }" :goals="goals" />
     </ul>
-    <ActivityForm />
+    <ActivityForm @add="emit('add', $event)" />
   </div>
 </template>

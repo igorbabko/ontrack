@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
-import { activities as activityItems, goals as goalItems, timelineItems as timelineActivityItems } from './db';
+import { id, activities as activityItems, goals as goalItems, timelineItems as timelineActivityItems } from './db';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
@@ -18,7 +18,7 @@ function changeActivityForHour(hour, activity) {
 }
 
 function addActivity(name) {
-  activities.value.push({ name });
+  activities.value[id()] = name;
 }
 
 watch(() => activities.value.length, () => {

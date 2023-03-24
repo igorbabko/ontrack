@@ -10,8 +10,8 @@ defineProps(['timelineItems', 'activities'])
     <TheTimelineIndicator />
     <ul class="divide-y">
       <TimelineItem
-        v-for="timelineItem, hour in timelineItems"
-        :hour="hour"
+        v-for="timelineItem, time in timelineItems"
+        :time="time"
         :timeline-item="timelineItem"
         :activities="activities"
         @change-activity="emit('changeActivity', $event)" />
