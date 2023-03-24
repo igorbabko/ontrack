@@ -21,6 +21,10 @@ function addActivity(name) {
   activities.value[id()] = name;
 }
 
+function deleteActivity({ id }) {
+  delete activities.value[id];
+}
+
 watch(() => activities.value.length, () => {
   window.scrollTo(0, document.body.scrollHeight);
 }, { flush: 'post' });
@@ -43,7 +47,8 @@ function go(to) {
       v-show="page === 'activities'"
       :activities="activities"
       :goals="goals"
-      @add="addActivity" />
+      @add="addActivity"
+      @delete="deleteActivity" />
     <TheGoals
       v-show="page === 'stats'"
       :timeline-items="timelineItems"
