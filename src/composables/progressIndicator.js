@@ -1,6 +1,6 @@
 import { onMounted, onUpdated } from 'vue';
 
-export function useProgress(el) {
+export function useProgressIndicator(el) {
   onMounted(() => {
     updateHeight();
 

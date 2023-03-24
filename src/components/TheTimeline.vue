@@ -1,19 +1,19 @@
 <script setup>
-import { useProgress } from '../composables/useProgress';
 import { ref } from 'vue';
+import { useProgressIndicator } from '../composables/progressIndicator';
 import TimelineActivity from './TimelineActivity.vue';
 import TheProgressIndicator from './TheProgressIndicator.vue';
 
-const a = ref();
-
 defineProps(['timelineActivities', 'activities'])
 
-useProgress(a);
+const progressIndicator = ref();
+
+useProgressIndicator(progressIndicator);
 </script>
 
 <template>
   <div>
-    <TheProgressIndicator ref="a" />
+    <TheProgressIndicator ref="progressIndicator" />
     <ul class="divide-y">
       <TimelineActivity
         v-for="timelineActivity, hour in timelineActivities"
