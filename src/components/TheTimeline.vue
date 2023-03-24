@@ -1,13 +1,13 @@
 <script setup>
 import TimelineItem from './TimelineItem.vue';
-import TheProgressIndicator from './TheProgressIndicator.vue';
+import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
 defineProps(['timelineItems', 'activities'])
 </script>
 
 <template>
   <div>
-    <TheProgressIndicator />
+    <TheTimelineIndicator />
     <ul class="divide-y">
       <TimelineItem
         v-for="timelineItem, hour in timelineItems"
