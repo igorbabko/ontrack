@@ -1,8 +1,8 @@
 <script setup>
-const props = defineProps(['time', 'activityId', 'activities', 'timelineActivities']);
+const props = defineProps(['time', 'activityId', 'activities', 'timelineItems']);
 
 function currentTime(activityId) {
-  return props.timelineActivities
+  return props.timelineItems
     .filter((timelineActivity) => timelineActivity.activityId === activityId)
     .reduce((total, hour) => Math.round((hour.time / 60) + total), 0);
 }

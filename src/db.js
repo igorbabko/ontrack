@@ -15,7 +15,7 @@ export const goals = {
   [trainingId]: 120,
 };
 
-export const timelineActivities = [
+export const timelineItems = [
   {
     activityId: codingId,
     time: 4100,

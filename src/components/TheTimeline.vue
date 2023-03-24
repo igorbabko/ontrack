@@ -3,8 +3,9 @@ import { ref } from 'vue';
 import { useProgressIndicator } from '../composables/progressIndicator';
 import TimelineActivity from './TimelineActivity.vue';
 import TheProgressIndicator from './TheProgressIndicator.vue';
+import TheHeader from './TheHeader.vue'
 
-defineProps(['timelineActivities', 'activities'])
+defineProps(['timelineItems', 'activities'])
 
 const progressIndicator = ref();
 
@@ -13,10 +14,11 @@ useProgressIndicator(progressIndicator);
 
 <template>
   <div>
+  <!-- <TheHeader /> -->
     <TheProgressIndicator ref="progressIndicator" />
     <ul class="divide-y">
       <TimelineActivity
-        v-for="timelineActivity, hour in timelineActivities"
+        v-for="timelineActivity, hour in timelineItems"
         :hour="hour"
         :timeline-activity="timelineActivity"
         :activities="activities"

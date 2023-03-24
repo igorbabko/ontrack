@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
-import { activities as activityItems, goals as goalItems, timelineActivities as timelineActivityItems } from './db';
+import { activities as activityItems, goals as goalItems, timelineItems as timelineActivityItems } from './db';
+import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
@@ -8,9 +9,9 @@ import TheGoals from './components/TheGoals.vue'
 
 const activities = ref(activityItems);
 const goals = ref(goalItems);
-const timelineActivities = ref(timelineActivityItems);
+const timelineItems = ref(timelineActivityItems);
 
-const view = ref(window.location.hash.slice(1) || 'timeline');
+const page = ref(window.location.hash.slice(1) || 'timeline');
 
 function changeActivityForHour(hour, activity) {
   timeline[hour].value.activityId = activity.id;
@@ -23,26 +24,32 @@ function addActivity(name) {
 watch(() => activities.value.length, () => {
   window.scrollTo(0, document.body.scrollHeight);
 }, { flush: 'post' });
+
+function go(to) {
+  page.value = to;
+}
 </script>
 
 <template>
-  <div class="flex-grow">
+  <TheHeader @home="go('timeline')" />
+
+  <main class="flex-grow">
     <TheTimeline
-      v-show="view === 'timeline'"
-      :timeline-activities="timelineActivities"
+      v-show="page === 'timeline'"
+      :timeline-items="timelineItems"
       :activities="activities"
       @change-activity="changeActivityForHour" />
     <TheActivities
-      v-show="view === 'activities'"
+      v-show="page === 'activities'"
       :activities="activities"
       :goals="goals"
       @add="addActivity" />
     <TheGoals
-      v-show="view === 'stats'"
+      v-show="page === 'stats'"
+      :timeline-items="timelineItems"
       :activities="activities"
-      :timeline-activities="timelineActivities"
       :goals="goals" />
-  </div>
+  </main>
 
-  <TheNav @go="view = $event" />
+  <TheNav @go="go($event)" />
 </template>

@@ -1,7 +1,7 @@
 <script setup>
 import GoalItem from './GoalItem.vue';
 
-const props = defineProps(['activities', 'goals', 'timelineActivities']);
+const props = defineProps(['activities', 'goals', 'timelineItems']);
 </script>
 
 <template>
@@ -11,6 +11,6 @@ const props = defineProps(['activities', 'goals', 'timelineActivities']);
       :time="time"
       :activity-id="activityId"
       :activities="activities"
-      :timeline-activities="timelineActivities" />
+      :timeline-items="timelineItems" />
   </ul>
 </template>
