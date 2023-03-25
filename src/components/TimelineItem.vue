@@ -5,7 +5,7 @@ import TimelineStopwatch from './TimelineStopwatch.vue';
 
 defineProps(['timelineItem', 'activities', 'time']);
 
-const emit = defineEmits(['selectActivity']);
+const emit = defineEmits(['selectActivity', 'updateTime']);
 </script>
 
 <template>
@@ -19,6 +19,7 @@ const emit = defineEmits(['selectActivity']);
     <TimelineStopwatch
       v-if="timelineItem.activityId && time <= (new Date).getHours()"
       :for-current-hour="time === (new Date).getHours()"
-      :time="timelineItem.time" />
+      :time="timelineItem.time"
+      @update-time="emit('updateTime', $event)" />
   </li>
 </template>

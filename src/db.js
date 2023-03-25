@@ -19,55 +19,47 @@ export const goals = {
 export const timelineItems = [
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: null,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
-  },
-  {
-    activityId: null,
-    time: null,
-  },
-  {
-    activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: null,
@@ -83,34 +75,42 @@ export const timelineItems = [
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: null,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
   },
   {
     activityId: codingId,
-    time: 4100,
+    time: 0,
+  },
+  {
+    activityId: codingId,
+    time: 0,
   },
 ];

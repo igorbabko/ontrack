@@ -33,6 +33,12 @@ function setGoal({ activityId, time }) {
   goals.value[activityId] = time;
 }
 
+function updateActivityTime({ hour, seconds }) {
+  console.log({ hour, seconds });
+
+  timelineItems.value[hour].time += seconds;
+}
+
 watch(() => activities.value.length, () => {
   window.scrollTo(0, document.body.scrollHeight);
 }, { flush: 'post' });
@@ -51,7 +57,9 @@ function go(to) {
       :timeline-items="timelineItems"
       :activities="activities"
       :current-page="page"
-      @select-activity="selectActivity" />
+      @select-activity="selectActivity"
+      @update-time="updateActivityTime"
+      />
     <TheActivities
       v-show="page === 'activities'"
       :activities="activities"

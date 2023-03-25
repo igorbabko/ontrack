@@ -10,6 +10,8 @@ const props = defineProps({
   time: Number,
 });
 
+const emit = defineEmits(['updateTime']);
+
 const isRunning = ref(false);
 const time = ref(props.time);
 
@@ -30,10 +32,16 @@ const shouldShowTime = computed(() => time.value || isRunning.value);
 function start() {
   isRunning.value = true;
 
-  stopwatch = setInterval(() => time.value++, 1000);
+  stopwatch = setInterval(() => {
+    emit('updateTime', 1);
+
+    time.value++;
+  }, 1000);
 }
 
 function reset() {
+  emit('updateTime', -time.value);
+
   time.value = 0;
 }
 
