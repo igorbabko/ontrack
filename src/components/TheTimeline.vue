@@ -24,7 +24,7 @@ function scrollToCurrentHour() {
 
 <template>
   <div>
-    <TheTimelineIndicator />
+    <TheTimelineIndicator :current-page="currentPage" />
     <ul class="divide-y divide-gray-200">
       <TimelineItem
         v-for="timelineItem, time in timelineItems"

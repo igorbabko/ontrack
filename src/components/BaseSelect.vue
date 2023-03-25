@@ -7,9 +7,9 @@ defineProps(['selected', 'options', 'placeholder']);
 
 const emit = defineEmits(['select']);
 
-onUpdated(() => {
-  console.log('updated');
-});
+// onUpdated(() => {
+//   console.log('updated');
+// });
 </script>
 
 <template>
