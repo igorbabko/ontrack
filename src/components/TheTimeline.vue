@@ -18,7 +18,13 @@ watchEffect(async () => {
 });
 
 function scrollToCurrentHour() {
-  timelineItemRefs.value[(new Date).getHours()].$el.scrollIntoView();
+  const currentHour = (new Date).getHours();
+
+  if (currentHour === 0) {
+    document.body.scrollIntoView();
+  } else {
+    timelineItemRefs.value[currentHour - 1].$el.scrollIntoView();
+  }
 }
 </script>
 

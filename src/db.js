@@ -5,15 +5,15 @@ const trainingId = id();
 const readingId = id();
 
 export const activities = {
-  [codingId]: 'Coding',
-  [trainingId]: 'Training',
-  [readingId]: 'Reading',
+  // [codingId]: 'Coding',
+  // [trainingId]: 'Training',
+  // [readingId]: 'Reading',
 };
 
 export const goals = {
-  [codingId]: 60,
-  [trainingId]: 120,
-  [readingId]: 0,
+  // [codingId]: 60,
+  // [trainingId]: 120,
+  // [readingId]: 0,
 };
 
 export const timelineItems = [
