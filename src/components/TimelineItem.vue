@@ -9,7 +9,8 @@ const emit = defineEmits(['selectActivity', 'updateTime']);
 </script>
 
 <template>
-  <li class="p-4 flex gap-1 relative">
+  <li
+    :class="['p-4', 'flex', 'gap-1', 'relative', 'border-t', 'border-gray-200', { 'opacity-50 pointer-events-none': time < (new Date).getHours() }]">
     <TimelineTime :time="time" />
     <TimelineActivity
       :activity-id="timelineItem.activityId"
