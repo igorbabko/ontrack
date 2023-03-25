@@ -5,6 +5,6 @@ import { ArrowPathIcon } from '@heroicons/vue/24/outline';
 
 <template>
   <BaseButton type="danger">
-    <ArrowPathIcon class="h-5 w-5" />
+    <ArrowPathIcon class="h-4 w-4" />
   </BaseButton>
 </template>

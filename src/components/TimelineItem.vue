@@ -9,13 +9,13 @@ const emit = defineEmits(['selectActivity']);
 </script>
 
 <template>
-  <li class="p-4 flex items-center gap-2">
+  <li class="p-4 flex gap-1 relative">
     <TimelineTime :time="time" />
     <TimelineActivity
       :activity-id="timelineItem.activityId"
       :activities="activities"
       :time="time"
-      @select="emit('selectActivity', $event)" />
+      @select-activity="emit('selectActivity', $event)" />
     <TimelineStopwatch
       v-if="timelineItem.activityId && time <= (new Date).getHours()"
       :for-current-hour="time === (new Date).getHours()"

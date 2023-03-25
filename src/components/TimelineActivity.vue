@@ -1,11 +1,9 @@
 <script setup>
 import BaseSelect from './BaseSelect.vue'
-import BaseButton from './BaseButton.vue'
-import { XMarkIcon } from '@heroicons/vue/24/outline';
 
 defineProps(['activityId', 'activities', 'time']);
 
-const emit = defineEmits(['select']);
+const emit = defineEmits(['selectActivity']);
 </script>
 
 <template>
@@ -15,12 +13,6 @@ const emit = defineEmits(['select']);
       :options="activities"
       :disabled="(new Date).getHours() >= time"
       placeholder="Rest"
-      @change="emit('select', $event.target.value)" />
-    <BaseButton
-      v-if="activityId && (new Date).getHours() < time"
-      type="danger"
-      @click="emit('select', null)">
-      <XMarkIcon class="h-5 w-5" />
-    </BaseButton>
+      @select="emit('selectActivity', $event)" />
   </div>
 </template>

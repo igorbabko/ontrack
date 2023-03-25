@@ -5,6 +5,6 @@ import { PauseIcon } from '@heroicons/vue/24/outline';
 
 <template>
   <BaseButton type="warning">
-    <PauseIcon class="h-5 w-5" />
+    <PauseIcon class="h-4 w-4" />
   </BaseButton>
 </template>
