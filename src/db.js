@@ -13,7 +13,7 @@ export const activities = {
 export const goals = {
   [codingId]: 60,
   [trainingId]: 120,
-  // [readingId]: 30,
+  [readingId]: 0,
 };
 
 export const timelineItems = [
