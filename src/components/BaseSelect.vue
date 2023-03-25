@@ -15,7 +15,7 @@ const emit = defineEmits(['select']);
 <template>
   <div class="flex gap-1">
     <select
-      class="py-1 px-2 text-sm rounded bg-gray-100 disabled:opacity-60 disabled:cursor-not-allowed"
+      class="py-1 px-2 text-sm rounded bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
       @change="emit('select', $event.target.value)">
       <option :selected="[null, undefined].includes(selected)" disabled value="">
         {{ placeholder }}

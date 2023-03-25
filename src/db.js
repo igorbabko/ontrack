@@ -18,7 +18,7 @@ export const goals = {
 
 export const timelineItems = [
   {
-    activityId: codingId,
+    activityId: null,
     time: 0,
   },
   {
@@ -26,91 +26,190 @@ export const timelineItems = [
     time: 0,
   },
   {
-    activityId: codingId,
-    time: 0,
-  },
-  {
-    activityId: codingId,
-    time: 0,
-  },
-  {
-    activityId: codingId,
-    time: 0,
-  },
-  {
-    activityId: codingId,
-    time: 0,
-  },
-  {
-    activityId: codingId,
-    time: 0,
-  },
-  {
-    activityId: codingId,
-    time: 0,
-  },
-  {
-    activityId: codingId,
-    time: 0,
-  },
-  {
-    activityId: codingId,
-    time: 0,
-  },
-  {
-    activityId: codingId,
+    activityId: null,
     time: 0,
   },
   {
     activityId: null,
-    time: null,
-  },
-  {
-    activityId: codingId,
     time: 0,
   },
   {
     activityId: null,
-    time: null,
-  },
-  {
-    activityId: codingId,
     time: 0,
   },
   {
     activityId: null,
-    time: null,
-  },
-  {
-    activityId: codingId,
     time: 0,
   },
   {
-    activityId: codingId,
+    activityId: null,
     time: 0,
   },
   {
-    activityId: codingId,
+    activityId: null,
     time: 0,
   },
   {
-    activityId: codingId,
+    activityId: null,
     time: 0,
   },
   {
-    activityId: codingId,
+    activityId: null,
     time: 0,
   },
   {
-    activityId: codingId,
+    activityId: null,
     time: 0,
   },
   {
-    activityId: codingId,
+    activityId: null,
     time: 0,
   },
   {
-    activityId: codingId,
+    activityId: null,
     time: 0,
   },
-];
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+  {
+    activityId: null,
+    time: 0,
+  },
+]
+
+// export const timelineItems = [
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: null,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: null,
+//     time: null,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: null,
+//     time: null,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: null,
+//     time: null,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+//   {
+//     activityId: codingId,
+//     time: 0,
+//   },
+// ];
