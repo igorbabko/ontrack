@@ -22,7 +22,11 @@ const options = {
       <XMarkIcon class="h-4 w-4" />
     </BaseButton>
     <span class="mr-auto flex items-center">{{ activity.name }}</span>
-    <ActivityGoal :activity="activity" :goal="goals[activity.id]" :timeline-items="timelineItems" />
+    <ActivityGoal
+      v-if="goals[activity.id]"
+      :activity="activity"
+      :goal="goals[activity.id]"
+      :timeline-items="timelineItems" />
     <BaseSelect
       :selected="goals[activity.id] || null"
       :options="options"
