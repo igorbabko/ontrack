@@ -21,7 +21,7 @@ const options = {
     <BaseButton type="danger" @click="emit('delete')">
       <XMarkIcon class="h-4 w-4" />
     </BaseButton>
-    <span class="mr-auto flex items-center">{{ activity.name }}</span>
+    <span class="mr-auto truncate">{{ activity.name }}</span>
     <ActivityGoal
       v-if="goals[activity.id]"
       :activity="activity"

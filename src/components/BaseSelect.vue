@@ -24,7 +24,10 @@ const emit = defineEmits(['select']);
         {{ label }}
       </option>
     </select>
-    <BaseButton type="neutral" @click="emit('select', null)">
+    <BaseButton
+      type="neutral"
+      :disabled="[null, undefined].includes(selected)"
+      @click="emit('select', null)">
       <XMarkIcon class="h-4 w-4" />
     </BaseButton>
   </div>
