@@ -15,6 +15,7 @@ defineProps(['timelineItem', 'activities', 'time']);
       :time="time" />
     <TimelineStopwatch
       v-if="time <= (new Date).getHours()"
+      :for-current-hour="time === (new Date).getHours()"
       :time="timelineItem.time" />
   </li>
 </template>
