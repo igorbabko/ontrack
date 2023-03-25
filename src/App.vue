@@ -28,6 +28,12 @@ function deleteActivity({ id }) {
   delete activities.value[id];
 }
 
+function setGoal({ activityId, time }) {
+  console.log({ activityId, time});
+
+  goals.value[activityId] = time;
+}
+
 watch(() => activities.value.length, () => {
   window.scrollTo(0, document.body.scrollHeight);
 }, { flush: 'post' });
@@ -40,7 +46,7 @@ function go(to) {
 <template>
   <!-- <TheHeader @home="go('timeline')" /> -->
 
-  <main class="flex-grow">
+  <main class="flex flex-col flex-grow">
     <TheTimeline
       v-show="page === 'timeline'"
       :timeline-items="timelineItems"
@@ -52,7 +58,8 @@ function go(to) {
       :activities="activities"
       :goals="goals"
       @add="addActivity"
-      @delete="deleteActivity" />
+      @delete="deleteActivity"
+      @set-goal="setGoal" />
     <TheGoals
       v-show="page === 'goals'"
       :timeline-items="timelineItems"

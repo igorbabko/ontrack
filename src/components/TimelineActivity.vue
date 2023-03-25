@@ -14,7 +14,7 @@ const emit = defineEmits(['select']);
       :selected="activityId"
       :options="activities"
       :disabled="(new Date).getHours() >= time"
-      placeholder="Pick Activity"
+      placeholder="Rest"
       @change="emit('select', $event.target.value)" />
     <BaseButton
       v-if="activityId && (new Date).getHours() < time"
