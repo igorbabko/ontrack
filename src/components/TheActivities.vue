@@ -2,7 +2,7 @@
 import ActivityItem from './ActivityItem.vue';
 import ActivityForm from './ActivityForm.vue';
 
-defineProps(['activities', 'goals']);
+defineProps(['activities', 'goals', 'timelineItems']);
 
 const emit = defineEmits(['add', 'delete', 'setGoal']);
 </script>
@@ -14,9 +14,9 @@ const emit = defineEmits(['add', 'delete', 'setGoal']);
         v-for="name, id in activities"
         :activity="{ id, name }"
         :goals="goals"
-        @delete="emit('delete', $event)"
-        @set-goal="emit('setGoal', $event)"
-        />
+        :timeline-items="timelineItems"
+        @delete="emit('delete', { id, name })"
+        @set-goal="emit('setGoal', $event)" />
     </ul>
     <ActivityForm @add="emit('add', $event)" />
   </div>

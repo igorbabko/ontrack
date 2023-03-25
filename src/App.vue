@@ -5,7 +5,6 @@ import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
-import TheGoals from './components/TheGoals.vue'
 
 const activities = ref(activityItems);
 const goals = ref(goalItems);
@@ -57,14 +56,10 @@ function go(to) {
       v-show="page === 'activities'"
       :activities="activities"
       :goals="goals"
+      :timeline-items="timelineItems"
       @add="addActivity"
       @delete="deleteActivity"
       @set-goal="setGoal" />
-    <TheGoals
-      v-show="page === 'goals'"
-      :timeline-items="timelineItems"
-      :activities="activities"
-      :goals="goals" />
   </main>
 
   <TheNav :current-page="page" @go="go($event)" />

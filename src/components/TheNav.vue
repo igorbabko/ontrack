@@ -1,5 +1,5 @@
 <script setup>
-import { ClockIcon, ListBulletIcon, ChartBarIcon } from '@heroicons/vue/24/outline';
+import { ClockIcon, ListBulletIcon } from '@heroicons/vue/24/outline';
 import NavItem from './NavItem.vue'
 
 defineProps(['currentPage']);
@@ -9,7 +9,6 @@ const emit = defineEmits(['go']);
 const navItems = {
   timeline: ClockIcon,
   activities: ListBulletIcon,
-  goals: ChartBarIcon
 }
 </script>
 
