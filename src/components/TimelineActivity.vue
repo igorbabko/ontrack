@@ -2,15 +2,16 @@
 import BaseSelect from './BaseSelect.vue'
 
 defineProps(['activityId', 'activities']);
-defineEmits(['selectActivity']);
+
+const emit = defineEmits(['selectActivity']);
 </script>
 
 <template>
-  <div class="mr-auto ml-4">
+  <div class="mr-auto">
     <BaseSelect
       :selected="activityId"
       :options="activities"
-      placeholder="Pick Activity"
-      @change="emit('changeActivity', $event)" />
+      placeholder="Rest"
+      @change="emit('selectActivity', $event)" />
   </div>
 </template>

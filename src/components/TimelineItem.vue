@@ -7,7 +7,7 @@ defineProps(['timelineItem', 'activities', 'time']);
 </script>
 
 <template>
-  <li class="p-4 flex items-center">
+  <li class="p-4 flex items-center gap-2">
     <TimelineTime :time="time" />
     <TimelineActivity :activity-id="timelineItem.activityId" :activities="activities" />
     <TimelineStopwatch :time="timelineItem.time" />

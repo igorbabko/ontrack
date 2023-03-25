@@ -50,11 +50,11 @@ function go(to) {
       @add="addActivity"
       @delete="deleteActivity" />
     <TheGoals
-      v-show="page === 'stats'"
+      v-show="page === 'goals'"
       :timeline-items="timelineItems"
       :activities="activities"
       :goals="goals" />
   </main>
 
-  <TheNav :page="page" @go="go($event)" />
+  <TheNav :current-page="page" @go="go($event)" />
 </template>

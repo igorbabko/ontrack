@@ -1,8 +1,13 @@
 <script setup>
+import { onUpdated } from 'vue';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
 defineProps(['timelineItems', 'activities'])
+
+onUpdated(() => {
+  console.log('timeline');
+});
 </script>
 
 <template>

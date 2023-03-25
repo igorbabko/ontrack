@@ -9,7 +9,11 @@ onMounted(() => {
   setInterval(updateHeight, 60 * 1000);
 });
 
-onUpdated(updateHeight);
+onUpdated(() => {
+  console.log('timeline indicator');
+
+  updateHeight();
+});
 
 function updateHeight() {
   el.value.style.height = `${height()}px`;

@@ -8,6 +8,8 @@ defineProps({
 
 const typeClasses = {
   primary: 'bg-purple-500 hover:bg-purple-600',
+  success: 'bg-green-500 hover:bg-green-600',
+  warning: 'bg-yellow-500 hover:bg-yellow-600',
   danger: 'bg-red-500 hover:bg-red-600',
 };
 </script>
