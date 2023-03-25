@@ -13,8 +13,9 @@ const timelineItems = ref(timelineActivityItems);
 
 const page = ref(window.location.hash.slice(1) || 'timeline');
 
-function changeActivityForHour(hour, activity) {
-  timeline[hour].value.activityId = activity.id;
+function selectActivity({ hour, activityId }) {
+  timelineItems.value[hour].activityId = activityId;
+  timelineItems.value[hour].time = 0;
 }
 
 function addActivity(name) {
@@ -35,14 +36,14 @@ function go(to) {
 </script>
 
 <template>
-  <TheHeader @home="go('timeline')" />
+  <!-- <TheHeader @home="go('timeline')" /> -->
 
   <main class="flex-grow">
     <TheTimeline
       v-show="page === 'timeline'"
       :timeline-items="timelineItems"
       :activities="activities"
-      @change-activity="changeActivityForHour" />
+      @select-activity="selectActivity" />
     <TheActivities
       v-show="page === 'activities'"
       :activities="activities"

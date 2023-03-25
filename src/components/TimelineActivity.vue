@@ -3,7 +3,7 @@ import BaseSelect from './BaseSelect.vue'
 
 defineProps(['activityId', 'activities', 'time']);
 
-const emit = defineEmits(['selectActivity']);
+const emit = defineEmits(['select']);
 </script>
 
 <template>
@@ -13,6 +13,6 @@ const emit = defineEmits(['selectActivity']);
       :options="activities"
       :disabled="(new Date).getHours() >= time"
       placeholder="Rest"
-      @change="emit('selectActivity', $event)" />
+      @change="emit('select', $event)" />
   </div>
 </template>

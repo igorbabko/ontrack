@@ -5,19 +5,21 @@ import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
 defineProps(['timelineItems', 'activities'])
 
+const emit = defineEmits(['selectActivity']);
+
 const timelineItemRefs = ref([]);
 
 onMounted(scrollToCurrentHour);
 onUpdated(scrollToCurrentHour);
 
 function scrollToCurrentHour() {
-  timelineItemRefs.value[(new Date).getHours() - 1].$el.scrollIntoView();
+  timelineItemRefs.value[(new Date).getHours()].$el.scrollIntoView();
 }
 </script>
 
 <template>
   <div>
-    <!-- <TheTimelineIndicator /> -->
+    <TheTimelineIndicator />
     <ul class="divide-y">
       <TimelineItem
         v-for="timelineItem, time in timelineItems"
@@ -25,7 +27,7 @@ function scrollToCurrentHour() {
         :timeline-item="timelineItem"
         :activities="activities"
         ref="timelineItemRefs"
-        @change-activity="emit('changeActivity', $event)" />
+        @select-activity="emit('selectActivity', { activityId: $event, hour: time })" />
     </ul>
   </div>
 </template>

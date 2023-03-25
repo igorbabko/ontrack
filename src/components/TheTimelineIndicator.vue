@@ -33,5 +33,5 @@ function seconds() {
 </script>
 
 <template>
-  <div ref="el" class="absolute border-b-2 border-red-600 w-full"></div>
+  <div ref="el" class="absolute border-b-2 border-red-600 w-full pointer-events-none"></div>
 </template>
