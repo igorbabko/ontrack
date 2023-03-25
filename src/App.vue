@@ -49,7 +49,7 @@ function go(to) {
 </script>
 
 <template>
-  <!-- <TheHeader @home="go('timeline')" /> -->
+  <TheHeader @home="go('timeline')" />
 
   <main class="flex flex-col flex-grow">
     <TheTimeline

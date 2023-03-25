@@ -13,7 +13,7 @@ const navItems = {
 </script>
 
 <template>
-  <nav class="sticky bottom-0 bg-white">
+  <nav class="sticky bottom-0 bg-white z-10">
     <ul class="flex justify-around items-center list-style-none border-t w-screen">
       <NavItem
         v-for="icon, page in navItems"

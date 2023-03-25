@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect, onMounted, nextTick } from 'vue';
+import { ref, watchPostEffect, onMounted, nextTick } from 'vue';
 
 const props = defineProps(['currentPage']);
 
@@ -11,7 +11,7 @@ onMounted(() => {
   setInterval(updateHeight, 60 * 1000);
 });
 
-watchEffect(async () => {
+watchPostEffect(async () => {
   if (props.currentPage === 'timeline') {
     await nextTick();
 

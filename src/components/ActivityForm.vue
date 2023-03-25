@@ -17,7 +17,7 @@ function submit() {
 <template>
   <form @submit.prevent="submit" class="p-4 w-full flex justify-between gap-2">
     <input type="text" v-model="name" class="border flex-grow rounded px-2" placeholder="Activity name">
-    <BaseButton :disabled="name === ''">
+    <BaseButton :disabled="name.trim() === ''">
       <PlusIcon class="h-5 w-5" />
     </BaseButton>
   </form>
