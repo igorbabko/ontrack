@@ -15,7 +15,7 @@ const typeClasses = {
 </script>
 
 <template>
-  <button :class="`text-white p-1 rounded disabled:opacity-70 disabled:pointer-events-none ${typeClasses[type]}`">
+  <button :class="`text-white p-1 rounded disabled:opacity-60 disabled:cursor-not-allowed ${typeClasses[type]}`">
     <slot></slot>
   </button>
 </template>

@@ -74,12 +74,12 @@ export const timelineItems = [
     time: null,
   },
   {
-    activityId: codingId,
-    time: 4100,
+    activityId: null,
+    time: null,
   },
   {
-    activityId: codingId,
-    time: 4100,
+    activityId: null,
+    time: null,
   },
   {
     activityId: codingId,

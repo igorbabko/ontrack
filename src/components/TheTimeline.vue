@@ -1,13 +1,18 @@
 <script setup>
-import { onUpdated } from 'vue';
+import { ref, onMounted, onUpdated } from 'vue';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
 defineProps(['timelineItems', 'activities'])
 
-onUpdated(() => {
-  console.log('timeline');
-});
+const timelineItemRefs = ref([]);
+
+onMounted(scrollToCurrentHour);
+onUpdated(scrollToCurrentHour);
+
+function scrollToCurrentHour() {
+  timelineItemRefs.value[(new Date).getHours() - 1].$el.scrollIntoView();
+}
 </script>
 
 <template>
@@ -19,6 +24,7 @@ onUpdated(() => {
         :time="time"
         :timeline-item="timelineItem"
         :activities="activities"
+        ref="timelineItemRefs"
         @change-activity="emit('changeActivity', $event)" />
     </ul>
   </div>
