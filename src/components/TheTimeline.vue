@@ -1,16 +1,21 @@
 <script setup>
-import { ref, onMounted, onUpdated } from 'vue';
+import { ref, watchEffect, nextTick } from 'vue';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
-defineProps(['timelineItems', 'activities'])
+const props = defineProps(['timelineItems', 'activities', 'currentPage'])
 
 const emit = defineEmits(['selectActivity']);
 
 const timelineItemRefs = ref([]);
 
-onMounted(scrollToCurrentHour);
-onUpdated(scrollToCurrentHour);
+watchEffect(async () => {
+  if (props.currentPage === 'timeline') {
+    await nextTick();
+
+    scrollToCurrentHour()
+  }
+});
 
 function scrollToCurrentHour() {
   timelineItemRefs.value[(new Date).getHours()].$el.scrollIntoView();

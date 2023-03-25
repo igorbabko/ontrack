@@ -45,6 +45,7 @@ function go(to) {
       v-show="page === 'timeline'"
       :timeline-items="timelineItems"
       :activities="activities"
+      :current-page="page"
       @select-activity="selectActivity" />
     <TheActivities
       v-show="page === 'activities'"
