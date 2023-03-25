@@ -4,7 +4,7 @@ defineProps(['selected', 'options', 'placeholder']);
 
 <template>
   <select class="py-1 px-2 rounded bg-gray-100 disabled:opacity-60 disabled:cursor-not-allowed">
-    <option>{{ placeholder }}</option>
+    <option disabled value="" :selected="selected === null">{{ placeholder }}</option>
     <option
       v-for="label, value in options"
       :selected="value == selected"

@@ -14,8 +14,10 @@ const timelineItems = ref(timelineActivityItems);
 const page = ref(window.location.hash.slice(1) || 'timeline');
 
 function selectActivity({ hour, activityId }) {
-  timelineItems.value[hour].activityId = activityId;
-  timelineItems.value[hour].time = 0;
+  timelineItems.value[hour] = {
+    activityId,
+    time: 0,
+  };
 }
 
 function addActivity(name) {

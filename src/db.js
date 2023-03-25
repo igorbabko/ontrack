@@ -74,8 +74,8 @@ export const timelineItems = [
     time: null,
   },
   {
-    activityId: null,
-    time: null,
+    activityId: codingId,
+    time: 0,
   },
   {
     activityId: null,
