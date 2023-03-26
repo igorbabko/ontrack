@@ -1,26 +1,26 @@
 <script setup>
-import TimelineTime from './TimelineTime.vue';
+import TimelineHour from './TimelineHour.vue';
 import TimelineActivity from './TimelineActivity.vue';
 import TimelineStopwatch from './TimelineStopwatch.vue';
 
-defineProps(['timelineItem', 'activities', 'time']);
+defineProps(['timelineItem', 'activities']);
 
-const emit = defineEmits(['selectActivity', 'updateTime', 'scrollTo']);
+const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']);
 </script>
 
 <template>
   <li
     :class="['p-4', 'flex', 'gap-1', 'relative', 'border-t', 'border-gray-200', { 'opacity-50 pointer-events-none': time < (new Date).getHours() }]">
-    <TimelineTime :time="time" @click.prevent="emit('scrollTo')" />
+    <TimelineHour :hour="timelineItem.hour" @click.prevent="emit('scrollTo')" />
     <TimelineActivity
       :activity-id="timelineItem.activityId"
       :activities="activities"
-      :time="time"
-      @select-activity="emit('selectActivity', $event)" />
+      :hour="timelineItem.hour"
+      @select="emit('selectActivity', $event)" />
     <TimelineStopwatch
-      v-if="timelineItem.activityId && time <= (new Date).getHours()"
-      :for-current-hour="time === (new Date).getHours()"
-      :time="timelineItem.time"
-      @update-time="emit('updateTime', $event)" />
+      v-if="timelineItem.activityId && timelineItem.hour <= (new Date).getHours()"
+      :for-current-hour="timelineItem.hour === (new Date).getHours()"
+      :seconds="timelineItem.seconds"
+      @update-seconds="emit('updateActivitySeconds', $event)" />
   </li>
 </template>

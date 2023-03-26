@@ -7,42 +7,42 @@ import StopwatchTime from './StopwatchTime.vue';
 
 const props = defineProps({
   forCurrentHour: Boolean,
-  time: Number,
+  seconds: Number,
 });
 
-const emit = defineEmits(['updateTime']);
+const emit = defineEmits(['updateSeconds']);
 
 const isRunning = ref(false);
-const time = ref(props.time);
+const seconds = ref(props.seconds);
 
 let stopwatch = null;
 
 const date = new Date();
 
 const formattedTime = computed(() => {
-  date.setTime(time.value * 1000);
+  date.setTime(seconds.value * 1000);
 
   const utc = date.toUTCString();
 
   return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6);
 });
 
-const shouldShowTime = computed(() => time.value || isRunning.value);
+const shouldShowTime = computed(() => seconds.value || isRunning.value);
 
 function start() {
   isRunning.value = true;
 
   stopwatch = setInterval(() => {
-    emit('updateTime', 1);
+    emit('updateSeconds', 1);
 
-    time.value++;
+    seconds.value++;
   }, 1000);
 }
 
 function reset() {
-  emit('updateTime', -time.value);
+  emit('updateSeconds', -seconds.value);
 
-  time.value = 0;
+  seconds.value = 0;
 }
 
 function pause() {
