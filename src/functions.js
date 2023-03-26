@@ -1,4 +1,6 @@
-export const id = () => Date.now().toString(36) + Math.random().toString(36).substring(2);
+export function id() {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+}
 
 export function getCurrentHour() {
   return (new Date).getHours();
@@ -25,23 +27,23 @@ export function generateActivitySelectOptions(activities) {
 }
 
 export function generatePeriodSelectOptions(periodsInMinutes) {
-  return periodsInMinutes.map(periodInMinutes => {
-    const hours = Math.floor(periodInMinutes / 60);
-    const minutes = periodInMinutes % 60;
+  return periodsInMinutes.map(periodInMinutes => ({
+    value: periodInMinutes,
+    label: generatePeriodSelectOptionLabel(periodInMinutes)
+  }));
+}
 
-    let label = '';
+function generatePeriodSelectOptionLabel(periodInMinutes) {
+  const hours = Math.floor(periodInMinutes / 60);
+  const minutes = periodInMinutes % 60;
 
-    if (hours && minutes) {
-      label = `${hours}:${minutes}`;
-    } else if (hours) {
-      label = `${hours}:00`;
-    } else {
-      label = `0:${minutes.toString().padStart(2, 0)}`;
-    }
+  if (hours && minutes) {
+    return `${hours}:${minutes}`;
+  }
 
-    return {
-      value: periodInMinutes,
-      label
-    };
-  });
+  if (hours) {
+    return `${hours}:00`;
+  }
+
+  return `0:${minutes.toString().padStart(2, 0)}`;
 }
