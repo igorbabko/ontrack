@@ -6,10 +6,9 @@ import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
 
-const activities = ref([]);
-const timelineItems = ref(generateTimelineItems());
-
 const currentPage = ref(window.location.hash.slice(1) || 'timeline');
+const timelineItems = ref(generateTimelineItems());
+const activities = ref([]);
 
 function setTimelineItemActivity({ timelineItem, activityId }) {
   timelineItem.activityId = activityId;

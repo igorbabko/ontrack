@@ -1,5 +1,10 @@
+<script>
+import { generatePeriodSelectOptions } from '../functions';
+
+const periodSelectOptions = generatePeriodSelectOptions();
+</script>
+
 <script setup>
-import { periodSelectOptions } from '../db';
 import { XMarkIcon } from '@heroicons/vue/24/outline';
 import BaseButton from './BaseButton.vue';
 import BaseSelect from './BaseSelect.vue';

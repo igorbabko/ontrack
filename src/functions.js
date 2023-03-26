@@ -41,7 +41,11 @@ export function generateActivitySelectOptions(activities) {
   return activities.map(activity => ({ value: activity.id, label: activity.name }));
 }
 
-export function generatePeriodSelectOptions(periodsInMinutes) {
+export function generatePeriodSelectOptions() {
+  const periodsInMinutes = [
+    15, 30, 45, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480
+  ];
+
   return periodsInMinutes.map(periodInMinutes => ({
     value: periodInMinutes,
     label: generatePeriodSelectOptionLabel(periodInMinutes)
@@ -62,3 +66,22 @@ function generatePeriodSelectOptionLabel(periodInMinutes) {
 
   return `0:${minutes.toString().padStart(2, 0)}`;
 }
+
+
+// export const activities = [
+//   {
+//     id: id(),
+//     name: 'Coding',
+//     secondsToComplete: 0,
+//   },
+//   {
+//     id: id(),
+//     name: 'Training',
+//     secondsToComplete: 60,
+//   },
+//   {
+//     id: id(),
+//     name: 'Reading',
+//     secondsToComplete: 120,
+//   },
+// ];
