@@ -2,26 +2,26 @@
 import { computed } from 'vue';
 import TheHeaderLabelDayComplete from './TheHeaderLabelDayComplete.vue';
 
-const props = defineProps(['timelineItems', 'goals']);
+const props = defineProps(['timelineItems', 'activities']);
 
-const emit = defineEmits(['home']);
+const emit = defineEmits(['goToTimeline']);
 
 const isDayComplete = computed(() => {
-  return Object.entries(props.goals).every(([activityId, time]) => {
-    return totalActivityTime(activityId) >= time;
+  return Object.entries(props.activities).every(([activityId, { secondsToComplete }]) => {
+    return totalActivitySeconds(activityId) >= secondsToComplete;
   });
 });
 
-function totalActivityTime(activityId) {
+function totalActivitySeconds(activityId) {
   return props.timelineItems
     .filter((timelineItem) => timelineItem.activityId === activityId)
-    .reduce((total, timelineItem) => Math.round((timelineItem.time/* / 60*/) + total), 0);
+    .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.seconds/* / 60*/) + totalSeconds), 0);
 }
 </script>
 
 <template>
   <header class="sticky z-20 top-0 flex justify-between items-center bg-white border-b w-full p-3 z-10">
-    <a href="#timeline" @click="emit('home')">
+    <a href="#timeline" @click="emit('goToTimeline')">
       <img src="../assets/logo1.png" alt="Logo" class="h-9">
     </a>
     <TheHeaderLabelDayComplete v-if="isDayComplete" />

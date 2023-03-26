@@ -4,7 +4,7 @@ import NavItem from './NavItem.vue'
 
 defineProps(['currentPage']);
 
-const emit = defineEmits(['go']);
+const emit = defineEmits(['navigate']);
 
 const navItems = {
   timeline: ClockIcon,
@@ -19,7 +19,7 @@ const navItems = {
         v-for="icon, page in navItems"
         :href="`#${page}`"
         :selected="page === currentPage"
-        @click="emit('go', page)">
+        @click="emit('navigate', page)">
         <component :is="icon" class="h-6 w-6" /> {{ page }}
       </NavItem>
     </ul>
