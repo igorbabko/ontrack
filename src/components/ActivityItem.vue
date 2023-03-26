@@ -1,9 +1,9 @@
 <script setup>
 import { periodSelectOptions } from '@/config';
 import { XMarkIcon } from '@heroicons/vue/24/outline';
-import BaseButton from './BaseButton.vue'
-import BaseSelect from './BaseSelect.vue'
-import ActivityGoal from './ActivityGoal.vue'
+import BaseButton from './BaseButton.vue';
+import BaseSelect from './BaseSelect.vue';
+import ActivityGoal from './ActivityGoal.vue';
 
 const props = defineProps(['activity', 'timelineItems']);
 

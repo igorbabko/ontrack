@@ -17,16 +17,6 @@ const seconds = ref(props.seconds);
 
 let stopwatch = null;
 
-const date = new Date();
-
-const formattedTime = computed(() => {
-  date.setTime(seconds.value * 1000);
-
-  const utc = date.toUTCString();
-
-  return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6);
-});
-
 const shouldShowTime = computed(() => seconds.value || isRunning.value);
 
 function start() {
@@ -39,23 +29,23 @@ function start() {
   }, 1000);
 }
 
-function reset() {
-  emit('updateSeconds', -seconds.value);
-
-  seconds.value = 0;
-}
-
 function pause() {
   isRunning.value = false;
 
   clearInterval(stopwatch);
+}
+
+function reset() {
+  emit('updateSeconds', -seconds.value);
+
+  seconds.value = 0;
 }
 </script>
 
 <template>
   <template v-if="shouldShowTime">
     <StopwatchButtonReset v-if="forCurrentHour" @click="reset" />
-    <StopwatchTime>{{ formattedTime }}</StopwatchTime>
+    <StopwatchTime :seconds="seconds" />
   </template>
   <StopwatchButtonStop v-if="isRunning" @click="pause" />
   <StopwatchButtonStart v-else-if="forCurrentHour" @click="start" />
