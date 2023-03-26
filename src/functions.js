@@ -22,6 +22,21 @@ export function formatTime(seconds) {
   return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6);
 }
 
+export function generateTimelineItems() {
+  const timelineItems = [];
+
+  for (let hour = 1; hour < 24; hour++) {
+    timelineItems.push({
+      id: id(),
+      hour,
+      activityId: null,
+      activitySeconds: 0,
+    });
+  }
+
+  return timelineItems;
+}
+
 export function generateActivitySelectOptions(activities) {
   return activities.map(activity => ({ value: activity.id, label: activity.name }));
 }

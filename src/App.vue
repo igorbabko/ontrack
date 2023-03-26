@@ -1,14 +1,13 @@
 <script setup>
 import { ref } from 'vue';
-import { activities as activitiesData, timelineItems as timelineItemsData } from './db';
-import { id } from './functions';
+import { id, generateTimelineItems } from './functions';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
 
-const activities = ref(activitiesData);
-const timelineItems = ref(timelineItemsData);
+const activities = ref([]);
+const timelineItems = ref(generateTimelineItems());
 
 const currentPage = ref(window.location.hash.slice(1) || 'timeline');
 
@@ -32,14 +31,14 @@ function createActivity(name) {
 }
 
 function deleteActivity(activity) {
-  const activityIndex = activities.value.findIndex(({ id }) => id === activity.id);
-
   timelineItems.value.forEach((timelineItem) => {
     if (timelineItem.activityId === activity.id) {
       timelineItem.activityId = null;
       timelineItem.activitySeconds = 0;
     }
   });
+
+  const activityIndex = activities.value.findIndex(({ id }) => id === activity.id);
 
   activities.value.splice(activityIndex, 1);
 }
