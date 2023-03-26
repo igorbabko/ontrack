@@ -6,7 +6,7 @@ import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
 const props = defineProps(['timelineItems', 'activities', 'currentPage'])
 
-const emit = defineEmits(['selectTimelineItemActivity', 'updateTimelineItemActivitySeconds']);
+const emit = defineEmits(['setTimelineItemActivity', 'updateTimelineItemActivitySeconds']);
 
 const timelineItemRefs = ref([]);
 
@@ -42,7 +42,7 @@ function scrollToTimelineItem(timelineItem, options = {}) {
         :activities="activities"
         ref="timelineItemRefs"
         @scroll-to="scrollToTimelineItem(timelineItem, { behavior: 'smooth' })"
-        @select-activity="emit('selectTimelineItemActivity', { timelineItem, activityId: $event })"
+        @select-activity="emit('setTimelineItemActivity', { timelineItem, activityId: $event })"
         @update-activity-seconds="emit('updateTimelineItemActivitySeconds', { timelineItem, activitySeconds: $event })" />
     </ul>
   </div>

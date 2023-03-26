@@ -12,7 +12,7 @@ const timelineItems = ref(timelineItemsData);
 
 const currentPage = ref(window.location.hash.slice(1) || 'timeline');
 
-function selectTimelineItemActivity({ timelineItem, activityId }) {
+function setTimelineItemActivity({ timelineItem, activityId }) {
   timelineItem.activityId = activityId;
   timelineItem.activitySeconds = 0;
 }
@@ -67,7 +67,7 @@ function goTo(page) {
       :timeline-items="timelineItems"
       :activities="activities"
       :current-page="currentPage"
-      @select-timeline-item-activity="selectTimelineItemActivity"
+      @set-timeline-item-activity="setTimelineItemActivity"
       @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds" />
     <TheActivities
       v-show="currentPage === 'activities'"
