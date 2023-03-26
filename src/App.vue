@@ -11,9 +11,7 @@ const timelineItems = ref(timelineItemsData);
 
 const currentPage = ref(window.location.hash.slice(1) || 'timeline');
 
-function selectTimelineItemActivity({ timelineItemId, activityId }) {
-  const timelineItem = timelineItems.value.find(({ id }) => id === timelineItemId);
-
+function selectTimelineItemActivity({ timelineItem, activityId }) {
   timelineItem.activityId = activityId;
   timelineItem.activitySeconds = 0;
 }
@@ -32,18 +30,14 @@ function deleteActivity(activity) {
   activities.value.splice(activityIndex, 1);
 }
 
-function setActivitySecondsToComplete({ activity: { id: activityId }, secondsToComplete }) {
-  console.log({ activityId, secondsToComplete });
-
-  const activity = activities.value.find(({ id }) => id === activityId);
+function setActivitySecondsToComplete({ activity, secondsToComplete }) {
+  console.log({ activity, secondsToComplete });
 
   activity.secondsToComplete = secondsToComplete;
 }
 
-function updateTimelineItemActivitySeconds({ timelineItemId, activitySeconds }) {
-  console.log({ timelineItemId, activitySeconds });
-
-  const timelineItem = timelineItems.value.find(({ id }) => id === timelineItemId);
+function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
+  console.log({ timelineItem, activitySeconds });
 
   timelineItem.activitySeconds += activitySeconds;
 }
