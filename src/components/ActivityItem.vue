@@ -1,36 +1,9 @@
-<script>
-const selectOptions = generateSelectOptions();
-
-function generateSelectOptions() {
-  const periodsInMinutes = [15, 30, 45, 60, 90, 120, 150];
-
-  return periodsInMinutes.map((period) => {
-    const hours = Math.floor(period / 60);
-    const minutes = period % 60;
-
-    let label = ''
-
-    if (hours && minutes) {
-      label = `${hours}:${minutes} hr`;
-    } else if (hours) {
-      label = `${hours} hr`;
-    } else {
-      label = `${minutes} min`;
-    }
-
-    return {
-      value: period,
-      label
-    };
-  });
-}
-</script>
-
 <script setup>
+import { periodSelectOptions } from '@/config';
+import { XMarkIcon } from '@heroicons/vue/24/outline';
 import BaseButton from './BaseButton.vue'
 import BaseSelect from './BaseSelect.vue'
 import ActivityGoal from './ActivityGoal.vue'
-import { XMarkIcon } from '@heroicons/vue/24/outline';
 
 const props = defineProps(['activity', 'timelineItems']);
 
@@ -48,9 +21,9 @@ const emit = defineEmits(['delete', 'setSecondsToComplete']);
       :activity="activity"
       :timeline-items="timelineItems" />
     <BaseSelect
-      :selected="activity.secondsToComplete || null"
-      :options="selectOptions"
-      placeholder="Goal"
+      class="font-mono"
+      :selected="activity.secondsToComplete"
+      :options="periodSelectOptions"
       @select="emit('setSecondsToComplete', $event)" />
   </li>
 </template>

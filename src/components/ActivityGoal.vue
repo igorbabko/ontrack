@@ -3,7 +3,19 @@ import { computed } from 'vue';
 
 const props = defineProps(['activity', 'timelineItems']);
 
-const label = computed(() => `${diff.value > 0 ? '+' : ''}${diff.value} min`);
+const date = new Date();
+
+const label = computed(() => {
+  date.setTime(Math.abs(diff.value) * 1000);
+
+  const utc = date.toUTCString();
+
+  const a = utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6);
+
+  const sign = diff.value > 0 ? '+' : '-';
+
+  return  `${sign}${a}`;
+});
 
 const diff = computed(() => (totalActivitySeconds.value - props.activity.secondsToComplete)); // / 60;
 
