@@ -17,6 +17,12 @@ function selectTimelineItemActivity({ timelineItem, activityId }) {
   timelineItem.activitySeconds = 0;
 }
 
+function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
+  console.log({ timelineItem, activitySeconds });
+
+  timelineItem.activitySeconds += activitySeconds;
+}
+
 function createActivity(name) {
   activities.value.push({
     id: id(),
@@ -28,6 +34,13 @@ function createActivity(name) {
 function deleteActivity(activity) {
   const activityIndex = activities.value.findIndex(({ id }) => id === activity.id);
 
+  timelineItems.value.forEach((timelineItem) => {
+    if (timelineItem.activityId === activity.id) {
+      timelineItem.activityId = null;
+      timelineItem.activitySeconds = 0;
+    }
+  });
+
   activities.value.splice(activityIndex, 1);
 }
 
@@ -35,12 +48,6 @@ function setActivitySecondsToComplete({ activity, secondsToComplete }) {
   console.log({ activity, secondsToComplete });
 
   activity.secondsToComplete = secondsToComplete;
-}
-
-function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
-  console.log({ timelineItem, activitySeconds });
-
-  timelineItem.activitySeconds += activitySeconds;
 }
 
 function goTo(page) {
