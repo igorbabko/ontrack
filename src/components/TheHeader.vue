@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import { getTotalActivitySeconds } from '../functions';
 import TheHeaderLabelDayComplete from './TheHeaderLabelDayComplete.vue';
 
 const props = defineProps(['timelineItems', 'activities']);
@@ -7,16 +8,8 @@ const props = defineProps(['timelineItems', 'activities']);
 const emit = defineEmits(['goToTimeline']);
 
 const isDayComplete = computed(() => {
-  return Object.entries(props.activities).every(([activityId, { secondsToComplete }]) => {
-    return totalActivitySeconds(activityId) >= secondsToComplete;
-  });
+  return props.activities.every((activity) => getTotalActivitySeconds(activity, props.timelineItems) >= activity.secondsToComplete);
 });
-
-function totalActivitySeconds(activityId) {
-  return props.timelineItems
-    .filter((timelineItem) => timelineItem.activityId === activityId)
-    .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.activitySeconds/* / 60*/) + totalSeconds), 0);
-}
 </script>
 
 <template>

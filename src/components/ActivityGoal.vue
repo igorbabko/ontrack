@@ -1,34 +1,21 @@
 <script setup>
 import { computed } from 'vue';
+import { getTotalActivitySeconds } from '../functions';
 
 const props = defineProps(['activity', 'timelineItems']);
 
-const date = new Date();
+const time = computed(() => {
+  const sign = diff.value >= 0 ? '+' : '-';
 
-const label = computed(() => {
-  date.setTime(Math.abs(diff.value) * 1000);
-
-  const utc = date.toUTCString();
-
-  const a = utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6);
-
-  const sign = diff.value > 0 ? '+' : '-';
-
-  return  `${sign}${a}`;
+  return `${sign}${formatTime(diff.value)}`;
 });
 
-const diff = computed(() => (totalActivitySeconds.value - props.activity.secondsToComplete)); // / 60;
-
-const totalActivitySeconds = computed(() => {
-  return props.timelineItems
-    .filter((timelineItem) => timelineItem.activityId === props.activity.id)
-    .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.activitySeconds/* / 60*/) + totalSeconds), 0);
-});
+const diff = computed(() => (getTotalActivitySeconds(props.activity, props.timelineItems) - props.activity.secondsToComplete)); // / 60;
 </script>
 
 <template>
   <div
     :class="`flex items-center font-mono text-sm ml-4 px-2 rounded ${diff < 0 ? 'text-red-600 bg-red-100' : 'text-green-600 bg-green-100'}`">
-    {{ label }}
+    {{ time }}
   </div>
 </template>
