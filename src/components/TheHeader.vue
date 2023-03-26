@@ -1,7 +1,22 @@
 <script setup>
-import { CheckCircleIcon } from '@heroicons/vue/24/solid';
+import { computed } from 'vue';
+import TheHeaderLabelDayComplete from './TheHeaderLabelDayComplete.vue';
+
+const props = defineProps(['timelineItems', 'goals']);
 
 const emit = defineEmits(['home']);
+
+const isDayComplete = computed(() => {
+  return Object.entries(props.goals).every(([activityId, time]) => {
+    return totalActivityTime(activityId) >= time;
+  });
+});
+
+function totalActivityTime(activityId) {
+  return props.timelineItems
+    .filter((timelineItem) => timelineItem.activityId === activityId)
+    .reduce((total, timelineItem) => Math.round((timelineItem.time/* / 60*/) + total), 0);
+}
 </script>
 
 <template>
@@ -9,8 +24,6 @@ const emit = defineEmits(['home']);
     <a href="#timeline" @click="emit('home')">
       <img src="../assets/logo1.png" alt="Logo" class="h-9">
     </a>
-    <div class="flex items-center text-sm gap-1">
-      Day complete!<CheckCircleIcon class="h-7 text-green-500" />
-    </div>
+    <TheHeaderLabelDayComplete v-if="isDayComplete" />
   </header>
 </template>

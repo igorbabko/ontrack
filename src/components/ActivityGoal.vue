@@ -3,13 +3,9 @@ import { computed } from 'vue';
 
 const props = defineProps(['activity', 'goal', 'timelineItems']);
 
-const label = computed(() => {
-  return `${diff.value > 0 ? '+' : ''}${diff.value} min`;
-});
+const label = computed(() => `${diff.value > 0 ? '+' : ''}${diff.value} min`);
 
-const diff = computed(() => {
-  return (totalActivityTime.value - props.goal); // / 60;
-});
+const diff = computed(() => (totalActivityTime.value - props.goal)); // / 60;
 
 const totalActivityTime = computed(() => {
   return props.timelineItems

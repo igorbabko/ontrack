@@ -24,13 +24,18 @@ function addActivity(name) {
 }
 
 function deleteActivity({ id }) {
+  delete goals.value[id];
   delete activities.value[id];
 }
 
 function setGoal({ activityId, time }) {
-  console.log({ activityId, time});
+  console.log({ activityId, time });
 
-  goals.value[activityId] = time;
+  if (time === null) {
+    delete goals.value[activityId];
+  } else {
+    goals.value[activityId] = time;
+  }
 }
 
 function updateActivityTime({ hour, seconds }) {
@@ -49,7 +54,10 @@ function go(to) {
 </script>
 
 <template>
-  <TheHeader @home="go('timeline')" />
+  <TheHeader
+    :timeline-items="timelineItems"
+    :goals="goals"
+    @home="go('timeline')" />
 
   <main class="flex flex-col flex-grow">
     <TheTimeline
@@ -58,8 +66,7 @@ function go(to) {
       :activities="activities"
       :current-page="page"
       @select-activity="selectActivity"
-      @update-time="updateActivityTime"
-      />
+      @update-time="updateActivityTime" />
     <TheActivities
       v-show="page === 'activities'"
       :activities="activities"
