@@ -1,10 +1,10 @@
-import { id, generatePeriodSelectOption } from './functions';
+import { id, generatePeriodSelectOptions } from './functions';
 
 const periodsInMinutes = [
   15, 30, 45, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480
 ];
 
-export const periodSelectOptions = periodsInMinutes.map(generatePeriodSelectOption);
+export const periodSelectOptions = generatePeriodSelectOptions(periodsInMinutes);
 
 export const activities = [
   {

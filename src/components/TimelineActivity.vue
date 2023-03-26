@@ -1,20 +1,20 @@
 <script setup>
 import { computed } from 'vue';
-import { getCurrentHour } from '../functions.js';
+import { getCurrentHour, generateActivitySelectOptions } from '../functions.js';
 import BaseSelect from './BaseSelect.vue'
 
 const props = defineProps(['activityId', 'activities', 'hour']);
 
 const emit = defineEmits(['select']);
 
-const options = computed(() => props.activities.map(({ id, name }) => ({ value: id, label: name })));
+const activitySelectOptions = computed(() => generateActivitySelectOptions(props.activities));
 </script>
 
 <template>
   <div class="mr-auto flex gap-2">
     <BaseSelect
       :selected="activityId"
-      :options="options"
+      :options="activitySelectOptions"
       :disabled="hour <= getCurrentHour()"
       placeholder="Rest"
       @select="emit('select', $event)" />
