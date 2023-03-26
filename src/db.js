@@ -5,113 +5,116 @@ const trainingId = id();
 const readingId = id();
 
 export const activities = {
-  // [codingId]: 'Coding',
-  // [trainingId]: 'Training',
-  // [readingId]: 'Reading',
-};
-
-export const goals = {
-  // [codingId]: 60,
-  // [trainingId]: 120,
-  // [readingId]: 0,
+  [codingId]: {
+    name: 'Coding',
+    secondsToComplete: 0,
+  },
+  [trainingId]: {
+    name: 'Training',
+    secondsToComplete: 60,
+  },
+  [readingId]: {
+    name: 'Reading',
+    secondsToComplete: 120,
+  },
 };
 
 export const timelineItems = [
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
   {
     activityId: null,
-    time: 0,
+    seconds: 0,
   },
 ]
 

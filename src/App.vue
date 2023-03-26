@@ -1,81 +1,67 @@
 <script setup>
-import { ref, watch } from 'vue';
-import { id, activities as activityItems, goals as goalItems, timelineItems as timelineActivityItems } from './db';
+import { ref } from 'vue';
+import { id, activities as activitiesData, timelineItems as timelineItemsData } from './db';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
 
-const activities = ref(activityItems);
-const goals = ref(goalItems);
-const timelineItems = ref(timelineActivityItems);
+const activities = ref(activitiesData);
+const timelineItems = ref(timelineItemsData);
 
-const page = ref(window.location.hash.slice(1) || 'timeline');
+const currentPage = ref(window.location.hash.slice(1) || 'timeline');
 
-function selectActivity({ hour, activityId }) {
-  timelineItems.value[hour] = {
-    activityId,
-    time: 0,
-  };
+function selectTimelineItemActivity({ timelineItemId, activityId }) {
+  timelineItems.value[timelineItemId] = { activityId, seconds: 0 };
 }
 
-function addActivity(name) {
-  activities.value[id()] = name;
+function createActivity(name) {
+  activities.value[id()] = { name, secondsToComplete: 0 };
 }
 
 function deleteActivity({ id }) {
-  delete goals.value[id];
   delete activities.value[id];
 }
 
-function setGoal({ activityId, time }) {
-  console.log({ activityId, time });
+function setActivitySecondsToComplete({ activityId, secondsToComplete }) {
+  console.log({ activityId, secondsToComplete });
 
-  if (time === null) {
-    delete goals.value[activityId];
-  } else {
-    goals.value[activityId] = time;
-  }
+  activities.value[activityId].secondsToComplete = secondsToComplete;
 }
 
-function updateActivityTime({ hour, seconds }) {
-  console.log({ hour, seconds });
+function updateTimelineItemSeconds({ timelineItemId, seconds }) {
+  console.log({ timelineItemId, seconds });
 
-  timelineItems.value[hour].time += seconds;
+  timelineItems.value[timelineItemId].time += seconds;
 }
 
-watch(() => activities.value.length, () => {
-  window.scrollTo(0, document.body.scrollHeight);
-}, { flush: 'post' });
-
-function go(to) {
-  page.value = to;
+function goTo(page) {
+  currentPage.value = page;
 }
 </script>
 
 <template>
   <TheHeader
     :timeline-items="timelineItems"
-    :goals="goals"
-    @home="go('timeline')" />
+    :activities="activities"
+    @go-to-timeline="go('timeline')" />
 
   <main class="flex flex-col flex-grow">
     <TheTimeline
-      v-show="page === 'timeline'"
+      v-show="currentPage === 'timeline'"
       :timeline-items="timelineItems"
       :activities="activities"
-      :current-page="page"
-      @select-activity="selectActivity"
-      @update-time="updateActivityTime" />
+      :current-page="currentPage"
+      @select-timeline-item-activity="selectTimelineItemActivity"
+      @update-timeline-item-seconds="updateTimelineItemSeconds" />
     <TheActivities
-      v-show="page === 'activities'"
-      :activities="activities"
-      :goals="goals"
+      v-show="currentPage === 'activities'"
       :timeline-items="timelineItems"
-      @add="addActivity"
-      @delete="deleteActivity"
-      @set-goal="setGoal" />
+      :activities="activities"
+      @create-activity="createActivity"
+      @delete-activity="deleteActivity"
+      @set-activity-seconds-to-complete="setActivitySecondsToComplete" />
   </main>
 
-  <TheNav :current-page="page" @go="go($event)" />
+  <TheNav :current-page="currentPage" @navigate="goTo($event)" />
 </template>
