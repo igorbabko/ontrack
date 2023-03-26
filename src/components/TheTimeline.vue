@@ -13,17 +13,15 @@ watchEffect(async () => {
   if (props.currentPage === 'timeline') {
     await nextTick();
 
-    scrollToCurrentHour()
+    scrollToHour((new Date).getHours());
   }
 });
 
-function scrollToCurrentHour() {
-  const currentHour = (new Date).getHours();
-
-  if (currentHour === 0) {
-    document.body.scrollIntoView();
+function scrollToHour(hour, options = {}) {
+  if (hour > 2) {
+    timelineItemRefs.value[hour - 3].$el.scrollIntoView(options);
   } else {
-    timelineItemRefs.value[currentHour - 1].$el.scrollIntoView();
+    document.body.scrollIntoView();
   }
 }
 </script>
@@ -38,6 +36,7 @@ function scrollToCurrentHour() {
         :timeline-item="timelineItem"
         :activities="activities"
         ref="timelineItemRefs"
+        @scroll-to="scrollToHour(time, { behavior: 'smooth' })"
         @select-activity="emit('selectActivity', { activityId: $event, hour: time })"
         @update-time="emit('updateTime', { hour: time, seconds: $event })" />
     </ul>

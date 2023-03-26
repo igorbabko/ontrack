@@ -5,13 +5,13 @@ import TimelineStopwatch from './TimelineStopwatch.vue';
 
 defineProps(['timelineItem', 'activities', 'time']);
 
-const emit = defineEmits(['selectActivity', 'updateTime']);
+const emit = defineEmits(['selectActivity', 'updateTime', 'scrollTo']);
 </script>
 
 <template>
   <li
     :class="['p-4', 'flex', 'gap-1', 'relative', 'border-t', 'border-gray-200', { 'opacity-50 pointer-events-none': time < (new Date).getHours() }]">
-    <TimelineTime :time="time" />
+    <TimelineTime :time="time" @click.prevent="emit('scrollTo')" />
     <TimelineActivity
       :activity-id="timelineItem.activityId"
       :activities="activities"
