@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import { id, activities as activitiesData, timelineItems as timelineItemsData } from './db';
+import { activities as activitiesData, timelineItems as timelineItemsData } from './db';
+import { id } from './functions';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'

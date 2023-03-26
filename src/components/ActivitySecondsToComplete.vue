@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { getTotalActivitySeconds } from '../functions';
+import { formatTime, getTotalActivitySeconds } from '../functions';
 
 const props = defineProps(['activity', 'timelineItems']);
 

@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import { getCurrentHour } from '../functions.js';
 import BaseSelect from './BaseSelect.vue'
 
 const props = defineProps(['activityId', 'activities', 'hour']);
@@ -14,7 +15,7 @@ const options = computed(() => props.activities.map(({ id, name }) => ({ value: 
     <BaseSelect
       :selected="activityId"
       :options="options"
-      :disabled="hour <= (new Date).getHours()"
+      :disabled="hour <= getCurrentHour()"
       placeholder="Rest"
       @select="emit('select', $event)" />
   </div>

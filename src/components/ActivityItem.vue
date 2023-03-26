@@ -1,9 +1,9 @@
 <script setup>
-import { periodSelectOptions } from '@/config';
+import { periodSelectOptions } from '../db';
 import { XMarkIcon } from '@heroicons/vue/24/outline';
 import BaseButton from './BaseButton.vue';
 import BaseSelect from './BaseSelect.vue';
-import ActivityGoal from './ActivityGoal.vue';
+import ActivitySecondsToComplete from './ActivitySecondsToComplete.vue';
 
 const props = defineProps(['activity', 'timelineItems']);
 
@@ -16,7 +16,7 @@ const emit = defineEmits(['delete', 'setSecondsToComplete']);
       <XMarkIcon class="h-4 w-4" />
     </BaseButton>
     <span class="mr-auto truncate">{{ activity.name }}</span>
-    <ActivityGoal
+    <ActivitySecondsToComplete
       v-if="activity.secondsToComplete"
       :activity="activity"
       :timeline-items="timelineItems" />

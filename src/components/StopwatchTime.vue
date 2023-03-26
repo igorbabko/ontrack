@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue';
 import { formatTime } from '../functions';
 
 const props = defineProps(['seconds']);

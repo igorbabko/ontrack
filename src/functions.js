@@ -1,5 +1,9 @@
 export const id = () => Date.now().toString(36) + Math.random().toString(36).substring(2);
 
+export function getCurrentHour() {
+  return (new Date).getHours();
+}
+
 export function getTotalActivitySeconds(activity, timelineItems) {
   return timelineItems
     .filter((timelineItem) => timelineItem.activityId === activity.id)
@@ -7,9 +11,9 @@ export function getTotalActivitySeconds(activity, timelineItems) {
 }
 
 export function formatTime(seconds) {
-  const now = new Date;
+  const date = new Date;
 
-  now.setTime(Math.abs(seconds) * 1000);
+  date.setTime(Math.abs(seconds) * 1000);
 
   const utc = date.toUTCString();
 

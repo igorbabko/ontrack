@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watchEffect, nextTick } from 'vue';
+import { getCurrentHour } from '../functions.js';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
@@ -13,7 +14,7 @@ watchEffect(async () => {
   if (props.currentPage === 'timeline') {
     await nextTick();
 
-    const currentHour = (new Date).getHours();
+    const currentHour = getCurrentHour();
 
     const timelineItem = props.timelineItems.find(({ hour }) => hour === currentHour);
 
