@@ -4,7 +4,7 @@ import { formatTime } from '../functions';
 
 const props = defineProps(['seconds']);
 
-const time = computed(() => formatTime(props.seconds.value));
+const time = computed(() => formatTime(props.seconds));
 </script>
 
 <template>

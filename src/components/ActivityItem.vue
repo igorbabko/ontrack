@@ -24,6 +24,6 @@ const emit = defineEmits(['delete', 'setSecondsToComplete']);
       class="font-mono"
       :selected="activity.secondsToComplete"
       :options="periodSelectOptions"
-      @select="emit('setSecondsToComplete', $event)" />
+      @select="emit('setSecondsToComplete', parseInt($event))" />
   </li>
 </template>
