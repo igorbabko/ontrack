@@ -19,17 +19,25 @@ function selectTimelineItemActivity({ timelineItemId, activityId }) {
 }
 
 function createActivity(name) {
-  activities.value[id()] = { name, secondsToComplete: 0 };
+  activities.value.push({
+    id: id(),
+    name,
+    secondsToComplete: 0
+  });
 }
 
-function deleteActivity({ id }) {
-  delete activities.value[id];
+function deleteActivity(activity) {
+  const activityIndex = activities.value.findIndex(({ id }) => id === activity.id);
+
+  activities.value.splice(activityIndex, 1);
 }
 
-function setActivitySecondsToComplete({ activityId, secondsToComplete }) {
+function setActivitySecondsToComplete({ activity: { id: activityId }, secondsToComplete }) {
   console.log({ activityId, secondsToComplete });
 
-  activities.value[activityId].secondsToComplete = secondsToComplete;
+  const activity = activities.value.find(({ id }) => id === activityId);
+
+  activity.secondsToComplete = secondsToComplete;
 }
 
 function updateTimelineItemActivitySeconds({ timelineItemId, activitySeconds }) {

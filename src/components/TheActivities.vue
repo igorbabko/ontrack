@@ -15,9 +15,9 @@ const emit = defineEmits(['createActivity', 'deleteActivity', 'setActivitySecond
         :key="activity.id"
         :activity="activity"
         :timeline-items="timelineItems"
-        @delete="emit('delete', activity)"
+        @delete="emit('deleteActivity', activity)"
         @set-seconds-to-complete="emit('setActivitySecondsToComplete', { activity, secondsToComplete: $event })" />
     </ul>
-    <ActivityForm @add="emit('add', $event)" />
+    <ActivityForm @submit="emit('createActivity', $event)" />
   </div>
 </template>

@@ -8,12 +8,12 @@ const props = defineProps(['activity', 'timelineItems']);
 
 const emit = defineEmits(['delete', 'setSecondsToComplete']);
 
-const options = {
-  30: '30 min',
-  60: '60 min',
-  90: '90 min',
-  120: '120 min',
-};
+const options = [
+  { value: 30, label: '30 min' },
+  { value: 60, label: '60 min' },
+  { value: 90, label: '90 min' },
+  { value: 120, label: '120 min' },
+];
 </script>
 
 <template>

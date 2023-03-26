@@ -1,14 +1,14 @@
 <script setup>
 import { ref } from 'vue';
-import BaseButton from './BaseButton.vue'
 import { PlusIcon } from '@heroicons/vue/24/outline';
+import BaseButton from './BaseButton.vue'
 
-const emit = defineEmits(['add']);
+const emit = defineEmits(['submit']);
 
 const name = ref('');
 
 function submit() {
-  emit('add', name.value);
+  emit('submit', name.value);
 
   name.value = '';
 }
