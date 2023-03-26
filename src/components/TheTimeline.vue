@@ -15,7 +15,7 @@ watchEffect(async () => {
 
     const currentHour = (new Date).getHours();
 
-    const timelineItem = props.timelineItems.value.find(({ hour }) => hour === currentHour);
+    const timelineItem = props.timelineItems.find(({ hour }) => hour === currentHour);
 
     scrollToTimelineItem(timelineItem);
   }

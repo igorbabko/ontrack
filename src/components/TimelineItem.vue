@@ -10,7 +10,7 @@ const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']
 
 <template>
   <li
-    :class="['p-4', 'flex', 'gap-1', 'relative', 'border-t', 'border-gray-200', { 'opacity-50 pointer-events-none': time < (new Date).getHours() }]">
+    :class="['p-4', 'flex', 'gap-1', 'relative', 'border-t', 'border-gray-200', { 'opacity-50 pointer-events-none': timelineItem.hour < (new Date).getHours() }]">
     <TimelineHour :hour="timelineItem.hour" @click.prevent="emit('scrollTo')" />
     <TimelineActivity
       :activity-id="timelineItem.activityId"

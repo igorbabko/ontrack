@@ -7,7 +7,7 @@ const props = defineProps(['selected', 'options', 'placeholder']);
 
 const emit = defineEmits(['select']);
 
-const isNotSelected = computed(() => [null, undefined].includes(selected.value));
+const isNotSelected = computed(() => [null, undefined].includes(props.selected));
 </script>
 
 <template>
@@ -18,7 +18,7 @@ const isNotSelected = computed(() => [null, undefined].includes(selected.value))
       <option :selected="isNotSelected" disabled value="">
         {{ placeholder }}
       </option>
-      <option v-for="label, value in options" :selected="value == selected" :value="value">
+      <option v-for="{ value, label } in options" :selected="value == selected" :value="value">
         {{ label }}
       </option>
     </select>

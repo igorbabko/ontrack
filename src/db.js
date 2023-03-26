@@ -1,23 +1,22 @@
 export const id = () => Date.now().toString(36) + Math.random().toString(36).substring(2);
 
-const codingId = id();
-const trainingId = id();
-const readingId = id();
-
-export const activities = {
-  [codingId]: {
+export const activities = [
+  {
+    id: id(),
     name: 'Coding',
     secondsToComplete: 0,
   },
-  [trainingId]: {
+  {
+    id: id(),
     name: 'Training',
     secondsToComplete: 60,
   },
-  [readingId]: {
+  {
+    id: id(),
     name: 'Reading',
     secondsToComplete: 120,
   },
-};
+];
 
 export const timelineItems = [];
 

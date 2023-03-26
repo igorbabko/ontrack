@@ -1,16 +1,19 @@
 <script setup>
+import { computed } from 'vue';
 import BaseSelect from './BaseSelect.vue'
 
-defineProps(['activityId', 'activities', 'hour']);
+const props = defineProps(['activityId', 'activities', 'hour']);
 
 const emit = defineEmits(['select']);
+
+const options = computed(() => props.activities.map(({ id, name }) => ({ value: id, label: name })));
 </script>
 
 <template>
   <div class="mr-auto flex gap-2">
     <BaseSelect
       :selected="activityId"
-      :options="activities"
+      :options="options"
       :disabled="hour <= (new Date).getHours()"
       placeholder="Rest"
       @select="emit('select', $event)" />
