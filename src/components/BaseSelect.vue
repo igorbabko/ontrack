@@ -15,7 +15,7 @@ const isNotSelected = computed(() => [null, undefined].includes(props.selected))
     <select
       class="py-1 px-2 text-sm rounded bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
       @change="emit('select', $event.target.value)">
-      <option v-if="placeholder" :selected="isNotSelected" disabled value="">
+      <option :selected="isNotSelected" disabled value="">
         {{ placeholder }}
       </option>
       <option

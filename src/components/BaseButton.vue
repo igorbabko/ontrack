@@ -7,11 +7,11 @@ defineProps({
 });
 
 const typeClasses = {
-  primary: 'bg-purple-500 hover:bg-purple-600 text-white',
-  success: 'bg-green-500 hover:bg-green-600 text-white',
-  warning: 'bg-yellow-500 hover:bg-yellow-600 text-white',
-  danger: 'bg-red-500 hover:bg-red-600 text-white',
-  neutral: 'bg-gray-100 hover:bg-gray-200',
+  primary: 'bg-purple-500 enabled:hover:bg-purple-600 text-white',
+  success: 'bg-green-500 enabled:hover:bg-green-600 text-white',
+  warning: 'bg-yellow-500 enabledhover:bg-yellow-600 text-white',
+  danger: 'bg-red-500 enabled:hover:bg-red-600 text-white',
+  neutral: 'bg-gray-100 enabled:hover:bg-gray-200',
 };
 </script>
 

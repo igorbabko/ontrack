@@ -27,11 +27,11 @@ export function generatePeriodSelectOption(periodInMinutes) {
   let label = '';
 
   if (hours && minutes) {
-    label = `${hours}:${minutes} hr`;
+    label = `${hours}:${minutes}`;
   } else if (hours) {
-    label = `${hours}:00 hr`;
+    label = `${hours}:00`;
   } else {
-    label = `0:${minutes.toString().padStart(2, 0)} hr`;
+    label = `0:${minutes.toString().padStart(2, 0)}`;
   }
 
   return {

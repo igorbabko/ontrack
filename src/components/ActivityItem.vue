@@ -22,8 +22,9 @@ const emit = defineEmits(['delete', 'setSecondsToComplete']);
       :timeline-items="timelineItems" />
     <BaseSelect
       class="font-mono"
-      :selected="activity.secondsToComplete"
+      :selected="activity.secondsToComplete || null"
       :options="periodSelectOptions"
+      placeholder="h:mm"
       @select="emit('setSecondsToComplete', parseInt($event))" />
   </li>
 </template>
