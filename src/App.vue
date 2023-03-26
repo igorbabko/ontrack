@@ -51,7 +51,7 @@ function goTo(page) {
   <TheHeader
     :timeline-items="timelineItems"
     :activities="activities"
-    @go-to-timeline="go('timeline')" />
+    @go-to-timeline="goTo('timeline')" />
 
   <main class="flex flex-col flex-grow">
     <TheTimeline
