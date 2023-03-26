@@ -17,6 +17,7 @@ const navItems = {
     <ul class="flex justify-around items-center list-style-none border-t w-screen">
       <NavItem
         v-for="icon, page in navItems"
+        :key="page"
         :href="`#${page}`"
         :selected="page === currentPage"
         @click="emit('navigate', page)">

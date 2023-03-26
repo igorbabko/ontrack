@@ -36,8 +36,8 @@ function scrollToTimelineItem(timelineItem, options = {}) {
     <ul>
       <TimelineItem
         v-for="timelineItem in timelineItems"
-        :timeline-item="timelineItem"
         :key="timelineItem.id"
+        :timeline-item="timelineItem"
         :activities="activities"
         ref="timelineItemRefs"
         @scroll-to="scrollToTimelineItem(timelineItem, { behavior: 'smooth' })"

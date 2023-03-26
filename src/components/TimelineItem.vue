@@ -20,7 +20,7 @@ const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']
     <TimelineStopwatch
       v-if="timelineItem.activityId && timelineItem.hour <= (new Date).getHours()"
       :for-current-hour="timelineItem.hour === (new Date).getHours()"
-      :seconds="timelineItem.seconds"
+      :seconds="timelineItem.activitySeconds"
       @update-seconds="emit('updateActivitySeconds', $event)" />
   </li>
 </template>

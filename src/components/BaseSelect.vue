@@ -18,7 +18,11 @@ const isNotSelected = computed(() => [null, undefined].includes(props.selected))
       <option :selected="isNotSelected" disabled value="">
         {{ placeholder }}
       </option>
-      <option v-for="{ value, label } in options" :selected="value == selected" :value="value">
+      <option
+        v-for="{ value, label } in options"
+        :key="value"
+        :selected="value == selected"
+        :value="value">
         {{ label }}
       </option>
     </select>
