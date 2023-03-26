@@ -1,16 +1,16 @@
 <script setup>
 import { computed } from 'vue';
 
-const props = defineProps(['activity', 'goal', 'timelineItems']);
+const props = defineProps(['activity', 'timelineItems']);
 
 const label = computed(() => `${diff.value > 0 ? '+' : ''}${diff.value} min`);
 
-const diff = computed(() => (totalActivityTime.value - props.goal)); // / 60;
+const diff = computed(() => (totalActivitySeconds.value - props.activity.secondsToComplete)); // / 60;
 
-const totalActivityTime = computed(() => {
+const totalActivitySeconds = computed(() => {
   return props.timelineItems
     .filter((timelineItem) => timelineItem.activityId === props.activity.id)
-    .reduce((total, timelineItem) => Math.round((timelineItem.time/* / 60*/) + total), 0);
+    .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.activitySeconds/* / 60*/) + totalSeconds), 0);
 });
 </script>
 

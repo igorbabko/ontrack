@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { XMarkIcon } from '@heroicons/vue/24/outline';
 import BaseButton from './BaseButton.vue'
 
-defineProps(['selected', 'options', 'placeholder']);
+const props = defineProps(['selected', 'options', 'placeholder']);
 
 const emit = defineEmits(['select']);
 

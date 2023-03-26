@@ -2,21 +2,21 @@
 import ActivityItem from './ActivityItem.vue';
 import ActivityForm from './ActivityForm.vue';
 
-defineProps(['activities', 'goals', 'timelineItems']);
+defineProps(['activities', 'timelineItems']);
 
-const emit = defineEmits(['add', 'delete', 'setGoal']);
+const emit = defineEmits(['createActivity', 'deleteActivity', 'setActivitySecondsToComplete']);
 </script>
 
 <template>
   <div class="flex flex-grow flex-col justify-between">
     <ul class="divide-y">
       <ActivityItem
-        v-for="name, id in activities"
-        :activity="{ id, name }"
-        :goals="goals"
+        v-for="activity in activities"
+        :key="activity.id"
+        :activity="activity"
         :timeline-items="timelineItems"
-        @delete="emit('delete', { id, name })"
-        @set-goal="emit('setGoal', $event)" />
+        @delete="emit('delete', activity)"
+        @set-seconds-to-complete="emit('setActivitySecondsToComplete', { activity, secondsToComplete: $event })" />
     </ul>
     <ActivityForm @add="emit('add', $event)" />
   </div>

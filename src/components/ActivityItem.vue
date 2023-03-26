@@ -4,9 +4,9 @@ import BaseSelect from './BaseSelect.vue'
 import ActivityGoal from './ActivityGoal.vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline';
 
-const props = defineProps(['activity', 'goals', 'timelineItems']);
+const props = defineProps(['activity', 'timelineItems']);
 
-const emit = defineEmits(['delete', 'setGoal']);
+const emit = defineEmits(['delete', 'setSecondsToComplete']);
 
 const options = {
   30: '30 min',
@@ -23,14 +23,13 @@ const options = {
     </BaseButton>
     <span class="mr-auto truncate">{{ activity.name }}</span>
     <ActivityGoal
-      v-if="goals[activity.id]"
+      v-if="activity.secondsToComplete"
       :activity="activity"
-      :goal="goals[activity.id]"
       :timeline-items="timelineItems" />
     <BaseSelect
-      :selected="goals[activity.id] || null"
+      :selected="activity.secondsToComplete || null"
       :options="options"
       placeholder="Goal"
-      @select="emit('setGoal', { activityId: activity.id, time: $event })" />
+      @select="emit('setSecondsToComplete', $event)" />
   </li>
 </template>
