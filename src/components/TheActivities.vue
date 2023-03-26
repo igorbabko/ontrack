@@ -9,7 +9,7 @@ const emit = defineEmits(['createActivity', 'deleteActivity', 'setActivitySecond
 
 <template>
   <div class="flex flex-grow flex-col justify-between">
-    <ul class="divide-y">
+    <ul v-if="activities.length" class="divide-y">
       <ActivityItem
         v-for="activity in activities"
         :key="activity.id"
@@ -18,6 +18,9 @@ const emit = defineEmits(['createActivity', 'deleteActivity', 'setActivitySecond
         @delete="emit('deleteActivity', activity)"
         @set-seconds-to-complete="emit('setActivitySecondsToComplete', { activity, secondsToComplete: $event })" />
     </ul>
+    <div v-else class="p-4 text-center text-gray-400">
+      You don't have any activities.
+    </div>
     <ActivityForm @submit="emit('createActivity', $event)" />
   </div>
 </template>
