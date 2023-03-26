@@ -15,7 +15,7 @@ const isDayComplete = computed(() => {
 function totalActivitySeconds(activityId) {
   return props.timelineItems
     .filter((timelineItem) => timelineItem.activityId === activityId)
-    .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.seconds/* / 60*/) + totalSeconds), 0);
+    .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.activitySeconds/* / 60*/) + totalSeconds), 0);
 }
 </script>
 

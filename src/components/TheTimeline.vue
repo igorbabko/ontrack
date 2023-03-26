@@ -5,7 +5,7 @@ import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
 const props = defineProps(['timelineItems', 'activities', 'currentPage'])
 
-const emit = defineEmits(['selectActivity', 'updateTime']);
+const emit = defineEmits(['selectTimelineItemActivity', 'updateTimelineItemActivitySeconds']);
 
 const timelineItemRefs = ref([]);
 
@@ -13,13 +13,17 @@ watchEffect(async () => {
   if (props.currentPage === 'timeline') {
     await nextTick();
 
-    scrollToHour((new Date).getHours());
+    const currentHour = (new Date).getHours();
+
+    const timelineItem = props.timelineItems.value.find(({ hour }) => hour === currentHour);
+
+    scrollToTimelineItem(timelineItem);
   }
 });
 
-function scrollToHour(hour, options = {}) {
-  if (hour > 2) {
-    timelineItemRefs.value[hour - 3].$el.scrollIntoView(options);
+function scrollToTimelineItem(timelineItem, options = {}) {
+  if (timelineItem.hour > 2) {
+    timelineItemRefs.value[timelineItem.hour - 3].$el.scrollIntoView(options);
   } else {
     document.body.scrollIntoView();
   }
@@ -31,14 +35,14 @@ function scrollToHour(hour, options = {}) {
     <TheTimelineIndicator :current-page="currentPage" />
     <ul>
       <TimelineItem
-        v-for="timelineItem, time in timelineItems"
-        :time="time"
+        v-for="timelineItem in timelineItems"
         :timeline-item="timelineItem"
+        :key="timelineItem.id"
         :activities="activities"
         ref="timelineItemRefs"
-        @scroll-to="scrollToHour(time, { behavior: 'smooth' })"
-        @select-activity="emit('selectActivity', { activityId: $event, hour: time })"
-        @update-time="emit('updateTime', { hour: time, seconds: $event })" />
+        @scroll-to="scrollToTimelineItem(timelineItem, { behavior: 'smooth' })"
+        @select-activity="emit('selectTimelineItemActivity', { timelineItem, activityId: $event })"
+        @update-activity-seconds="emit('updateTimelineItemActivitySeconds', { timelineItem, activitySeconds: $event })" />
     </ul>
   </div>
 </template>

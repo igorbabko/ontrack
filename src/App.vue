@@ -12,7 +12,10 @@ const timelineItems = ref(timelineItemsData);
 const currentPage = ref(window.location.hash.slice(1) || 'timeline');
 
 function selectTimelineItemActivity({ timelineItemId, activityId }) {
-  timelineItems.value[timelineItemId] = { activityId, seconds: 0 };
+  const timelineItem = timelineItems.value.find(({ id }) => id === timelineItemId);
+
+  timelineItem.activityId = activityId;
+  timelineItem.activitySeconds = 0;
 }
 
 function createActivity(name) {
@@ -29,10 +32,12 @@ function setActivitySecondsToComplete({ activityId, secondsToComplete }) {
   activities.value[activityId].secondsToComplete = secondsToComplete;
 }
 
-function updateTimelineItemSeconds({ timelineItemId, seconds }) {
-  console.log({ timelineItemId, seconds });
+function updateTimelineItemActivitySeconds({ timelineItemId, activitySeconds }) {
+  console.log({ timelineItemId, activitySeconds });
 
-  timelineItems.value[timelineItemId].time += seconds;
+  const timelineItem = timelineItems.value.find(({ id }) => id === timelineItemId);
+
+  timelineItem.activitySeconds += activitySeconds;
 }
 
 function goTo(page) {
@@ -53,7 +58,7 @@ function goTo(page) {
       :activities="activities"
       :current-page="currentPage"
       @select-timeline-item-activity="selectTimelineItemActivity"
-      @update-timeline-item-seconds="updateTimelineItemSeconds" />
+      @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds" />
     <TheActivities
       v-show="currentPage === 'activities'"
       :timeline-items="timelineItems"
