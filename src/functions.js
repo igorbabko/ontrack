@@ -25,7 +25,7 @@ export function formatTime(seconds) {
 export function generateTimelineItems() {
   const timelineItems = [];
 
-  for (let hour = 1; hour < 24; hour++) {
+  for (let hour = 0; hour < 24; hour++) {
     timelineItems.push({
       id: id(),
       hour,

@@ -18,8 +18,9 @@ const emit = defineEmits(['createActivity', 'deleteActivity', 'setActivitySecond
         @delete="emit('deleteActivity', activity)"
         @set-seconds-to-complete="emit('setActivitySecondsToComplete', { activity, secondsToComplete: $event })" />
     </ul>
-    <div v-else class="p-4 text-center text-gray-400">
-      You don't have any activities.
+    <div v-else class="p-4 pt-8 flex flex-col items-center gap-4">
+      <img src="../assets/empty.svg" alt="No activities" class="h-48">
+      <span class="text-gray-400">You don't have any activities.</span>
     </div>
     <ActivityForm @submit="emit('createActivity', $event)" />
   </div>
