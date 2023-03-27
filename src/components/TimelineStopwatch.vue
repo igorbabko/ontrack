@@ -17,8 +17,6 @@ const seconds = ref(props.seconds);
 
 let stopwatch = null;
 
-const shouldShowTime = computed(() => seconds.value || isRunning.value);
-
 function start() {
   isRunning.value = true;
 
@@ -29,13 +27,15 @@ function start() {
   }, 1000);
 }
 
-function pause() {
+function stop() {
   isRunning.value = false;
 
   clearInterval(stopwatch);
 }
 
 function reset() {
+  stop();
+
   emit('updateSeconds', -seconds.value);
 
   seconds.value = 0;
@@ -43,10 +43,8 @@ function reset() {
 </script>
 
 <template>
-  <template v-if="shouldShowTime">
-    <StopwatchButtonReset v-if="forCurrentHour" @click="reset" />
-    <StopwatchTime :seconds="seconds" />
-  </template>
-  <StopwatchButtonStop v-if="isRunning" @click="pause" />
+  <StopwatchButtonReset v-if="seconds && forCurrentHour" @click="reset" />
+  <StopwatchTime :seconds="seconds" />
+  <StopwatchButtonStop v-if="isRunning" @click="stop" />
   <StopwatchButtonStart v-else-if="forCurrentHour" @click="start" />
 </template>
