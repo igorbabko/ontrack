@@ -5,6 +5,6 @@ import BaseButton from './BaseButton.vue'
 
 <template>
   <BaseButton type="success">
-    <PlayIcon class="h-5" />
+    <PlayIcon class="h-8" />
   </BaseButton>
 </template>

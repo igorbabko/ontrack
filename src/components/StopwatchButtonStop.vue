@@ -5,6 +5,6 @@ import BaseButton from './BaseButton.vue';
 
 <template>
   <BaseButton type="warning">
-    <PauseIcon class="h-5" />
+    <PauseIcon class="h-8" />
   </BaseButton>
 </template>

@@ -20,7 +20,7 @@ watchPostEffect(async () => {
 });
 
 function updateHeight() {
-  el.value.style.height = `${height()}px`;
+  el.value.style.top = `${height()}px`;
 }
 
 function height() {
@@ -37,5 +37,5 @@ function seconds() {
 </script>
 
 <template>
-  <div ref="el" class="absolute border-b-2 border-red-600/30 w-full z-10"></div>
+  <hr ref="el" class="absolute border-2 border-red-600/30 w-full z-10">
 </template>

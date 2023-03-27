@@ -5,6 +5,6 @@ import BaseButton from './BaseButton.vue'
 
 <template>
   <BaseButton type="danger">
-    <ArrowPathIcon class="h-5" />
+    <ArrowPathIcon class="h-8" />
   </BaseButton>
 </template>
