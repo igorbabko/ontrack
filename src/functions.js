@@ -47,7 +47,7 @@ export function generatePeriodSelectOptions() {
   ];
 
   return periodsInMinutes.map(periodInMinutes => ({
-    value: periodInMinutes,
+    value: periodInMinutes * 60,
     label: generatePeriodSelectOptionLabel(periodInMinutes)
   }));
 }
@@ -67,21 +67,22 @@ function generatePeriodSelectOptionLabel(periodInMinutes) {
   return `0:${minutes.toString().padStart(2, 0)}`;
 }
 
-
-// export const activities = [
-//   {
-//     id: id(),
-//     name: 'Coding',
-//     secondsToComplete: 0,
-//   },
-//   {
-//     id: id(),
-//     name: 'Training',
-//     secondsToComplete: 60,
-//   },
-//   {
-//     id: id(),
-//     name: 'Reading',
-//     secondsToComplete: 120,
-//   },
-// ];
+export function generateActivities() {
+  return [
+    {
+      id: id(),
+      name: 'Coding',
+      secondsToComplete: 0,
+    },
+    {
+      id: id(),
+      name: 'Training',
+      secondsToComplete: 3600,
+    },
+    {
+      id: id(),
+      name: 'Reading',
+      secondsToComplete: 120 * 60,
+    },
+  ];
+}

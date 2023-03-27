@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { id, generateTimelineItems } from './functions';
+import { id, generateTimelineItems, generateActivities } from './functions';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
@@ -8,7 +8,7 @@ import TheActivities from './components/TheActivities.vue'
 
 const currentPage = ref(window.location.hash.slice(1) || 'timeline');
 const timelineItems = ref(generateTimelineItems());
-const activities = ref([]);
+const activities = ref(generateActivities());
 
 function setTimelineItemActivity({ timelineItem, activityId }) {
   timelineItem.activityId = activityId;
