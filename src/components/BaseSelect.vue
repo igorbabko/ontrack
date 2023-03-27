@@ -13,7 +13,7 @@ const isNotSelected = computed(() => [null, undefined].includes(props.selected))
 <template>
   <div class="flex gap-1">
     <select
-      class="py-1 px-2 text-sm rounded bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+      class="w-full py-1 px-2 text-lg rounded bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
       @change="emit('select', $event.target.value)">
       <option :selected="isNotSelected" disabled value="">
         {{ placeholder }}
@@ -30,7 +30,7 @@ const isNotSelected = computed(() => [null, undefined].includes(props.selected))
       type="neutral"
       :disabled="isNotSelected"
       @click="emit('select', null)">
-      <XMarkIcon class="h-4 w-4" />
+      <XMarkIcon class="h-5" />
     </BaseButton>
   </div>
 </template>

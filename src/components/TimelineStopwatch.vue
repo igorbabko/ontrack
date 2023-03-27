@@ -43,8 +43,10 @@ function reset() {
 </script>
 
 <template>
-  <StopwatchButtonReset v-if="seconds && forCurrentHour" @click="reset" />
-  <StopwatchTime :seconds="seconds" />
-  <StopwatchButtonStop v-if="isRunning" @click="stop" />
-  <StopwatchButtonStart v-else-if="forCurrentHour" @click="start" />
+  <div class="flex gap-1 w-full">
+    <StopwatchButtonReset v-if="forCurrentHour" @click="reset" />
+    <StopwatchTime :seconds="seconds" />
+    <StopwatchButtonStop v-if="isRunning" @click="stop" />
+    <StopwatchButtonStart v-else-if="forCurrentHour" @click="start" />
+  </div>
 </template>

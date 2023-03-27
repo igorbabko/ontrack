@@ -11,8 +11,9 @@ const activitySelectOptions = computed(() => generateActivitySelectOptions(props
 </script>
 
 <template>
-  <div class="mr-auto flex gap-2">
+  <div class="mr-auto flex gap-2 w-full">
     <BaseSelect
+      class="w-full"
       :selected="activityId"
       :options="activitySelectOptions"
       :disabled="hour <= getCurrentHour()"

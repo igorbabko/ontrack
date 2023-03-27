@@ -8,5 +8,5 @@ const time = computed(() => formatTime(props.seconds));
 </script>
 
 <template>
-  <div class="font-mono flex items-center text-sm bg-gray-100 rounded px-2">{{ time }}</div>
+  <div class="font-mono flex flex-grow items-center bg-gray-100 rounded px-2">{{ time }}</div>
 </template>

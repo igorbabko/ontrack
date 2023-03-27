@@ -16,17 +16,17 @@ const emit = defineEmits(['delete', 'setSecondsToComplete']);
 </script>
 
 <template>
-  <li class="p-4 flex gap-2">
+  <li class="p-2 flex gap-2">
     <BaseButton type="danger" @click="emit('delete')">
-      <XMarkIcon class="h-4 w-4" />
+      <XMarkIcon class="h-5" />
     </BaseButton>
-    <span class="mr-auto truncate">{{ activity.name }}</span>
+    <span class="mr-auto truncate flex items-center">{{ activity.name }}</span>
     <ActivitySecondsToComplete
       v-if="activity.secondsToComplete"
       :activity="activity"
       :timeline-items="timelineItems" />
     <BaseSelect
-      class="font-mono"
+      class="font-mono ml-4"
       :selected="activity.secondsToComplete || null"
       :options="periodSelectOptions"
       placeholder="h:mm"
