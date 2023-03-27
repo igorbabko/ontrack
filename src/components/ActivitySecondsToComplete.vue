@@ -15,7 +15,7 @@ const diff = computed(() => (getTotalActivitySeconds(props.activity, props.timel
 
 <template>
   <div
-    :class="`flex items-center font-mono ml-4 px-2 rounded ${diff < 0 ? 'text-red-600 bg-red-100' : 'text-green-600 bg-green-100'}`">
+    :class="`flex items-center text-xl font-mono px-2 rounded ${diff < 0 ? 'text-red-600 bg-red-100' : 'text-green-600 bg-green-100'}`">
     {{ time }}
   </div>
 </template>
