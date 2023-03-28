@@ -1,12 +1,13 @@
 <script setup>
 import { ref } from 'vue';
+import { PAGE_TIMELINE } from './constants';
 import { id, generateTimelineItems, generateActivities } from './functions';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
 
-const currentPage = ref(window.location.hash.slice(1) || 'timeline');
+const currentPage = ref(window.location.hash.slice(1) || PAGE_TIMELINE);
 const timelineItems = ref(generateTimelineItems());
 const activities = ref(generateActivities());
 
@@ -57,11 +58,11 @@ function goTo(page) {
   <TheHeader
     :timeline-items="timelineItems"
     :activities="activities"
-    @go-to-timeline="goTo('timeline')" />
+    @go-to-timeline="goTo(PAGE_TIMELINE)" />
 
   <main class="flex flex-col flex-grow">
     <TheTimeline
-      v-show="currentPage === 'timeline'"
+      v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
       :activities="activities"
       :current-page="currentPage"

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watchEffect, nextTick } from 'vue';
+import { PAGE_TIMELINE } from '../constants';
 import { getCurrentHour } from '../functions';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
@@ -11,7 +12,7 @@ const emit = defineEmits(['setTimelineItemActivity', 'updateTimelineItemActivity
 const timelineItemRefs = ref([]);
 
 watchEffect(async () => {
-  if (props.currentPage === 'timeline') {
+  if (props.currentPage === PAGE_TIMELINE) {
     await nextTick();
 
     const currentHour = getCurrentHour();

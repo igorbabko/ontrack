@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watchPostEffect, onMounted, nextTick } from 'vue';
+import { PAGE_TIMELINE } from '../constants';
 
 const props = defineProps(['currentPage']);
 
@@ -12,7 +13,7 @@ onMounted(() => {
 });
 
 watchPostEffect(async () => {
-  if (props.currentPage === 'timeline') {
+  if (props.currentPage === PAGE_TIMELINE) {
     await nextTick();
 
     updateHeight();
