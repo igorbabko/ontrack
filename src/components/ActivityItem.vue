@@ -10,7 +10,7 @@ import BaseButton from './BaseButton.vue';
 import BaseSelect from './BaseSelect.vue';
 import ActivitySecondsToComplete from './ActivitySecondsToComplete.vue';
 
-const props = defineProps(['activity', 'timelineItems']);
+defineProps(['activity', 'timelineItems']);
 
 const emit = defineEmits(['delete', 'setSecondsToComplete']);
 </script>
@@ -21,7 +21,7 @@ const emit = defineEmits(['delete', 'setSecondsToComplete']);
       <BaseButton type="danger" @click="emit('delete')">
         <TrashIcon class="h-8" />
       </BaseButton>
-      <span class="mr-auto text-xl truncate">{{ activity.name }}</span>
+      <span class="text-xl truncate">{{ activity.name }}</span>
     </div>
     <div class="flex gap-1">
       <BaseSelect
