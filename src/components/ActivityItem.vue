@@ -5,7 +5,7 @@ const periodSelectOptions = generatePeriodSelectOptions();
 </script>
 
 <script setup>
-import { XMarkIcon } from '@heroicons/vue/24/outline';
+import { TrashIcon } from '@heroicons/vue/24/outline';
 import BaseButton from './BaseButton.vue';
 import BaseSelect from './BaseSelect.vue';
 import ActivitySecondsToComplete from './ActivitySecondsToComplete.vue';
@@ -19,7 +19,7 @@ const emit = defineEmits(['delete', 'setSecondsToComplete']);
   <li class="p-4 flex flex-col gap-1">
     <div class="flex items-center gap-1">
       <BaseButton type="danger" @click="emit('delete')">
-        <XMarkIcon class="h-8" />
+        <TrashIcon class="h-8" />
       </BaseButton>
       <span class="mr-auto text-xl truncate">{{ activity.name }}</span>
     </div>
