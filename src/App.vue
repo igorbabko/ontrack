@@ -10,6 +10,7 @@ import TheActivities from './components/TheActivities.vue'
 const currentPage = ref(window.location.hash.slice(1) || PAGE_TIMELINE);
 const timelineItems = ref(generateTimelineItems());
 const activities = ref(generateActivities());
+const timeline = ref();
 
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 
@@ -53,13 +54,21 @@ function setActivitySecondsToComplete({ activity, secondsToComplete }) {
 function goTo(page) {
   currentPage.value = page;
 }
+
+function goToTimeline() {
+  if (currentPage.value === PAGE_TIMELINE) {
+    timeline.value.scrollToCurrentTimelineItem();
+  } else {
+    goTo(PAGE_TIMELINE);
+  }
+}
 </script>
 
 <template>
   <TheHeader
     :timeline-items="timelineItems"
     :activities="activities"
-    @go-to-timeline="goTo(PAGE_TIMELINE)" />
+    @go-to-timeline="goToTimeline" />
 
   <main class="flex flex-col flex-grow">
     <TheTimeline
@@ -67,6 +76,7 @@ function goTo(page) {
       :timeline-items="timelineItems"
       :activity-select-options="activitySelectOptions"
       :current-page="currentPage"
+      ref="timeline"
       @set-timeline-item-activity="setTimelineItemActivity"
       @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds" />
     <TheActivities

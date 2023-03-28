@@ -9,21 +9,29 @@ const props = defineProps(['timelineItems', 'activitySelectOptions', 'currentPag
 
 const emit = defineEmits(['setTimelineItemActivity', 'updateTimelineItemActivitySeconds']);
 
+defineExpose({ scrollToCurrentTimelineItem });
+
 const timelineItemRefs = ref([]);
 
 watchEffect(async () => {
   if (props.currentPage === PAGE_TIMELINE) {
     await nextTick();
 
-    const currentHour = getCurrentHour();
-
-    const timelineItem = props.timelineItems.find(({ hour }) => hour === currentHour);
-
-    scrollToTimelineItem(timelineItem);
+    scrollToCurrentTimelineItem(false);
   }
 });
 
-function scrollToTimelineItem(timelineItem, options = {}) {
+function scrollToCurrentTimelineItem(isSmooth = true) {
+  const currentHour = getCurrentHour();
+
+  const timelineItem = props.timelineItems.find(({ hour }) => hour === currentHour);
+
+  scrollToTimelineItem(timelineItem, isSmooth);
+}
+
+function scrollToTimelineItem(timelineItem, isSmooth = true) {
+  const options = { behavior: isSmooth ? 'smooth' : 'instant' };
+
   if (timelineItem.hour === 0) {
     document.body.scrollIntoView(options);
   } else {
@@ -42,7 +50,7 @@ function scrollToTimelineItem(timelineItem, options = {}) {
         :timeline-item="timelineItem"
         :activity-select-options="activitySelectOptions"
         ref="timelineItemRefs"
-        @scroll-to="scrollToTimelineItem(timelineItem, { behavior: 'smooth' })"
+        @scroll-to="scrollToTimelineItem(timelineItem)"
         @select-activity="emit('setTimelineItemActivity', { timelineItem, activityId: $event })"
         @update-activity-seconds="emit('updateTimelineItemActivitySeconds', { timelineItem, activitySeconds: $event })" />
     </ul>
