@@ -16,7 +16,7 @@ const activitySelectOptions = computed(() => generateActivitySelectOptions(props
       class="w-full"
       :selected="timelineItem.activityId"
       :options="activitySelectOptions"
-      :disabled="timelineItem.hour <= getCurrentHour()"
+      :disabled="timelineItem.hour < getCurrentHour()"
       placeholder="Rest"
       @select="emit('select', $event)" />
   </div>

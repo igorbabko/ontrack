@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { getCurrentHour } from '../functions.js';
 import StopwatchButtonReset from './StopwatchButtonReset.vue';
 import StopwatchButtonStart from './StopwatchButtonStart.vue';
@@ -15,7 +15,7 @@ const isRunning = ref(false);
 
 let stopwatch = null;
 
-const isDisabled = computed(() => !props.timelineItem.activityId || props.timelineItem.hour > getCurrentHour());
+const disabled = computed(() => !props.timelineItem.activityId || props.timelineItem.hour > getCurrentHour());
 
 function start() {
   isRunning.value = true;
@@ -44,9 +44,9 @@ function reset() {
 
 <template>
   <div class="flex gap-1 w-full">
-    <StopwatchButtonReset @click="reset" :disabled="isDisabled" />
+    <StopwatchButtonReset @click="reset" :disabled="disabled" />
     <StopwatchTime :seconds="seconds" />
-    <StopwatchButtonStop v-if="isRunning" @click="stop" :disabled="isDisabled" />
-    <StopwatchButtonStart v-else @click="start" :disabled="isDisabled" />
+    <StopwatchButtonStop v-if="isRunning" @click="stop" :disabled="disabled" />
+    <StopwatchButtonStart v-else @click="start" :disabled="disabled" />
   </div>
 </template>
