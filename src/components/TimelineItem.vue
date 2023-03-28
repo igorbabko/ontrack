@@ -1,15 +1,12 @@
 <script setup>
-import { computed } from 'vue';
-import { getCurrentHour, generateActivitySelectOptions } from '../functions';
+import { getCurrentHour } from '../functions';
 import BaseSelect from './BaseSelect.vue'
 import TimelineHour from './TimelineHour.vue';
 import TimelineStopwatch from './TimelineStopwatch.vue';
 
-const props = defineProps(['timelineItem', 'activities']);
+defineProps(['timelineItem', 'activitySelectOptions']);
 
 const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']);
-
-const activitySelectOptions = computed(() => generateActivitySelectOptions(props.activities));
 </script>
 
 <template>

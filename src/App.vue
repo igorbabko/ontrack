@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { PAGE_TIMELINE, PAGE_ACTIVITIES } from './constants';
-import { id, generateTimelineItems, generateActivities } from './functions';
+import { id, generateTimelineItems, generateActivities, generateActivitySelectOptions } from './functions';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
@@ -10,6 +10,8 @@ import TheActivities from './components/TheActivities.vue'
 const currentPage = ref(window.location.hash.slice(1) || PAGE_TIMELINE);
 const timelineItems = ref(generateTimelineItems());
 const activities = ref(generateActivities());
+
+const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 
 function setTimelineItemActivity({ timelineItem, activityId }) {
   timelineItem.activityId = activityId;
@@ -63,7 +65,7 @@ function goTo(page) {
     <TheTimeline
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
-      :activities="activities"
+      :activity-select-options="activitySelectOptions"
       :current-page="currentPage"
       @set-timeline-item-activity="setTimelineItemActivity"
       @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds" />

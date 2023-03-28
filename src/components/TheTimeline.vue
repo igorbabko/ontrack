@@ -5,7 +5,7 @@ import { getCurrentHour } from '../functions';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
-const props = defineProps(['timelineItems', 'activities', 'currentPage'])
+const props = defineProps(['timelineItems', 'activitySelectOptions', 'currentPage'])
 
 const emit = defineEmits(['setTimelineItemActivity', 'updateTimelineItemActivitySeconds']);
 
@@ -40,7 +40,7 @@ function scrollToTimelineItem(timelineItem, options = {}) {
         v-for="timelineItem in timelineItems"
         :key="timelineItem.id"
         :timeline-item="timelineItem"
-        :activities="activities"
+        :activity-select-options="activitySelectOptions"
         ref="timelineItemRefs"
         @scroll-to="scrollToTimelineItem(timelineItem, { behavior: 'smooth' })"
         @select-activity="emit('setTimelineItemActivity', { timelineItem, activityId: $event })"
