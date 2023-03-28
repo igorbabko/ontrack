@@ -1,6 +1,6 @@
 <script setup>
 import ActivityItem from './ActivityItem.vue';
-import ActivityForm from './ActivityForm.vue';
+import TheActivityForm from './TheActivityForm.vue';
 
 defineProps(['activities', 'timelineItems']);
 
@@ -22,6 +22,6 @@ const emit = defineEmits(['createActivity', 'deleteActivity', 'setActivitySecond
       <img src="../assets/empty.svg" alt="No activities" class="h-48">
       <span class="text-gray-400">You don't have any activities.</span>
     </div>
-    <ActivityForm @submit="emit('createActivity', $event)" />
+    <TheActivityForm @submit="emit('createActivity', $event)" />
   </div>
 </template>
