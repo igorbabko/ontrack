@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watchEffect, nextTick } from 'vue';
-import { getCurrentHour } from '../functions.js';
+import { getCurrentHour } from '../functions';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
 

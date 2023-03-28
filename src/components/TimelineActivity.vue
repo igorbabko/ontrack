@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { getCurrentHour, generateActivitySelectOptions } from '../functions.js';
+import { getCurrentHour, generateActivitySelectOptions } from '../functions';
 import BaseSelect from './BaseSelect.vue'
 
 const props = defineProps(['timelineItem', 'activities']);

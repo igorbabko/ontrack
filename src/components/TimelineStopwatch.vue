@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { getCurrentHour } from '../functions.js';
+import { getCurrentHour } from '../functions';
 import StopwatchButtonReset from './StopwatchButtonReset.vue';
 import StopwatchButtonStart from './StopwatchButtonStart.vue';
 import StopwatchButtonStop from './StopwatchButtonStop.vue';
