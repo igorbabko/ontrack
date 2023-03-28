@@ -5,7 +5,7 @@ import BaseSelect from './BaseSelect.vue'
 import TimelineHour from './TimelineHour.vue';
 import TimelineStopwatch from './TimelineStopwatch.vue';
 
-defineProps(['timelineItem', 'activities']);
+const props = defineProps(['timelineItem', 'activities']);
 
 const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']);
 
