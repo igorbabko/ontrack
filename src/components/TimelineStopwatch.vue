@@ -48,7 +48,7 @@ function reset() {
 
 <template>
   <div class="flex gap-1 w-full">
-    <StopwatchButtonReset @click="reset" :disabled="!timelineItem.activityId" />
+    <StopwatchButtonReset @click="reset" :disabled="disabled" />
     <StopwatchTime :seconds="seconds" />
     <StopwatchButtonStop v-if="isRunning" @click="stop" :disabled="disabled" />
     <StopwatchButtonStart v-else @click="start" :disabled="disabled" />
