@@ -1,5 +1,4 @@
 <script setup>
-import { getCurrentHour } from '../functions.js';
 import TimelineHour from './TimelineHour.vue';
 import TimelineActivity from './TimelineActivity.vue';
 import TimelineStopwatch from './TimelineStopwatch.vue';
@@ -10,8 +9,7 @@ const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']
 </script>
 
 <template>
-  <li
-    :class="['py-10', 'px-4', 'flex', 'flex-col', 'gap-1', 'relative', 'border-t', 'border-gray-200', { 'opacity-50': timelineItem.hour < getCurrentHour() }]">
+  <li class="py-10 px-4 flex flex-col gap-1 relative border-t border-gray-200">
     <TimelineHour :hour="timelineItem.hour" @click.prevent="emit('scrollTo')" />
     <TimelineActivity
       :timeline-item="timelineItem"

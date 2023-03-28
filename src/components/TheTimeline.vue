@@ -23,10 +23,10 @@ watchEffect(async () => {
 });
 
 function scrollToTimelineItem(timelineItem, options = {}) {
-  if (timelineItem.hour > 2) {
-    timelineItemRefs.value[timelineItem.hour - 3].$el.scrollIntoView(options);
+  if (timelineItem.hour === 0) {
+    document.body.scrollIntoView(options);
   } else {
-    document.body.scrollIntoView();
+    timelineItemRefs.value[timelineItem.hour - 1].$el.scrollIntoView(options);
   }
 }
 </script>
