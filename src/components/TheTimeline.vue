@@ -12,6 +12,11 @@ const emit = defineEmits(['setTimelineItemActivity', 'updateTimelineItemActivity
 defineExpose({ scrollToCurrentTimelineItem });
 
 const timelineItemRefs = ref([]);
+const currentHour = ref((new Date).toUTCString());
+
+setInterval(() => {
+  currentHour.value = (new Date).toUTCString();
+}, 1000);
 
 watchEffect(async () => {
   if (props.currentPage === PAGE_TIMELINE) {
@@ -42,6 +47,7 @@ function scrollToTimelineItem(timelineItem, isSmooth = true) {
 
 <template>
   <div class="relative mt-7">
+    <div class="relative z-50">{{ currentHour }}</div>
     <TheTimelineIndicator :current-page="currentPage" />
     <ul>
       <TimelineItem
@@ -49,6 +55,7 @@ function scrollToTimelineItem(timelineItem, isSmooth = true) {
         :key="timelineItem.id"
         :timeline-item="timelineItem"
         :activity-select-options="activitySelectOptions"
+        :is-current="timelineItem.hour === currentHour"
         ref="timelineItemRefs"
         @scroll-to="scrollToTimelineItem(timelineItem)"
         @select-activity="emit('setTimelineItemActivity', { timelineItem, activityId: $event })"
