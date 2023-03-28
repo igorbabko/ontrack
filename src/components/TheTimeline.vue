@@ -32,7 +32,7 @@ function scrollToTimelineItem(timelineItem, options = {}) {
 </script>
 
 <template>
-  <div class="mt-7">
+  <div class="relative mt-7">
     <TheTimelineIndicator :current-page="currentPage" />
     <ul>
       <TimelineItem
