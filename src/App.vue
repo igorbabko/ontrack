@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { PAGE_TIMELINE } from './constants';
+import { PAGE_TIMELINE, PAGE_ACTIVITIES } from './constants';
 import { id, generateTimelineItems, generateActivities } from './functions';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
@@ -13,7 +13,6 @@ const activities = ref(generateActivities());
 
 function setTimelineItemActivity({ timelineItem, activityId }) {
   timelineItem.activityId = activityId;
-  timelineItem.activitySeconds = 0;
 }
 
 function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
@@ -69,7 +68,7 @@ function goTo(page) {
       @set-timeline-item-activity="setTimelineItemActivity"
       @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds" />
     <TheActivities
-      v-show="currentPage === 'activities'"
+      v-show="currentPage === PAGE_ACTIVITIES"
       :timeline-items="timelineItems"
       :activities="activities"
       @create-activity="createActivity"

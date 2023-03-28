@@ -16,8 +16,8 @@ const emit = defineEmits(['delete', 'setSecondsToComplete']);
 </script>
 
 <template>
-  <li class="p-2 flex flex-col gap-2">
-    <div class="flex items-center gap-2">
+  <li class="p-4 flex flex-col gap-1">
+    <div class="flex items-center gap-1">
       <BaseButton type="danger" @click="emit('delete')">
         <XMarkIcon class="h-8" />
       </BaseButton>
