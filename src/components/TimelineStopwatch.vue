@@ -47,7 +47,7 @@ function reset() {
 </script>
 
 <template>
-  <div class="flex gap-1 w-full">
+  <div class="flex gap-2 w-full">
     <StopwatchButtonReset @click="reset" :disabled="disabled" />
     <StopwatchTime :seconds="seconds" :disabled="disabled" />
     <StopwatchButtonStop v-if="isRunning" @click="stop" :disabled="disabled" />

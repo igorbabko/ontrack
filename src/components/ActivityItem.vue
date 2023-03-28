@@ -16,14 +16,14 @@ const emit = defineEmits(['delete', 'setSecondsToComplete']);
 </script>
 
 <template>
-  <li class="p-4 flex flex-col gap-1">
-    <div class="flex items-center gap-1">
+  <li class="p-4 flex flex-col gap-2">
+    <div class="flex items-center gap-2">
       <BaseButton type="danger" @click="emit('delete')">
         <TrashIcon class="h-8" />
       </BaseButton>
       <span class="text-xl truncate">{{ activity.name }}</span>
     </div>
-    <div class="flex gap-1">
+    <div class="flex gap-2">
       <BaseSelect
         class="font-mono flex-grow"
         :selected="activity.secondsToComplete || null"

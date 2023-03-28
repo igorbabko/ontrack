@@ -10,7 +10,7 @@ const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']
 </script>
 
 <template>
-  <li class="py-10 px-4 flex flex-col gap-1 relative border-t border-gray-200">
+  <li class="py-10 px-4 flex flex-col gap-2 relative border-t border-gray-200">
     <TimelineHour :hour="timelineItem.hour" @click.prevent="emit('scrollTo')" />
     <BaseSelect
       :selected="timelineItem.activityId"

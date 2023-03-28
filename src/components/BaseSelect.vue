@@ -16,7 +16,7 @@ const isNotSelected = computed(() => [null, undefined].includes(props.selected))
 </script>
 
 <template>
-  <div class="flex gap-1">
+  <div class="flex gap-2">
     <BaseButton
       type="neutral"
       :disabled="disabled"
