@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { getCurrentHour, generateActivitySelectOptions } from '../functions.js';
 import BaseSelect from './BaseSelect.vue'
 
-const props = defineProps(['activityId', 'activities', 'hour']);
+const props = defineProps(['timelineItem', 'activities']);
 
 const emit = defineEmits(['select']);
 
@@ -14,9 +14,9 @@ const activitySelectOptions = computed(() => generateActivitySelectOptions(props
   <div class="mr-auto flex gap-2 w-full">
     <BaseSelect
       class="w-full"
-      :selected="activityId"
+      :selected="timelineItem.activityId"
       :options="activitySelectOptions"
-      :disabled="hour <= getCurrentHour()"
+      :disabled="timelineItem.hour <= getCurrentHour()"
       placeholder="Rest"
       @select="emit('select', $event)" />
   </div>
