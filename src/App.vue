@@ -1,11 +1,12 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { PAGE_TIMELINE, PAGE_ACTIVITIES } from './constants';
+import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_STATS } from './constants';
 import { id, generateTimelineItems, generateActivities, generateActivitySelectOptions } from './functions';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
+import TheStats from './components/TheStats.vue'
 
 const currentPage = ref(window.location.hash.slice(1) || PAGE_TIMELINE);
 const timelineItems = ref(generateTimelineItems());
@@ -86,6 +87,7 @@ function goToTimeline() {
       @create-activity="createActivity"
       @delete-activity="deleteActivity"
       @set-activity-seconds-to-complete="setActivitySecondsToComplete" />
+    <TheStats v-show="currentPage === PAGE_STATS" />
   </main>
 
   <TheNav :current-page="currentPage" @navigate="goTo($event)" />
