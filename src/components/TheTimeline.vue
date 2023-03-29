@@ -13,9 +13,7 @@ defineExpose({ scrollToCurrentTimelineItem });
 const timelineItemRefs = ref([]);
 const currentTime = ref(new Date);
 
-setInterval(() => {
-  currentTime.value = new Date;
-}, 1000);
+setInterval(() => currentTime.value = new Date, 1000);
 
 watchEffect(async () => {
   if (props.currentPage === PAGE_TIMELINE) {
