@@ -31,7 +31,7 @@ function height() {
 }
 
 function seconds() {
-  const now = new Date();
+  const now = new Date;
 
   return now.getSeconds() + (60 * now.getMinutes()) + (60 * 60 * now.getHours());
 }

@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { getCurrentHour } from '../functions';
 import StopwatchButtonReset from './StopwatchButtonReset.vue';
 import StopwatchButtonStart from './StopwatchButtonStart.vue';
 import StopwatchButtonStop from './StopwatchButtonStop.vue';
@@ -15,7 +14,7 @@ const isRunning = ref(false);
 
 let stopwatch = null;
 
-const disabled = computed(() => !props.timelineItem.activityId || props.timelineItem.hour > getCurrentHour());
+const disabled = computed(() => !props.timelineItem.activityId || props.timelineItem.hour > (new Date).getHours());
 
 watch(props.timelineItem, () => {
   if (props.timelineItem.activityId === null) reset();

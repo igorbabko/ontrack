@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watchEffect, nextTick } from 'vue';
 import { PAGE_TIMELINE } from '../constants';
-import { getCurrentHour } from '../functions';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
@@ -12,10 +11,10 @@ const emit = defineEmits(['setTimelineItemActivity', 'updateTimelineItemActivity
 defineExpose({ scrollToCurrentTimelineItem });
 
 const timelineItemRefs = ref([]);
-const currentHour = ref((new Date).toUTCString());
+const currentTime = ref(new Date);
 
 setInterval(() => {
-  currentHour.value = (new Date).toUTCString();
+  currentTime.value = new Date;
 }, 1000);
 
 watchEffect(async () => {
@@ -27,7 +26,7 @@ watchEffect(async () => {
 });
 
 function scrollToCurrentTimelineItem(isSmooth = true) {
-  const currentHour = getCurrentHour();
+  const currentHour = currentTime.value.getHours();
 
   const timelineItem = props.timelineItems.find(({ hour }) => hour === currentHour);
 
@@ -47,7 +46,6 @@ function scrollToTimelineItem(timelineItem, isSmooth = true) {
 
 <template>
   <div class="relative mt-7">
-    <div class="relative z-50">{{ currentHour }}</div>
     <TheTimelineIndicator :current-page="currentPage" />
     <ul>
       <TimelineItem
@@ -55,7 +53,7 @@ function scrollToTimelineItem(timelineItem, isSmooth = true) {
         :key="timelineItem.id"
         :timeline-item="timelineItem"
         :activity-select-options="activitySelectOptions"
-        :is-current="timelineItem.hour === currentHour"
+        :current-time="timelineItem.hour === currentTime.getHours() ? currentTime : null"
         ref="timelineItemRefs"
         @scroll-to="scrollToTimelineItem(timelineItem)"
         @select-activity="emit('setTimelineItemActivity', { timelineItem, activityId: $event })"

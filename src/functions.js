@@ -2,10 +2,6 @@ export function id() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }
 
-export function getCurrentHour() {
-  return (new Date).getHours();
-}
-
 export function getTotalActivitySeconds(activity, timelineItems) {
   return timelineItems
     .filter((timelineItem) => timelineItem.activityId === activity.id)
