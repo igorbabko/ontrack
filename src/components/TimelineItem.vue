@@ -10,7 +10,7 @@ const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']
 
 const time = computed(() => {
   if (props.currentTime) {
-    return props.currentTime.toLocaleTimeString().substring(0, 8);
+    return props.currentTime.toLocaleTimeString('en-US', { hour12: false }).substring(0, 8);
   } else {
     return `${props.timelineItem.hour.toString().padStart(2, 0)}:00`;
   }
