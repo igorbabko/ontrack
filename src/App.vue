@@ -87,7 +87,10 @@ function goToTimeline() {
       @create-activity="createActivity"
       @delete-activity="deleteActivity"
       @set-activity-seconds-to-complete="setActivitySecondsToComplete" />
-    <TheStats v-show="currentPage === PAGE_STATS" />
+    <TheStats
+      :timeline-items="timelineItems"
+      :activities="activities"
+      v-show="currentPage === PAGE_STATS" />
   </main>
 
   <TheNav :current-page="currentPage" @navigate="goTo($event)" />
