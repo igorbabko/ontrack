@@ -26,15 +26,13 @@ function percentage(activity) {
     <div v-for="activity in activities.filter(({ secondsToComplete }) => secondsToComplete)"
       class="flex flex-col gap-1 p-4">
       <label for="file" class="text-xl">{{ activity.name }}</label>
-      <progress id="file" :class="`rounded h-4 ${color(activity)} [&::-moz-progress-bar]:bg-purple-500`" :max="activity.secondsToComplete"
-        :value="getTotalActivitySeconds(activity, timelineItems)">
-        70%
-      </progress>
+      <div :class="`h-5 flex bg-neutral-200 rounded overflow-hidden`">
+        <div :class="`${color(activity)}`" :style="`width: ${percentage(activity)}%`" />
+      </div>
       <div class="flex justify-between text-sm font-mono">
         <span>{{ percentage(activity) }}%</span>
         <span>
-          {{ formatTime(getTotalActivitySeconds(activity, timelineItems)) }} / {{ formatTime(activity.secondsToComplete)
-          }}
+          {{ formatTime(getTotalActivitySeconds(activity, timelineItems)) }} / {{ formatTime(activity.secondsToComplete) }}
         </span>
       </div>
     </div>
