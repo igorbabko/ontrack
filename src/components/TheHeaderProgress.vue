@@ -29,7 +29,7 @@ const progress = computed(() => {
       <CheckCircleIcon class="h-7 text-green-500" />
     </div>
     <div v-else class="text-sm">
-      Complete: <span class="font-mono">{{ progress }}%</span>
+      Progress: <span class="font-mono">{{ progress }}%</span>
     </div>
   </a>
 </template>
