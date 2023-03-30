@@ -1,15 +1,9 @@
 <script setup>
-import { computed } from 'vue';
-import { getTotalActivitySeconds } from '../functions';
-import TheHeaderLabelDayComplete from './TheHeaderLabelDayComplete.vue';
+import TheHeaderProgress from './TheHeaderProgress.vue';
 
-const props = defineProps(['timelineItems', 'activities']);
+defineProps(['timelineItems', 'activities']);
 
 const emit = defineEmits(['goToTimeline']);
-
-const isDayComplete = computed(() => {
-  return props.activities.every((activity) => getTotalActivitySeconds(activity, props.timelineItems) >= activity.secondsToComplete);
-});
 </script>
 
 <template>
@@ -17,6 +11,6 @@ const isDayComplete = computed(() => {
     <a href="#timeline" @click="emit('goToTimeline')">
       <img src="../assets/logo.png" alt="Logo" class="h-9">
     </a>
-    <TheHeaderLabelDayComplete v-if="isDayComplete" />
+    <TheHeaderProgress :activities="activities" :timeline-items="timelineItems" />
   </header>
 </template>
