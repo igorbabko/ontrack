@@ -21,11 +21,13 @@ const progress = computed(() => {
 </script>
 
 <template>
-  <div v-if="progress === 100" class="flex items-center text-sm gap-1">
-    Day complete!
-    <CheckCircleIcon class="h-7 text-green-500" />
-  </div>
-  <div v-else class="text-sm">
-    Complete: <span class="font-mono">{{ progress }}%</span>
-  </div>
+  <a href="#progress">
+    <div v-if="progress === 100" class="flex items-center text-sm gap-1">
+      Day complete!
+      <CheckCircleIcon class="h-7 text-green-500" />
+    </div>
+    <div v-else class="text-sm">
+      Complete: <span class="font-mono">{{ progress }}%</span>
+    </div>
+  </a>
 </template>

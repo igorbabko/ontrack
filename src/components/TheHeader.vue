@@ -3,7 +3,7 @@ import TheHeaderProgress from './TheHeaderProgress.vue';
 
 defineProps(['timelineItems', 'activities']);
 
-const emit = defineEmits(['goToTimeline']);
+const emit = defineEmits(['goToTimeline', 'goToProgress']);
 </script>
 
 <template>
@@ -11,6 +11,10 @@ const emit = defineEmits(['goToTimeline']);
     <a href="#timeline" @click="emit('goToTimeline')">
       <img src="../assets/logo.png" alt="Logo" class="h-9">
     </a>
-    <TheHeaderProgress :activities="activities" :timeline-items="timelineItems" />
+    <TheHeaderProgress
+      v-if="activities.filter(({ secondsToComplete }) => secondsToComplete).length"
+      :activities="activities"
+      :timeline-items="timelineItems"
+      @click="emit('goToProgress')" />
   </header>
 </template>

@@ -9,7 +9,7 @@ const emit = defineEmits(['navigate']);
 const navItems = {
   timeline: ClockIcon,
   activities: ListBulletIcon,
-  stats: ChartBarIcon,
+  progress: ChartBarIcon,
 }
 </script>
 
