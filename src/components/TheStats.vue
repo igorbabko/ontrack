@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue';
 import { formatTime, getTotalActivitySeconds } from '../functions';
 
 const props = defineProps(['activities', 'timelineItems']);
@@ -17,7 +16,7 @@ function color(activity) {
 }
 
 function percentage(activity) {
-  return Math.round(getTotalActivitySeconds(activity, props.timelineItems) * 100 / activity.secondsToComplete);
+  return Math.floor(getTotalActivitySeconds(activity, props.timelineItems) * 100 / activity.secondsToComplete);
 }
 </script>
 
