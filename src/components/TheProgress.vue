@@ -20,7 +20,9 @@ function getProgressLabel(activity) {
 }
 
 function getCompletionPercentage(activity) {
-  return Math.floor(getTotalActivitySeconds(activity, props.timelineItems) * 100 / activity.secondsToComplete);
+  const percentage = Math.floor(getTotalActivitySeconds(activity, props.timelineItems) * 100 / activity.secondsToComplete);
+
+  return percentage < 100 ? percentage : 100;
 }
 </script>
 

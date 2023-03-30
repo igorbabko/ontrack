@@ -16,7 +16,9 @@ const progress = computed(() => {
     return totalSeconds + activity.secondsToComplete;
   }, 0);
 
-  return Math.floor(totalActivitySeconds * 100 / totalSecondsToComplete);
+  const percentage = Math.floor(totalActivitySeconds * 100 / totalSecondsToComplete);
+
+  return percentage < 100 ? percentage : 100;
 });
 </script>
 
