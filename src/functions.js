@@ -12,6 +12,12 @@ export function getTotalActivitySeconds(activity, timelineItems) {
     .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.activitySeconds/* / 60 */) + totalSeconds), 0);
 }
 
+export function formatPercentage(percentage) {
+  percentage = Math.floor(percentage);
+
+  return `${percentage < 100 ? percentage : 100}%`;
+}
+
 export function formatTime(seconds) {
   const date = new Date;
 

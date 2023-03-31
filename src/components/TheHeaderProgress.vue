@@ -1,14 +1,14 @@
 <script setup>
 import { computed } from 'vue';
 import { CheckCircleIcon } from '@heroicons/vue/24/solid';
-import { getTotalActivitySeconds, filterTrackedActivities } from '../functions';
+import { getTotalActivitySeconds, filterTrackedActivities, formatPercentage } from '../functions';
 
 const props = defineProps(['activities', 'timelineItems']);
 
 const progress = computed(() => {
-  const percentage = Math.floor(totalActivitySeconds * 100 / totalActivitySecondsToComplete);
+  const percentage = totalActivitySeconds * 100 / totalActivitySecondsToComplete;
 
-  return percentage < 100 ? percentage : 100;
+  return formatPercentage(percentage);
 });
 
 const totalActivitySeconds = computed(() => {
