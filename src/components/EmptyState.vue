@@ -4,6 +4,5 @@
     <span class="text-gray-400">
       <slot></slot>
     </span>
-    <slot name="action"></slot>
   </div>
 </template>
