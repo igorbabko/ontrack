@@ -1,6 +1,7 @@
 <script setup>
 import ActivityItem from './ActivityItem.vue';
 import TheActivityForm from './TheActivityForm.vue';
+import EmptyState from './EmptyState.vue';
 
 defineProps(['activities', 'timelineItems']);
 
@@ -18,10 +19,9 @@ const emit = defineEmits(['createActivity', 'deleteActivity', 'setActivitySecond
         @delete="emit('deleteActivity', activity)"
         @set-seconds-to-complete="emit('setActivitySecondsToComplete', { activity, secondsToComplete: $event })" />
     </ul>
-    <div v-else class="p-4 pt-8 flex flex-col items-center gap-4">
-      <img src="../assets/empty.svg" alt="No activities" class="h-48">
-      <span class="text-gray-400">You don't have any activities.</span>
-    </div>
+    <EmptyState v-else image="../assets/empty.svg" alt="No activities">
+      You don't have any activities.
+    </EmptyState>
     <TheActivityForm @submit="emit('createActivity', $event)" />
   </div>
 </template>
