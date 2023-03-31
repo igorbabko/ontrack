@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { formatTime, getTotalActivitySeconds, formatPercentage } from '../functions';
+import { formatTime, getTotalActivitySeconds, normalizePercentage } from '../functions';
 
 const props = defineProps(['activity', 'timelineItems']);
 
@@ -12,9 +12,9 @@ const timeProgress = computed(() => {
 });
 
 const bgColorClass = computed(() => {
-  if (percentage < 33) return 'bg-red-500';
-  if (percentage < 66) return 'bg-yellow-500';
-  if (percentage < 100) return 'bg-blue-500';
+  if (progress < 33) return 'bg-red-500';
+  if (progress < 66) return 'bg-yellow-500';
+  if (progress < 100) return 'bg-blue-500';
 
   return 'bg-green-500';
 });
@@ -23,7 +23,7 @@ const progress = computed(() => {
   const activitySeconds = getTotalActivitySeconds(props.activity, props.timelineItems);
   const percentage = activitySeconds * 100 / props.activity.secondsToComplete;
 
-  return formatPercentage(percentage);
+  return normalizePercentage(percentage);
 });
 </script>
 
@@ -35,7 +35,7 @@ const progress = computed(() => {
     </div>
     <div class="flex justify-between text-sm font-mono">
       <span>{{ progress }}%</span>
-      <span>{{ timeProgress }}</span>
+      <span>{{ timeProgress }}%</span>
     </div>
   </li>
 </template>
