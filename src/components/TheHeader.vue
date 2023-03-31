@@ -1,9 +1,13 @@
 <script setup>
+import { computed } from 'vue';
+import { filterTrackedActivities } from '../functions';
 import TheHeaderProgress from './TheHeaderProgress.vue';
 
-defineProps(['timelineItems', 'activities']);
+const props = defineProps(['activities', 'timelineItems']);
 
-const emit = defineEmits(['goToTimeline', 'goToProgress']);
+defineEmits(['goToTimeline', 'goToProgress']);
+
+const trackedActivities = computed(() => filterTrackedActivities(props.activities));
 </script>
 
 <template>
@@ -12,7 +16,7 @@ const emit = defineEmits(['goToTimeline', 'goToProgress']);
       <img src="../assets/logo.png" alt="Logo" class="h-9">
     </a>
     <TheHeaderProgress
-      v-if="activities.filter(({ secondsToComplete }) => secondsToComplete).length"
+      v-if="trackedActivities.length"
       :activities="activities"
       :timeline-items="timelineItems"
       @click="emit('goToProgress')" />
