@@ -89,9 +89,11 @@ function goToTimeline() {
       @delete-activity="deleteActivity"
       @set-activity-seconds-to-complete="setActivitySecondsToComplete" />
     <TheProgress
+      v-show="currentPage === PAGE_PROGRESS"
       :timeline-items="timelineItems"
       :activities="activities"
-      v-show="currentPage === PAGE_PROGRESS" />
+      @go-to-activities="goTo(PAGE_ACTIVITIES)"
+       />
   </main>
 
   <TheNav :current-page="currentPage" @navigate="goTo($event)" />
