@@ -35,7 +35,7 @@ const progress = computed(() => {
     </div>
     <div class="flex justify-between text-sm font-mono">
       <span>{{ progress }}%</span>
-      <span>{{ timeProgress }}%</span>
+      <span>{{ timeProgress }}</span>
     </div>
   </li>
 </template>

@@ -6,19 +6,19 @@ import { getTotalActivitySeconds, filterTrackedActivities, normalizePercentage }
 const props = defineProps(['activities', 'timelineItems']);
 
 const progress = computed(() => {
-  const percentage = totalActivitySeconds * 100 / totalActivitySecondsToComplete;
+  const percentage = totalActivitySeconds.value * 100 / totalActivitySecondsToComplete.value;
 
   return normalizePercentage(percentage);
 });
 
 const totalActivitySeconds = computed(() => {
-  return trackedActivities.reduce((totalSeconds, activity) => {
+  return trackedActivities.value.reduce((totalSeconds, activity) => {
     return totalSeconds + getTotalActivitySeconds(activity, props.timelineItems);
   }, 0);
 });
 
 const totalActivitySecondsToComplete = computed(() => {
-  return trackedActivities.reduce((totalSeconds, activity) => {
+  return trackedActivities.value.reduce((totalSeconds, activity) => {
     return totalSeconds + activity.secondsToComplete;
   }, 0);
 });
