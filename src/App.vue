@@ -3,49 +3,37 @@ import { ref, computed } from 'vue';
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
 import {
   id,
-  getCurrentPage,
   generateTimelineItems,
   generateActivities,
+  getCurrentPage,
   generateActivitySelectOptions
 } from './functions';
-import TheHeader from './components/TheHeader.vue'
-import TheNav from './components/TheNav.vue'
-import TheTimeline from './components/TheTimeline.vue'
-import TheActivities from './components/TheActivities.vue'
-import TheProgress from './components/TheProgress.vue'
+import TheHeader from './components/TheHeader.vue';
+import TheNav from './components/TheNav.vue';
+import TheTimeline from './components/TheTimeline.vue';
+import TheActivities from './components/TheActivities.vue';
+import TheProgress from './components/TheProgress.vue';
 
 let state = localStorage.getItem('ontrack');
 
-// console.log(state);
+state = state ? JSON.parse(state) : {};
 
-state = state ? JSON.parse(state) : {
-  timelineItems: generateTimelineItems(),
-  activities: generateActivities()
-};
+console.log(state);
 
-window.addEventListener(
-  'pagehide',
-  (event) => {
-    let state = {
-      timelineItems: timelineItems.value,
-      activities: activities.value
-    };
+if (state.date !== (new Date).toLocaleDateString()) {
+  state = {
+    timelineItems: generateTimelineItems(),
+    activities: generateActivities()
+  };
+}
 
-    localStorage.setItem('ontrack', JSON.stringify(state));
-
-    console.log(state);
-  }
-);
-
-
-
-// console.log(state);
-
-
-
-
-
-
+window.addEventListener('pagehide', () => {
+  localStorage.setItem('ontrack', JSON.stringify({
+    date: (new Date).toLocaleDateString(),
+    timelineItems: timelineItems.value,
+    activities: activities.value
+  }));
+});
 
 const currentPage = ref(getCurrentPage());
 const timelineItems = ref(state.timelineItems);
@@ -93,6 +81,10 @@ function setActivitySecondsToComplete({ activity, secondsToComplete }) {
 
 function goTo(page) {
   currentPage.value = page;
+
+  if (page === PAGE_ACTIVITIES) {
+    document.body.scrollIntoView();
+  }
 }
 
 function goToTimeline() {
