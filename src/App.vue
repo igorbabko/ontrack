@@ -33,6 +33,8 @@ window.addEventListener('pagehide', () => {
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 
 function resetState() {
+  console.log('reset!!!!!!!!!!');
+
   timelineItems.value = generateTimelineItems();
   activities.value = generateActivities();
 }
