@@ -1,44 +1,27 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
-import {
-  id,
-  generateTimelineItems,
-  generateActivities,
-  getCurrentPage,
-  generateActivitySelectOptions
-} from './functions';
+import { id, loadState, getCurrentPage, generateActivitySelectOptions } from './functions';
 import TheHeader from './components/TheHeader.vue';
 import TheNav from './components/TheNav.vue';
 import TheTimeline from './components/TheTimeline.vue';
 import TheActivities from './components/TheActivities.vue';
 import TheProgress from './components/TheProgress.vue';
 
-let state = localStorage.getItem('ontrack');
+const state = loadState();
 
-state = state ? JSON.parse(state) : {};
-
-console.log(state);
-
-if (state.date !== (new Date).toLocaleDateString()) {
-  state = {
-    timelineItems: generateTimelineItems(),
-    activities: generateActivities()
-  };
-}
+const timelineItems = ref(state.timelineItems);
+const activities = ref(state.activities);
+const currentPage = ref(getCurrentPage());
+const timeline = ref();
 
 window.addEventListener('pagehide', () => {
   localStorage.setItem('ontrack', JSON.stringify({
     date: (new Date).toLocaleDateString(),
     timelineItems: timelineItems.value,
-    activities: activities.value
+    activities: activities.value,
   }));
 });
-
-const currentPage = ref(getCurrentPage());
-const timelineItems = ref(state.timelineItems);
-const activities = ref(state.activities);
-const timeline = ref();
 
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 

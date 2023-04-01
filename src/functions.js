@@ -1,5 +1,20 @@
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
 
+export function loadState() {
+  let state = localStorage.getItem('ontrack');
+
+  state = state ? JSON.parse(state) : {};
+
+  if (state.date !== (new Date).toLocaleDateString()) {
+    return {
+      timelineItems: generateTimelineItems(),
+      activities: generateActivities(),
+    };
+  }
+
+  return state;
+}
+
 export function id() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }
