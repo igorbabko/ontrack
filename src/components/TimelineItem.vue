@@ -32,6 +32,7 @@ const time = computed(() => {
       @select="emit('selectActivity', $event)" />
     <TimelineStopwatch
       :timeline-item="timelineItem"
+      :current-time="currentTime"
       @update-seconds="emit('updateActivitySeconds', $event)" />
   </li>
 </template>
