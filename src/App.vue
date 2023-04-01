@@ -79,7 +79,7 @@ function setActivitySecondsToComplete({ activity, secondsToComplete }) {
 function goTo(page) {
   currentPage.value = page;
 
-  if (page === PAGE_ACTIVITIES) {
+  if (page !== PAGE_TIMELINE) {
     document.body.scrollIntoView();
   }
 }
