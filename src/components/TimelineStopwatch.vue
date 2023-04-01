@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, watchEffect } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { formatTime } from '../functions';
 import StopwatchButtonReset from './StopwatchButtonReset.vue';
 import StopwatchButtonStart from './StopwatchButtonStart.vue';
@@ -26,17 +26,15 @@ watch(props.timelineItem, () => {
   if (props.timelineItem.activityId === null) reset();
 });
 
-watchEffect(() => {
-  // console.log(newTime, oldTime);
+watch(props.isCurrent, () => props.isCurrent && props.timelineItem.activityId ? start() : stop());
+// console.log(newTime, oldTime);
 
-  if (props.isCurrent && props.timelineItem.activityId) {
-    // console.log('aaaaaaaaaaaaaaaaaaa');
-    start();
-  } else {
-    // console.log('bbbbbbbbbbbbbbbbbbb');
-    stop();
-  }
-});
+// console.log('aaaaaaaaaaaaaaaaaaa');
+// start();
+// } else {
+// console.log('bbbbbbbbbbbbbbbbbbb');
+// stop();
+// }
 
 function start() {
   isRunning.value = true;
