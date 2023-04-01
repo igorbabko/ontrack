@@ -12,9 +12,9 @@ const timeProgress = computed(() => {
 });
 
 const bgColorClass = computed(() => {
-  if (progress < 33) return 'bg-red-500';
-  if (progress < 66) return 'bg-yellow-500';
-  if (progress < 100) return 'bg-blue-500';
+  if (progress.value < 33) return 'bg-red-500';
+  if (progress.value < 66) return 'bg-yellow-500';
+  if (progress.value < 100) return 'bg-blue-500';
 
   return 'bg-green-500';
 });
