@@ -14,9 +14,42 @@ import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
 import TheProgress from './components/TheProgress.vue'
 
+let state = localStorage.getItem('ontrack');
+
+// console.log(state);
+
+state = state ? JSON.parse(state) : {
+  timelineItems: generateTimelineItems(),
+  activities: generateActivities()
+};
+
+window.addEventListener(
+  'pagehide',
+  (event) => {
+    let state = {
+      timelineItems: timelineItems.value,
+      activities: activities.value
+    };
+
+    localStorage.setItem('ontrack', JSON.stringify(state));
+
+    console.log(state);
+  }
+);
+
+
+
+// console.log(state);
+
+
+
+
+
+
+
 const currentPage = ref(getCurrentPage());
-const timelineItems = ref(generateTimelineItems());
-const activities = ref(generateActivities());
+const timelineItems = ref(state.timelineItems);
+const activities = ref(state.activities);
 const timeline = ref();
 
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
