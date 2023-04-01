@@ -12,8 +12,12 @@ const progress = computed(() => {
 });
 
 const totalActivitySeconds = computed(() => {
-  return trackedActivities.value.reduce((totalSeconds, activity) => {
-    return totalSeconds + getTotalActivitySeconds(activity, props.timelineItems);
+  return trackedActivities.value.reduce((total, activity) => {
+    let totalSeconds = getTotalActivitySeconds(activity, props.timelineItems);
+
+    totalSeconds = totalSeconds < activity.secondsToComplete ? totalSeconds : activity.secondsToComplete;
+
+    return total + totalSeconds;
   }, 0);
 });
 
