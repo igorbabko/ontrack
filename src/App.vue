@@ -1,14 +1,20 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
-import { id, generateTimelineItems, generateActivities, generateActivitySelectOptions } from './functions';
+import {
+  id,
+  getCurrentPage,
+  generateTimelineItems,
+  generateActivities,
+  generateActivitySelectOptions
+} from './functions';
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './components/TheTimeline.vue'
 import TheActivities from './components/TheActivities.vue'
 import TheProgress from './components/TheProgress.vue'
 
-const currentPage = ref([PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS].includes(window.location.hash.slice(1)) ? window.location.hash.slice(1) : PAGE_TIMELINE);
+const currentPage = ref(getCurrentPage());
 const timelineItems = ref(generateTimelineItems());
 const activities = ref(generateActivities());
 const timeline = ref();
@@ -81,6 +87,7 @@ function goToTimeline() {
       ref="timeline"
       @set-timeline-item-activity="setTimelineItemActivity"
       @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds" />
+
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"
       :timeline-items="timelineItems"
@@ -88,12 +95,12 @@ function goToTimeline() {
       @create-activity="createActivity"
       @delete-activity="deleteActivity"
       @set-activity-seconds-to-complete="setActivitySecondsToComplete" />
+
     <TheProgress
       v-show="currentPage === PAGE_PROGRESS"
       :timeline-items="timelineItems"
       :activities="activities"
-      @go-to-activities="goTo(PAGE_ACTIVITIES)"
-       />
+      @go-to-activities="goTo(PAGE_ACTIVITIES)" />
   </main>
 
   <TheNav :current-page="currentPage" @navigate="goTo($event)" />

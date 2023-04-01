@@ -1,3 +1,5 @@
+import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
+
 export function id() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }
@@ -34,6 +36,12 @@ export function formatTime(seconds) {
   const utc = date.toUTCString();
 
   return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6);
+}
+
+export function getCurrentPage() {
+  const hash = window.location.hash.slice(1);
+
+  return [PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS].includes(hash) ? hash : PAGE_TIMELINE;
 }
 
 export function generateTimelineItems() {
