@@ -1,5 +1,4 @@
 <script setup>
-import EmptyState from './EmptyState.vue';
 import ActivityItem from './ActivityItem.vue';
 import TheActivityForm from './TheActivityForm.vue';
 import TheActivitiesEmptyState from './TheActivitiesEmptyState.vue';
