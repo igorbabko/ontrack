@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { CheckCircleIcon } from '@heroicons/vue/24/solid';
-import { getTotalActivitySeconds, filterTrackedActivities, normalizePercentage } from '../functions';
+import { getTotalActivitySeconds, filterTrackedActivities, normalizePercentage, getProgressColorClass } from '../functions';
 
 const props = defineProps(['activities', 'timelineItems']);
 
@@ -24,6 +24,8 @@ const totalActivitySecondsToComplete = computed(() => {
 });
 
 const trackedActivities = computed(() => filterTrackedActivities(props.activities));
+
+const progressColorClass = computed(() => getProgressColorClass(progress.value));
 </script>
 
 <template>
@@ -32,8 +34,9 @@ const trackedActivities = computed(() => filterTrackedActivities(props.activitie
       Day complete!
       <CheckCircleIcon class="h-7 text-green-500" />
     </div>
-    <div v-else class="text-sm">
-      Progress: <span class="font-mono">{{ progress }}%</span>
+    <div v-else class="text-sm flex items-center gap-1">
+      <div>Progress: <span class="font-mono">{{ progress }}%</span></div>
+      <div :class="`h-3 w-3 rounded-full ${progressColorClass}`"></div>
     </div>
   </a>
 </template>

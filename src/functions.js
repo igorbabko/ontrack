@@ -12,6 +12,14 @@ export function getTotalActivitySeconds(activity, timelineItems) {
     .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.activitySeconds/* / 60 */) + totalSeconds), 0);
 }
 
+export function getProgressColorClass(percentage) {
+  if (percentage < 33) return 'bg-red-500';
+  if (percentage < 66) return 'bg-yellow-500';
+  if (percentage < 100) return 'bg-blue-500';
+
+  return 'bg-green-500';
+}
+
 export function normalizePercentage(percentage) {
   percentage = Math.floor(percentage);
 
