@@ -4,7 +4,7 @@ import { PAGE_TIMELINE } from '../constants';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
-const props = defineProps(['timelineItems', 'activitySelectOptions', 'currentPage'])
+const props = defineProps(['timelineItems', 'activitySelectOptions', 'currentPage']);
 
 const emit = defineEmits(['setTimelineItemActivity', 'updateTimelineItemActivitySeconds']);
 
