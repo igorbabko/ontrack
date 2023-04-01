@@ -6,7 +6,11 @@ import StopwatchButtonStart from './StopwatchButtonStart.vue';
 import StopwatchButtonStop from './StopwatchButtonStop.vue';
 import StopwatchTime from './StopwatchTime.vue';
 
-const props = defineProps(['timelineItem', 'currentTime']);
+const props = defineProps({
+  timelineItem: Object,
+  currentTime: Object,
+  isCurrent: Boolean
+});
 
 const emit = defineEmits(['updateSeconds']);
 
