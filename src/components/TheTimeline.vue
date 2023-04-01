@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect, nextTick } from 'vue';
+import { ref, computed, watchEffect, nextTick } from 'vue';
 import { PAGE_TIMELINE } from '../constants';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';
@@ -13,7 +13,17 @@ defineExpose({ scrollToCurrentTimelineItem });
 const timelineItemRefs = ref([]);
 const currentTime = ref(new Date);
 
+const isMidnight = computed(() => currentTime.value.toTimeString().substring(0, 8) === '00:00:00');
+
 setInterval(() => currentTime.value = new Date, 1000);
+
+watchEffect(() => {
+  console.log(currentTime.value.toTimeString().substring(0, 8));
+
+  if (isMidnight.value) {
+    emit('midnight');
+  }
+});
 
 watchEffect(async () => {
   if (props.currentPage === PAGE_TIMELINE) {

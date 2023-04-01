@@ -1,7 +1,14 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
-import { id, loadState, getCurrentPage, generateActivitySelectOptions } from './functions';
+import {
+  id,
+  loadState,
+  getCurrentPage,
+  generateTimelineItems,
+  generateActivities,
+  generateActivitySelectOptions
+} from './functions';
 import TheHeader from './components/TheHeader.vue';
 import TheNav from './components/TheNav.vue';
 import TheTimeline from './components/TheTimeline.vue';
@@ -24,6 +31,11 @@ window.addEventListener('pagehide', () => {
 });
 
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
+
+function resetState() {
+  timelineItems.value = generateTimelineItems();
+  activities.value = generateActivities();
+}
 
 function setTimelineItemActivity({ timelineItem, activityId }) {
   timelineItem.activityId = activityId;
@@ -93,6 +105,7 @@ function goToTimeline() {
       :activity-select-options="activitySelectOptions"
       :current-page="currentPage"
       ref="timeline"
+      @midnight="resetState"
       @set-timeline-item-activity="setTimelineItemActivity"
       @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds" />
 
