@@ -26,7 +26,7 @@ watch(props.timelineItem, () => {
   if (props.timelineItem.activityId === null) reset();
 });
 
-watch(props.isCurrent, () => props.isCurrent && props.timelineItem.activityId ? start() : stop());
+watch(() => props.isCurrent, () => props.isCurrent && props.timelineItem.activityId ? start() : stop());
 // console.log(newTime, oldTime);
 
 // console.log('aaaaaaaaaaaaaaaaaaa');
