@@ -20,7 +20,7 @@ const isRunning = ref(false);
 let stopwatch = null;
 
 const time = computed(() => formatTime(seconds.value));
-const isTimeDisabled = computed(() => !props.timelineItem.activityId || props.timelineItem.hour > props.currentTime.getHours());
+const isTimeEnabled = computed(() => props.timelineItem.activityId && props.timelineItem.hour >= props.currentTime.getHours());
 const isStartButtonEnabled = computed(() => props.timelineItem.activityId && props.timelineItem.hour === props.currentTime.getHours());
 
 watch(props.timelineItem, () => {
@@ -67,7 +67,7 @@ function reset() {
 <template>
   <div class="flex gap-2 w-full">
     <StopwatchButtonReset @click="reset" :disabled="!isRunning" />
-    <StopwatchTime :class="{ 'opacity-50': isTimeDisabled }">{{ time }}</StopwatchTime>
+    <StopwatchTime :class="{ 'opacity-50': !isTimeEnabled }">{{ time }}</StopwatchTime>
     <StopwatchButtonStop v-if="isRunning" @click="stop" />
     <StopwatchButtonStart v-else @click="start" :disabled="!isStartButtonEnabled" />
   </div>
