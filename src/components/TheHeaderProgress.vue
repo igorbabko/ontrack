@@ -29,12 +29,12 @@ const progressColorClass = computed(() => getProgressColorClass(progress.value))
 </script>
 
 <template>
-  <a href="#progress">
-    <div v-if="progress === 100" class="flex items-center text-sm gap-1">
+  <a href="#progress" class="text-sm">
+    <div v-if="progress === 100" class="flex items-center gap-1">
       Day complete!
       <CheckCircleIcon class="h-7 text-green-500" />
     </div>
-    <div v-else class="text-sm flex items-center gap-1">
+    <div v-else class="flex items-center gap-1">
       <div>Progress: <span class="font-mono">{{ progress }}%</span></div>
       <div :class="`h-3 w-3 rounded-full ${progressColorClass}`"></div>
     </div>
