@@ -24,7 +24,7 @@ const isNotSelected = computed(() => [null, undefined].includes(props.selected))
       <XMarkIcon class="h-8" />
     </BaseButton>
     <select
-      class="w-full py-1 px-2 text-2xl rounded bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+      class="w-full py-1 px-2 text-2xl rounded bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed truncate"
       :disabled="disabled"
       @change="emit('select', $event.target.value)">
       <option :selected="isNotSelected" disabled value="">

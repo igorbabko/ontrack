@@ -23,7 +23,7 @@ const progress = computed(() => {
 
 <template>
   <li class="flex flex-col gap-1 p-4">
-    <label for="file" class="text-xl">{{ activity.name }}</label>
+    <div class="text-xl truncate">{{ activity.name }}</div>
     <div :class="`h-5 flex bg-neutral-200 rounded overflow-hidden`">
       <div :class="progressColorClass" :style="{ width: `${progress}%` }" />
     </div>
