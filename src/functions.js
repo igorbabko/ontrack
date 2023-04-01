@@ -15,6 +15,41 @@ export function loadState() {
   return state;
 }
 
+export function generateTimelineItems() {
+  const timelineItems = [];
+
+  for (let hour = 0; hour < 24; hour++) {
+    timelineItems.push({
+      id: id(),
+      hour,
+      activityId: null,
+      activitySeconds: 0,
+    });
+  }
+
+  return timelineItems;
+}
+
+export function generateActivities() {
+  return [
+    {
+      id: id(),
+      name: 'Coding',
+      secondsToComplete: 0,
+    },
+    {
+      id: id(),
+      name: 'Training',
+      secondsToComplete: 3600,
+    },
+    {
+      id: id(),
+      name: 'Reading',
+      secondsToComplete: 120 * 60,
+    },
+  ];
+}
+
 export function id() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }
@@ -59,21 +94,6 @@ export function getCurrentPage() {
   return [PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS].includes(hash) ? hash : PAGE_TIMELINE;
 }
 
-export function generateTimelineItems() {
-  const timelineItems = [];
-
-  for (let hour = 0; hour < 24; hour++) {
-    timelineItems.push({
-      id: id(),
-      hour,
-      activityId: null,
-      activitySeconds: 0,
-    });
-  }
-
-  return timelineItems;
-}
-
 export function generateActivitySelectOptions(activities) {
   return activities.map(activity => ({ value: activity.id, label: activity.name }));
 }
@@ -85,7 +105,7 @@ export function generatePeriodSelectOptions() {
 
   return periodsInMinutes.map(periodInMinutes => ({
     value: periodInMinutes * 60,
-    label: generatePeriodSelectOptionLabel(periodInMinutes)
+    label: generatePeriodSelectOptionLabel(periodInMinutes),
   }));
 }
 
@@ -102,24 +122,4 @@ function generatePeriodSelectOptionLabel(periodInMinutes) {
   }
 
   return `0:${minutes.toString().padStart(2, 0)}`;
-}
-
-export function generateActivities() {
-  return [
-    {
-      id: id(),
-      name: 'Coding',
-      secondsToComplete: 0,
-    },
-    {
-      id: id(),
-      name: 'Training',
-      secondsToComplete: 3600,
-    },
-    {
-      id: id(),
-      name: 'Reading',
-      secondsToComplete: 120 * 60,
-    },
-  ];
 }
