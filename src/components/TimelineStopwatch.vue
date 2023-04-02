@@ -27,14 +27,6 @@ watchEffect(() => {
 });
 
 watch(() => props.isCurrent, () => props.isCurrent && props.timelineItem.activityId ? start() : stop());
-// console.log(newTime, oldTime);
-
-// console.log('aaaaaaaaaaaaaaaaaaa');
-// start();
-// } else {
-// console.log('bbbbbbbbbbbbbbbbbbb');
-// stop();
-// }
 
 function start() {
   isRunning.value = true;

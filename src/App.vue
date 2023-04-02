@@ -33,8 +33,6 @@ window.addEventListener('pagehide', () => {
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 
 function resetState() {
-  console.log('reset!!!!!!!!!!');
-
   timelineItems.value = generateTimelineItems();
   activities.value = generateActivities();
 }
@@ -44,7 +42,7 @@ function setTimelineItemActivity({ timelineItem, activityId }) {
 }
 
 function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
-  console.log('aaaa', { timelineItem, activitySeconds });
+  // console.log('aaaa', { timelineItem, activitySeconds });
 
   timelineItem.activitySeconds += activitySeconds;
 }
@@ -71,7 +69,7 @@ function deleteActivity(activity) {
 }
 
 function setActivitySecondsToComplete({ activity, secondsToComplete }) {
-  console.log('bbb', { activity, secondsToComplete });
+  // console.log('bbb', { activity, secondsToComplete });
 
   activity.secondsToComplete = secondsToComplete;
 }

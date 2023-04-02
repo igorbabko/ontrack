@@ -18,11 +18,7 @@ const isMidnight = computed(() => currentTime.value.toTimeString().substring(0, 
 setInterval(() => currentTime.value = new Date, 1000);
 
 watchEffect(() => {
-  console.log(currentTime.value.toTimeString().substring(0, 8));
-
-  if (isMidnight.value) {
-    emit('midnight');
-  }
+  if (isMidnight.value) emit('midnight');
 });
 
 watchEffect(async () => {
