@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { formatTime } from '../functions';
 import StopwatchButtonReset from './StopwatchButtonReset.vue';
 import StopwatchButtonStart from './StopwatchButtonStart.vue';
@@ -9,7 +9,8 @@ import StopwatchTime from './StopwatchTime.vue';
 const props = defineProps({
   timelineItem: Object,
   currentTime: Object,
-  isCurrent: Boolean
+  isTracking: Boolean,
+  isCurrent: Boolean,
 });
 
 const emit = defineEmits(['updateSeconds']);
@@ -22,11 +23,11 @@ let stopwatch = null;
 const time = computed(() => formatTime(seconds.value));
 const isStartButtonEnabled = computed(() => props.timelineItem.activityId && props.timelineItem.hour === props.currentTime.getHours());
 
-watchEffect(() => {
-  if (!props.isCurrent && isRunning.value) {
-    stop();
-  } else if (props.isCurrent) {
+watch(() => props.isCurrent, () => {
+  if (props.isCurrent && props.isTracking) {
     start();
+  } else if (!props.isCurrent && isRunning.value) {
+    stop();
   }
 });
 

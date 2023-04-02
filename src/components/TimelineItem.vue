@@ -6,9 +6,10 @@ import TimelineStopwatch from './TimelineStopwatch.vue';
 
 const props = defineProps({
   timelineItem: Object,
+  isTracking: Boolean,
   isCurrent: Boolean,
   currentTime: Object,
-  activitySelectOptions: Array
+  activitySelectOptions: Array,
 });
 
 const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']);
@@ -37,6 +38,7 @@ const time = computed(() => {
     <TimelineStopwatch
       :timeline-item="timelineItem"
       :current-time="currentTime"
+      :is-tracking="isTracking"
       :is-current="isCurrent"
       @update-seconds="emit('updateActivitySeconds', $event)" />
   </li>

@@ -13,6 +13,8 @@ defineExpose({ scrollToCurrentTimelineItem });
 const timelineItemRefs = ref([]);
 const currentTime = ref(new Date);
 
+const isTracking = computed(() => props.timelineItems.some(({ startedTrackingAt }) => startedTrackingAt));
+
 const isMidnight = computed(() => currentTime.value.toTimeString().substring(0, 8) === '00:00:00');
 
 setInterval(() => currentTime.value = new Date, 1000);
@@ -57,6 +59,7 @@ function scrollToTimelineItem(timelineItem, isSmooth = true) {
         :key="timelineItem.id"
         :timeline-item="timelineItem"
         :activity-select-options="activitySelectOptions"
+        :is-tracking="isTracking"
         :is-current="timelineItem.hour === currentTime.getHours()"
         :current-time="currentTime"
         ref="timelineItemRefs"
