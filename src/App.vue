@@ -17,18 +17,41 @@ import TheProgress from './components/TheProgress.vue';
 
 const state = loadState();
 
+alert('initial');
+
 const timelineItems = ref(state.timelineItems);
 const activities = ref(state.activities);
 const currentPage = ref(getCurrentPage());
 const timeline = ref();
 
-window.addEventListener('pagehide', () => {
-  localStorage.setItem('ontrack', JSON.stringify({
-    date: (new Date).toLocaleDateString(),
-    timelineItems: timelineItems.value,
-    activities: activities.value,
-  }));
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    console.log('visible');
+    alert('visible');
+
+    const state = loadState();
+
+    timelineItems.value = state.timelineItems;
+    activities.value = state.activities;
+  } else {
+    alert('hidden');
+    console.log('hidden');
+
+    localStorage.setItem('ontrack', JSON.stringify({
+      date: (new Date).toLocaleDateString(),
+      timelineItems: timelineItems.value,
+      activities: activities.value,
+    }));
+  }
 });
+
+// window.addEventListener('pagehide', () => {
+//   localStorage.setItem('ontrack', JSON.stringify({
+//     date: (new Date).toLocaleDateString(),
+//     timelineItems: timelineItems.value,
+//     activities: activities.value,
+//   }));
+// });
 
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 
