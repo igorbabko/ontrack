@@ -32,7 +32,6 @@ const time = computed(() => {
     <BaseSelect
       :selected="timelineItem.activityId"
       :options="activitySelectOptions"
-      :disabled="timelineItem.hour < currentTime.getHours()"
       placeholder="Rest"
       @select="emit('selectActivity', $event)" />
     <TimelineStopwatch
