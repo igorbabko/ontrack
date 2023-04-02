@@ -68,6 +68,12 @@ function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
   // console.log('aaaa', { timelineItem, activitySeconds });
 
   timelineItem.activitySeconds += activitySeconds;
+
+  if (timelineItem.activitySeconds === 0) {
+    timelineItem.startedTrackingAt = null;
+  } else if (timelineItem.activitySeconds === 1) {
+    timelineItem.startedTrackingAt = (new Date).toJSON();
+  }
 }
 
 function createActivity(name) {
