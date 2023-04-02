@@ -20,7 +20,7 @@ const isRunning = ref(false);
 let stopwatch = null;
 
 const time = computed(() => formatTime(seconds.value));
-const isCurrentActivity = computed(() => props.timelineItem.activityId && props.timelineItem.hour === props.currentTime.getHours());
+const isStartButtonEnabled = computed(() => props.timelineItem.activityId && props.timelineItem.hour === props.currentTime.getHours());
 
 watch(props.timelineItem, () => {
   if (props.timelineItem.activityId === null) reset();
@@ -39,17 +39,19 @@ watch(() => props.isCurrent, () => props.isCurrent && props.timelineItem.activit
 function start() {
   isRunning.value = true;
 
-  stopwatch = setInterval(() => {
+  stopwatch = new Worker(new URL('../stopwatch.js', import.meta.url));
+
+  stopwatch.onmessage = () => {
     emit('updateSeconds', 1);
 
     seconds.value++;
-  }, 1000);
+  };
 }
 
 function stop() {
   isRunning.value = false;
 
-  clearInterval(stopwatch);
+  stopwatch.terminate();
 }
 
 function reset() {
@@ -63,9 +65,9 @@ function reset() {
 
 <template>
   <div class="flex gap-2 w-full">
-    <StopwatchButtonReset @click="reset" :disabled="!isRunning" />
-    <StopwatchTime :class="{ 'opacity-50': !isCurrentActivity }">{{ time }}</StopwatchTime>
+    <StopwatchButtonReset @click="reset" :disabled="!isRunning && !seconds" />
+    <StopwatchTime>{{ time }}</StopwatchTime>
     <StopwatchButtonStop v-if="isRunning" @click="stop" />
-    <StopwatchButtonStart v-else @click="start" :disabled="!isCurrentActivity" />
+    <StopwatchButtonStart v-else @click="start" :disabled="!isStartButtonEnabled" />
   </div>
 </template>
