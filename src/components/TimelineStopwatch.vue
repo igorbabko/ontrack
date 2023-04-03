@@ -38,13 +38,11 @@ watch(() => props.isCurrent, () => {
 function start() {
   isRunning.value = true;
 
-  stopwatch = new Worker(new URL('../stopwatch.js', import.meta.url));
-
-  stopwatch.onmessage = () => {
+  stopwatch = setInterval(() => {
     emit('updateSeconds', 1);
 
     seconds.value++;
-  };
+  }, 1000);
 
   emit('toggle', true);
 }
@@ -52,7 +50,7 @@ function start() {
 function stop() {
   isRunning.value = false;
 
-  stopwatch?.terminate();
+  clearInterval(stopwatch);
 
   emit('toggle', false);
 }
