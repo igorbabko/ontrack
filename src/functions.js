@@ -19,10 +19,11 @@ export function loadState() {
   if (start === end) {
     const diff = now - new Date(state.timelineItems[start].startedTrackingAt);
 
+    console.log(state.timelineItems[start].startedTrackingAt);
     console.log('diff: ', diff);
     console.log(': ', state.timelineItems[start].activitySeconds);
 
-    state.timelineItems[start].activitySeconds = diff / 1000;
+    state.timelineItems[start].activitySeconds += diff / 1000;
 
     console.log(': ', state.timelineItems[start].activitySeconds);
   }

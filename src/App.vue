@@ -16,6 +16,7 @@ import TheActivities from './components/TheActivities.vue';
 import TheProgress from './components/TheProgress.vue';
 
 const state = loadState();
+// debugger;
 
 // alert('initial');
 
@@ -40,6 +41,12 @@ document.addEventListener('visibilitychange', () => {
   } else {
     // alert('hidden');
     // console.log('hidden');
+
+    const trackedTimelineItem = timelineItems.value.find(({ startedTrackingAt }) => startedTrackingAt);
+
+    if (trackedTimelineItem) {
+      trackedTimelineItem.startedTrackingAt = new Date;
+    }
 
     localStorage.setItem('ontrack', JSON.stringify({
       date: (new Date).toLocaleDateString(),
@@ -69,6 +76,7 @@ function setTimelineItemActivity({ timelineItem, activityId }) {
 }
 
 function updateTimelineItemStartedTrackingAt({ timelineItem, isTracked }) {
+  console.log('aaaaaaaaaaaaaaaaaaaaa');
   // if (timelineItem.startedTrackingAt) {
   // timelineItem.startedTrackingAt = null;
   // } else {
