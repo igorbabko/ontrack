@@ -12,6 +12,21 @@ export function loadState() {
     };
   }
 
+  const now = new Date;
+  const start = state.timelineItems.findIndex(({ startedTrackingAt }) => startedTrackingAt);
+  const end = state.timelineItems.findIndex(({ hour }) => hour === now.getHours());
+
+  if (start === end) {
+    const diff = now - new Date(state.timelineItems[start].startedTrackingAt);
+
+    console.log('diff: ', diff);
+    console.log(': ', state.timelineItems[start].activitySeconds);
+
+    state.timelineItems[start].activitySeconds = diff / 1000;
+
+    console.log(': ', state.timelineItems[start].activitySeconds);
+  }
+
   return state;
 }
 

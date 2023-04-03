@@ -17,7 +17,7 @@ import TheProgress from './components/TheProgress.vue';
 
 const state = loadState();
 
-alert('initial');
+// alert('initial');
 
 const timelineItems = ref(state.timelineItems);
 const activities = ref(state.activities);
@@ -26,16 +26,20 @@ const timeline = ref();
 
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') {
-    console.log('visible');
-    alert('visible');
+    // console.log('visible');
+    // alert('visible');
 
     const state = loadState();
+
+    // state.timelineItems.slice(start, end).forEach(timelineItem => {
+
+    // })
 
     timelineItems.value = state.timelineItems;
     activities.value = state.activities;
   } else {
-    alert('hidden');
-    console.log('hidden');
+    // alert('hidden');
+    // console.log('hidden');
 
     localStorage.setItem('ontrack', JSON.stringify({
       date: (new Date).toLocaleDateString(),
@@ -70,8 +74,12 @@ function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
   timelineItem.activitySeconds += activitySeconds;
 
   if (timelineItem.activitySeconds === 0) {
+    console.log('stop tracking');
+
     timelineItem.startedTrackingAt = null;
   } else if (timelineItem.activitySeconds === 1) {
+    console.log('start tracking');
+
     timelineItem.startedTrackingAt = (new Date).toJSON();
   }
 }

@@ -20,6 +20,10 @@ const isRunning = ref(false);
 
 let stopwatch = null;
 
+if (props.isTracking && props.isCurrent) {
+  start();
+}
+
 const time = computed(() => formatTime(seconds.value));
 const isStartButtonEnabled = computed(() => props.timelineItem.activityId && props.timelineItem.hour === props.currentTime.getHours());
 
