@@ -55,7 +55,11 @@ function syncTime() {
   } else if (firstTrackedIndex + 1 === lastTrackedIndex) {
     const trackedStartDate = getTimelineItemStartDate(firstTracked);
 
-    const trackedSeconds = getFirstAndLastTrackedTimelineItemSeconds(trackedStartDate, trackedStartDate, firstTracked);
+    const trackedSeconds = getFirstAndLastTrackedTimelineItemSeconds(
+      trackedStartDate,
+      trackedStartDate,
+      firstTracked
+    );
 
     updateTrackedTimelineItemActivitySeconds(firstTracked, trackedSeconds.first);
     updateTrackedTimelineItemActivitySeconds(lastTracked, trackedSeconds.last);
