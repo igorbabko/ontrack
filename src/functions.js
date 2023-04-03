@@ -33,40 +33,45 @@ export function loadState() {
     // console.log('diff: ', trackedTimelineItemSeconds);
     // console.log(': ', trackedTimelineItem.activitySeconds);
 
-    firstTracked.activitySeconds += trackedSeconds / 1000;
+    updateTrackedActivitySeconds(firstTracked, trackedSeconds);
 
     // console.log(': ', firstTrackedTimelineItem.activitySeconds);
   } else if (firstTrackedIndex + 1 === lastTrackedIndex) {
     const trackedStartDate = getTimelineItemStartDate(firstTracked);
 
-    const { firstTrackedSeconds, lastTrackedSeconds } = getFirstAndLastTrackedSeconds(trackedStartDate, trackedStartDate, firstTracked);
+    const trackedSeconds = getFirstAndLastTrackedSeconds(trackedStartDate, trackedStartDate, firstTracked);
 
-    firstTracked.activitySeconds += firstTrackedSeconds / 1000;
-    lastTracked.activitySeconds = lastTrackedSeconds / 1000;
+    updateTrackedActivitySeconds(firstTracked, trackedSeconds.first);
+    updateTrackedActivitySeconds(lastTracked, trackedSeconds.last);
   } else {
-    const nextTracked = state.timelineItems[firstTrackedIndex + 1].hour;
+    const nextTracked = state.timelineItems[firstTrackedIndex + 1];
 
-    const nextTrackedStartDate = getTimelineItemStartDate(nextTracked);
-    const lastTrackedStartDate = getTimelineItemStartDate(lastTracked);
+    const trackedSeconds = getFirstAndLastTrackedSeconds(
+      getTimelineItemStartDate(nextTracked),
+      getTimelineItemStartDate(lastTracked),
+      firstTracked
+    );
 
-    const { firstTrackedSeconds, lastTrackedSeconds } = getFirstAndLastTrackedSeconds(nextTrackedStartDate, lastTrackedStartDate, firstTracked);
-
-    firstTracked.activitySeconds += firstTrackedSeconds / 1000;
+    updateTrackedActivitySeconds(firstTracked, trackedSeconds.first);
 
     state.timelineItems
       .slice(firstTrackedIndex + 1, lastTrackedIndex - 1)
-      .forEach(timelineItem => timelineItem.activitySeconds = 3600);
+      .forEach(timelineItem => updateTrackedActivitySeconds(timelineItem, 3_600_000));
 
-    lastTracked.activitySeconds = lastTrackedSeconds / 1000;
+    updateTrackedActivitySeconds(lastTracked, trackedSeconds.last);
   }
 
   return state;
 }
 
+function updateTrackedActivitySeconds(tracked, milliseconds) {
+  tracked.activitySeconds += milliseconds / 1000;
+}
+
 function getFirstAndLastTrackedSeconds(nextTrackedStartDate, lastTrackedStartDate, firstTracked) {
   return {
-    firstTrackedSeconds: nextTrackedStartDate - new Date(firstTracked.startedTrackingAt),
-    lastTrackedSeconds: now() - lastTrackedStartDate,
+    first: nextTrackedStartDate - new Date(firstTracked.startedTrackingAt),
+    last: now() - lastTrackedStartDate,
   };
 }
 
