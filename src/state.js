@@ -17,6 +17,20 @@ export function loadState() {
   return state;
 }
 
+export function saveState(timelineItems, activities) {
+  const trackedTimelineItem = timelineItems.value.find(({ startedTrackingAt }) => startedTrackingAt);
+
+  if (trackedTimelineItem) {
+    trackedTimelineItem.startedTrackingAt = now();
+  }
+
+  localStorage.setItem(APP_NAME, JSON.stringify({
+    date: now().toLocaleDateString(),
+    timelineItems,
+    activities
+  }));
+}
+
 function loadFromLocalStorage() {
   const rawState = localStorage.getItem(APP_NAME);
 

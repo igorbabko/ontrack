@@ -9,15 +9,14 @@ import {
   generateActivities,
   generateActivitySelectOptions
 } from './functions';
-import { loadState } from './state';
+import { loadState, saveState } from './state';
 import TheHeader from './components/TheHeader.vue';
 import TheNav from './components/TheNav.vue';
 import TheTimeline from './components/TheTimeline.vue';
 import TheActivities from './components/TheActivities.vue';
 import TheProgress from './components/TheProgress.vue';
 
-const state = loadState();
-// debugger;
+let state = loadState();
 
 // alert('initial');
 
@@ -39,27 +38,9 @@ document.addEventListener('visibilitychange', () => {
     // alert('hidden');
     // console.log('hidden');
 
-    const trackedTimelineItem = timelineItems.value.find(({ startedTrackingAt }) => startedTrackingAt);
-
-    if (trackedTimelineItem) {
-      trackedTimelineItem.startedTrackingAt = now();
-    }
-
-    localStorage.setItem('ontrack', JSON.stringify({
-      date: now().toLocaleDateString(),
-      timelineItems: timelineItems.value,
-      activities: activities.value,
-    }));
+    saveState(timelineItems.value, activities.value);
   }
 });
-
-// window.addEventListener('pagehide', () => {
-//   localStorage.setItem('ontrack', JSON.stringify({
-//     date: now().toLocaleDateString(),
-//     timelineItems: timelineItems.value,
-//     activities: activities.value,
-//   }));
-// });
 
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 
@@ -73,14 +54,6 @@ function setTimelineItemActivity({ timelineItem, activityId }) {
 }
 
 function updateTimelineItemStartedTrackingAt({ timelineItem, isTracked }) {
-  console.log('aaaaaaaaaaaaaaaaaaaaa');
-  // if (timelineItem.startedTrackingAt) {
-  // timelineItem.startedTrackingAt = null;
-  // } else {
-  // timelineItem.startedTrackingAt = now().toJSON();
-  // timelineItem.startedTrackingAt = now();
-  // }
-
   timelineItem.startedTrackingAt = isTracked ? now() : null;
 }
 
