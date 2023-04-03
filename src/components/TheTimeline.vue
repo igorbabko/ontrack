@@ -6,7 +6,7 @@ import TheTimelineIndicator from './TheTimelineIndicator.vue';
 
 const props = defineProps(['timelineItems', 'activitySelectOptions', 'currentPage']);
 
-const emit = defineEmits(['setTimelineItemActivity', 'updateTimelineItemActivitySeconds']);
+const emit = defineEmits(['setTimelineItemActivity', 'updateTimelineItemActivitySeconds', 'updateTimelineItemStartedTrackingAt']);
 
 defineExpose({ scrollToCurrentTimelineItem });
 
@@ -65,6 +65,7 @@ function scrollToTimelineItem(timelineItem, isSmooth = true) {
         ref="timelineItemRefs"
         @scroll-to="scrollToTimelineItem(timelineItem)"
         @select-activity="emit('setTimelineItemActivity', { timelineItem, activityId: $event })"
+        @toggle-tracking="emit('updateTimelineItemStartedTrackingAt', { timelineItem, isTracked: $event })"
         @update-activity-seconds="emit('updateTimelineItemActivitySeconds', { timelineItem, activitySeconds: $event })" />
     </ul>
   </div>

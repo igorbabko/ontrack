@@ -12,7 +12,7 @@ const props = defineProps({
   activitySelectOptions: Array,
 });
 
-const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo']);
+const emit = defineEmits(['selectActivity', 'updateActivitySeconds', 'scrollTo', 'toggleTracking']);
 
 const time = computed(() => {
   if (props.isCurrent) {
@@ -40,6 +40,7 @@ const time = computed(() => {
       :current-time="currentTime"
       :is-tracking="isTracking"
       :is-current="isCurrent"
+      @toggle="emit('toggleTracking', $event)"
       @update-seconds="emit('updateActivitySeconds', $event)" />
   </li>
 </template>

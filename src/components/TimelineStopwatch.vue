@@ -13,7 +13,7 @@ const props = defineProps({
   isCurrent: Boolean,
 });
 
-const emit = defineEmits(['updateSeconds']);
+const emit = defineEmits(['toggle', 'updateSeconds']);
 
 const seconds = ref(props.timelineItem.activitySeconds);
 const isRunning = ref(false);
@@ -45,12 +45,16 @@ function start() {
 
     seconds.value++;
   };
+
+  emit('toggle', true);
 }
 
 function stop() {
   isRunning.value = false;
 
   stopwatch?.terminate();
+
+  emit('toggle', false);
 }
 
 function reset() {

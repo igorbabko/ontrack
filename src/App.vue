@@ -68,20 +68,21 @@ function setTimelineItemActivity({ timelineItem, activityId }) {
   timelineItem.activityId = activityId;
 }
 
+function updateTimelineItemStartedTrackingAt({ timelineItem, isTracked }) {
+  // if (timelineItem.startedTrackingAt) {
+  // timelineItem.startedTrackingAt = null;
+  // } else {
+  // timelineItem.startedTrackingAt = (new Date).toJSON();
+  // timelineItem.startedTrackingAt = new Date;
+  // }
+
+  timelineItem.startedTrackingAt = isTracked ? new Date : null;
+}
+
 function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
   // console.log('aaaa', { timelineItem, activitySeconds });
 
   timelineItem.activitySeconds += activitySeconds;
-
-  if (timelineItem.activitySeconds === 0) {
-    console.log('stop tracking');
-
-    timelineItem.startedTrackingAt = null;
-  } else if (timelineItem.activitySeconds === 1) {
-    console.log('start tracking');
-
-    timelineItem.startedTrackingAt = (new Date).toJSON();
-  }
 }
 
 function createActivity(name) {
@@ -144,7 +145,8 @@ function goToTimeline() {
       ref="timeline"
       @midnight="resetState"
       @set-timeline-item-activity="setTimelineItemActivity"
-      @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds" />
+      @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds"
+      @update-timeline-item-started-tracking-at="updateTimelineItemStartedTrackingAt" />
 
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"
