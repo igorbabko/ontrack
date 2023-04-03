@@ -64,7 +64,7 @@ function syncTime() {
     // console.log('diff: ', trackedTimelineItemSeconds);
     // console.log(': ', trackedTimelineItem.activitySeconds);
 
-    updateTrackedTimelineItemActivitySeconds(firstTracked, now() - new Date(firstTracked.startedTrackingAt));
+    updateTimelineItemActivitySeconds(firstTracked, now() - new Date(firstTracked.startedTrackingAt));
 
     // console.log(': ', firstTrackedTimelineItem.activitySeconds);
   } else if (firstTrackedIndex + 1 === lastTrackedIndex) {
@@ -76,8 +76,10 @@ function syncTime() {
       firstTracked
     );
 
-    updateTrackedTimelineItemActivitySeconds(firstTracked, trackedSeconds.first);
-    updateTrackedTimelineItemActivitySeconds(lastTracked, trackedSeconds.last);
+    debugger;
+
+    updateTimelineItemActivitySeconds(firstTracked, trackedSeconds.first);
+    updateTimelineItemActivitySeconds(lastTracked, trackedSeconds.last);
   } else {
     const nextTracked = state.timelineItems[firstTrackedIndex + 1];
 
@@ -87,11 +89,11 @@ function syncTime() {
       firstTracked
     );
 
-    updateTrackedTimelineItemActivitySeconds(firstTracked, trackedSeconds.first);
+    updateTimelineItemActivitySeconds(firstTracked, trackedSeconds.first);
 
     updateTrackedTimelineItemActivitySecondsWithinRange(firstTrackedIndex + 1, lastTrackedIndex - 1);
 
-    updateTrackedTimelineItemActivitySeconds(lastTracked, trackedSeconds.last);
+    updateTimelineItemActivitySeconds(lastTracked, trackedSeconds.last);
   }
 
   return state;
@@ -104,25 +106,25 @@ function getFirstTrackedTimelineItem() {
 function getLastTrackedTimelineItem() {
   const currentDate = now();
 
-  // now.setHours(13);
-
   return state.timelineItems.find(({ hour }) => hour === currentDate.getHours());
 }
 
 function updateTrackedTimelineItemActivitySecondsWithinRange(start, end) {
+  console.log(start, end + 1);
+
   state.timelineItems
-    .slice(start, end)
-    .forEach(timelineItem => updateTrackedTimelineItemActivitySeconds(timelineItem, 3_600_000));
+    .slice(start, end + 1)
+    .forEach(timelineItem => updateTimelineItemActivitySeconds(timelineItem, 3_600_000));
 }
 
-function updateTrackedTimelineItemActivitySeconds(tracked, milliseconds) {
-  tracked.activitySeconds += milliseconds / 1000;
+function updateTimelineItemActivitySeconds(timelineItem, seconds) {
+  timelineItem.activitySeconds += seconds;
 }
 
 function getFirstAndLastTrackedTimelineItemSeconds(nextTrackedStartDate, lastTrackedStartDate, firstTracked) {
   return {
-    first: nextTrackedStartDate - new Date(firstTracked.startedTrackingAt),
-    last: now() - lastTrackedStartDate,
+    first: (nextTrackedStartDate - new Date(firstTracked.startedTrackingAt)) / 1000,
+    last: (now() - lastTrackedStartDate) / 1000,
   };
 }
 
