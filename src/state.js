@@ -1,4 +1,5 @@
 import { APP_NAME } from './constants';
+import { now } from './functions';
 
 let state = null;
 
@@ -42,14 +43,14 @@ function syncTime() {
   const firstTrackedIndex = state.timelineItems.indexOf(firstTracked);
 
   const lastTracked = getLastTrackedTimelineItem();
-  const lastTrackedIndex = state.timelineItems.indexOf(lastTrackedIndex);
+  const lastTrackedIndex = state.timelineItems.indexOf(lastTracked);
 
   if (firstTrackedIndex === lastTrackedIndex) {
     // console.log(firstTrackedTimelineItem.startedTrackingAt);
     // console.log('diff: ', trackedTimelineItemSeconds);
     // console.log(': ', trackedTimelineItem.activitySeconds);
 
-    updateTrackedTimelineItemActivitySeconds(firstTracked, now - new Date(firstTracked.startedTrackingAt));
+    updateTrackedTimelineItemActivitySeconds(firstTracked, now() - new Date(firstTracked.startedTrackingAt));
 
     // console.log(': ', firstTrackedTimelineItem.activitySeconds);
   } else if (firstTrackedIndex + 1 === lastTrackedIndex) {

@@ -31,7 +31,7 @@ document.addEventListener('visibilitychange', () => {
     // console.log('visible');
     // alert('visible');
 
-    const state = loadState();
+    state = loadState();
 
     timelineItems.value = state.timelineItems;
     activities.value = state.activities;
