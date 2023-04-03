@@ -4,12 +4,12 @@ import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
 import {
   id,
   now,
-  loadState,
   getCurrentPage,
   generateTimelineItems,
   generateActivities,
   generateActivitySelectOptions
 } from './functions';
+import { loadState } from './state';
 import TheHeader from './components/TheHeader.vue';
 import TheNav from './components/TheNav.vue';
 import TheTimeline from './components/TheTimeline.vue';
