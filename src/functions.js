@@ -26,6 +26,23 @@ export function loadState() {
     state.timelineItems[start].activitySeconds += diff / 1000;
 
     console.log(': ', state.timelineItems[start].activitySeconds);
+  } else if (start + 1 === end) {
+    const startOfCurrentHour = new Date();
+
+    startOfCurrentHour.setMinutes(0)
+    startOfCurrentHour.setSeconds(0);
+
+    const diff = startOfCurrentHour - new Date(state.timelineItems[start].startedTrackingAt);
+    const diff2 = new Date - startOfCurrentHour;
+
+    state.timelineItems[start].activitySeconds += diff / 1000;
+    state.timelineItems[end].activitySeconds = diff2 / 1000;
+  } else {
+    // ...
+
+    state.timelineItems.slice(start + 1, end - 1).forEach(timelineItem => {
+      timelineItem.activitySeconds = 3600;
+    });
   }
 
   return state;

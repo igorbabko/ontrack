@@ -32,10 +32,6 @@ document.addEventListener('visibilitychange', () => {
 
     const state = loadState();
 
-    // state.timelineItems.slice(start, end).forEach(timelineItem => {
-
-    // })
-
     timelineItems.value = state.timelineItems;
     activities.value = state.activities;
   } else {
