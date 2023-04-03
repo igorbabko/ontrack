@@ -17,13 +17,13 @@ export function loadState() {
   const end = state.timelineItems.findIndex(({ hour }) => hour === now.getHours());
 
   if (start === end) {
-    const diff = now - new Date(state.timelineItems[start].startedTrackingAt);
+    const rackedTimelineItemSeconds = now - new Date(state.timelineItems[start].startedTrackingAt);
 
     console.log(state.timelineItems[start].startedTrackingAt);
-    console.log('diff: ', diff);
+    console.log('diff: ', rackedTimelineItemSeconds);
     console.log(': ', state.timelineItems[start].activitySeconds);
 
-    state.timelineItems[start].activitySeconds += diff / 1000;
+    state.timelineItems[start].activitySeconds += rackedTimelineItemSeconds / 1000;
 
     console.log(': ', state.timelineItems[start].activitySeconds);
   } else if (start + 1 === end) {
@@ -32,17 +32,34 @@ export function loadState() {
     startOfCurrentHour.setMinutes(0)
     startOfCurrentHour.setSeconds(0);
 
-    const diff = startOfCurrentHour - new Date(state.timelineItems[start].startedTrackingAt);
-    const diff2 = new Date - startOfCurrentHour;
+    const firstTrackedTimelineItemSeconds = startOfCurrentHour - new Date(state.timelineItems[start].startedTrackingAt);
+    const lastTrackedTimelineItemSeconds = new Date - startOfCurrentHour;
 
-    state.timelineItems[start].activitySeconds += diff / 1000;
-    state.timelineItems[end].activitySeconds = diff2 / 1000;
+    state.timelineItems[start].activitySeconds += firstTrackedTimelineItemSeconds / 1000;
+    state.timelineItems[end].activitySeconds = lastTrackedTimelineItemSeconds / 1000;
   } else {
-    // ...
+    const startOfTrackedTimelineItemNextHour = new Date;
+
+    startOfTrackedTimelineItemNextHour.setHours(state.timelineItems[start + 1].hour);
+    startOfTrackedTimelineItemNextHour.setMinutes(0);
+    startOfTrackedTimelineItemNextHour.setSeconds(0);
+
+    const startOfTrackedTimelineItemCurrentHour = new Date;
+
+    startOfTrackedTimelineItemCurrentHour.setHours(state.timelineItems[end].hour);
+    startOfTrackedTimelineItemCurrentHour.setMinutes(0);
+    startOfTrackedTimelineItemCurrentHour.setSeconds(0);
+
+    const firstTrackedTimelineItemSeconds = startOfTrackedTimelineItemNextHour - new Date(state.timelineItems[start].startedTrackingAt);
+    const lastTrackedTimelineItemSeconds = new Date - startOfTrackedTimelineItemCurrentHour;
+
+    state.timelineItems[start].activitySeconds += firstTrackedTimelineItemSeconds / 1000;
 
     state.timelineItems.slice(start + 1, end - 1).forEach(timelineItem => {
       timelineItem.activitySeconds = 3600;
     });
+
+    state.timelineItems[end].activitySeconds = lastTrackedTimelineItemSeconds / 1000;
   }
 
   return state;
