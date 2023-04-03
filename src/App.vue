@@ -54,6 +54,8 @@ function setTimelineItemActivity({ timelineItem, activityId }) {
 }
 
 function updateTimelineItemStartedTrackingAt({ timelineItem, isTracked }) {
+  timelineItems.value.forEach((timelineItem) => timelineItem.startedTrackingAt = null);
+
   timelineItem.startedTrackingAt = isTracked ? now() : null;
 }
 

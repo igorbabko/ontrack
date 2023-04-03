@@ -18,7 +18,7 @@ export function loadState() {
 }
 
 export function saveState(timelineItems, activities) {
-  const trackedTimelineItem = timelineItems.value.find(({ startedTrackingAt }) => startedTrackingAt);
+  const trackedTimelineItem = timelineItems.find(({ startedTrackingAt }) => startedTrackingAt);
 
   if (trackedTimelineItem) {
     trackedTimelineItem.startedTrackingAt = now();
