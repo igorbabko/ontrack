@@ -16,24 +16,18 @@ export function loadState() {
     };
   }
 
-  const currentDate = now();
+  const firstTracked = getFirstTracked();
+  const firstTrackedIndex = state.timelineItems.indexOf(firstTracked);
 
-  // now.setHours(13);
-
-  const firstTrackedIndex = state.timelineItems.findIndex(({ startedTrackingAt }) => startedTrackingAt);
-  const firstTracked = state.timelineItems[firstTrackedIndex];
-
-  const lastTrackedIndex = state.timelineItems.findIndex(({ hour }) => hour === currentDate.getHours());
-  const lastTracked = state.timelineItems[lastTrackedIndex];
+  const lastTracked = getLastTracked();
+  const lastTrackedIndex = state.timelineItems.indexOf(lastTrackedIndex);
 
   if (firstTrackedIndex === lastTrackedIndex) {
-    const trackedSeconds = now - new Date(firstTracked.startedTrackingAt);
-
     // console.log(firstTrackedTimelineItem.startedTrackingAt);
     // console.log('diff: ', trackedTimelineItemSeconds);
     // console.log(': ', trackedTimelineItem.activitySeconds);
 
-    updateTrackedActivitySeconds(firstTracked, trackedSeconds);
+    updateTrackedActivitySeconds(firstTracked, now - new Date(firstTracked.startedTrackingAt));
 
     // console.log(': ', firstTrackedTimelineItem.activitySeconds);
   } else if (firstTrackedIndex + 1 === lastTrackedIndex) {
@@ -54,14 +48,30 @@ export function loadState() {
 
     updateTrackedActivitySeconds(firstTracked, trackedSeconds.first);
 
-    state.timelineItems
-      .slice(firstTrackedIndex + 1, lastTrackedIndex - 1)
-      .forEach(timelineItem => updateTrackedActivitySeconds(timelineItem, 3_600_000));
+    updateTrackedActivitySecondsWithinRange(firstTrackedIndex + 1, lastTrackedIndex - 1);
 
     updateTrackedActivitySeconds(lastTracked, trackedSeconds.last);
   }
 
   return state;
+}
+
+function getFirstTracked() {
+  return state.timelineItems.find(({ startedTrackingAt }) => startedTrackingAt);
+}
+
+function getLastTracked() {
+  const currentDate = now();
+
+  // now.setHours(13);
+
+  return state.timelineItems.find(({ hour }) => hour === currentDate.getHours());
+}
+
+function updateTrackedActivitySecondsWithinRange(start, end) {
+  state.timelineItems
+    .slice(start, end)
+    .forEach(timelineItem => updateTrackedActivitySeconds(timelineItem, 3_600_000));
 }
 
 function updateTrackedActivitySeconds(tracked, milliseconds) {
