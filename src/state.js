@@ -63,8 +63,11 @@ function syncTime() {
     // console.log(firstTrackedTimelineItem.startedTrackingAt);
     // console.log('diff: ', trackedTimelineItemSeconds);
     // console.log(': ', trackedTimelineItem.activitySeconds);
+    //
 
-    updateTimelineItemActivitySeconds(firstTracked, now() - new Date(firstTracked.startedTrackingAt));
+    const seconds = (now() - new Date(firstTracked.startedTrackingAt)) / 1000;
+
+    updateTimelineItemActivitySeconds(firstTracked, seconds);
 
     // console.log(': ', firstTrackedTimelineItem.activitySeconds);
   } else if (firstTrackedIndex + 1 === lastTrackedIndex) {
