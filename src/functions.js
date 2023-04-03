@@ -1,65 +1,75 @@
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
 
+export function now() {
+  return new Date;
+}
+
 export function loadState() {
   let state = localStorage.getItem('ontrack');
 
   state = state ? JSON.parse(state) : {};
 
-  if (state.date !== (new Date).toLocaleDateString()) {
+  if (state.date !== now().toLocaleDateString()) {
     return {
       timelineItems: generateTimelineItems(),
       activities: generateActivities(),
     };
   }
 
-  const now = new Date;
-  const start = state.timelineItems.findIndex(({ startedTrackingAt }) => startedTrackingAt);
-  const end = state.timelineItems.findIndex(({ hour }) => hour === now.getHours());
+  const currentDate = now();
 
-  if (start === end) {
-    const rackedTimelineItemSeconds = now - new Date(state.timelineItems[start].startedTrackingAt);
+  // now.setHours(13);
 
-    console.log(state.timelineItems[start].startedTrackingAt);
-    console.log('diff: ', rackedTimelineItemSeconds);
-    console.log(': ', state.timelineItems[start].activitySeconds);
+  const firstTrackedTimelineItemIndex = state.timelineItems.findIndex(({ startedTrackingAt }) => startedTrackingAt);
+  const firstTrackedTimelineItem = state.timelineItems[firstTrackedTimelineItemIndex];
 
-    state.timelineItems[start].activitySeconds += rackedTimelineItemSeconds / 1000;
+  const lastTrackedTimelineItemIndex = state.timelineItems.findIndex(({ hour }) => hour === currentDate.getHours());
+  const lastTrackedTimelineItem = state.timelineItems[lastTrackedTimelineItemIndex];
 
-    console.log(': ', state.timelineItems[start].activitySeconds);
-  } else if (start + 1 === end) {
-    const startOfCurrentHour = new Date();
+  if (firstTrackedTimelineItemIndex === lastTrackedTimelineItemIndex) {
+    const trackedTimelineItemSeconds = now - new Date(firstTrackedTimelineItem.startedTrackingAt);
+
+    console.log(firstTrackedTimelineItem.startedTrackingAt);
+    console.log('diff: ', trackedTimelineItemSeconds);
+    console.log(': ', trackedTimelineItem.activitySeconds);
+
+    firstTrackedTimelineItem.activitySeconds += trackedTimelineItemSeconds / 1000;
+
+    console.log(': ', firstTrackedTimelineItem.activitySeconds);
+  } else if (firstTrackedTimelineItemIndex + 1 === lastTrackedTimelineItemIndex) {
+    const startOfCurrentHour = now();
 
     startOfCurrentHour.setMinutes(0)
     startOfCurrentHour.setSeconds(0);
 
-    const firstTrackedTimelineItemSeconds = startOfCurrentHour - new Date(state.timelineItems[start].startedTrackingAt);
-    const lastTrackedTimelineItemSeconds = new Date - startOfCurrentHour;
+    const firstTrackedTimelineItemSeconds = startOfCurrentHour - new Date(firstTrackedTimelineItem.startedTrackingAt);
+    const lastTrackedTimelineItemSeconds = now() - startOfCurrentHour;
 
-    state.timelineItems[start].activitySeconds += firstTrackedTimelineItemSeconds / 1000;
-    state.timelineItems[end].activitySeconds = lastTrackedTimelineItemSeconds / 1000;
+    firstTrackedTimelineItem.activitySeconds += firstTrackedTimelineItemSeconds / 1000;
+    lastTrackedTimelineItem.activitySeconds = lastTrackedTimelineItemSeconds / 1000;
   } else {
-    const startOfTrackedTimelineItemNextHour = new Date;
+    const startOfTrackedTimelineItemNextHour = now();
 
-    startOfTrackedTimelineItemNextHour.setHours(state.timelineItems[start + 1].hour);
+    startOfTrackedTimelineItemNextHour.setHours(state.timelineItems[firstTrackedTimelineItemIndex + 1].hour);
     startOfTrackedTimelineItemNextHour.setMinutes(0);
     startOfTrackedTimelineItemNextHour.setSeconds(0);
 
-    const startOfTrackedTimelineItemCurrentHour = new Date;
+    const startOfTrackedTimelineItemCurrentHour = now();
 
-    startOfTrackedTimelineItemCurrentHour.setHours(state.timelineItems[end].hour);
+    startOfTrackedTimelineItemCurrentHour.setHours(lastTrackedTimelineItem.hour);
     startOfTrackedTimelineItemCurrentHour.setMinutes(0);
     startOfTrackedTimelineItemCurrentHour.setSeconds(0);
 
-    const firstTrackedTimelineItemSeconds = startOfTrackedTimelineItemNextHour - new Date(state.timelineItems[start].startedTrackingAt);
-    const lastTrackedTimelineItemSeconds = new Date - startOfTrackedTimelineItemCurrentHour;
+    const firstTrackedTimelineItemSeconds = startOfTrackedTimelineItemNextHour - new Date(firstTrackedTimelineItem.startedTrackingAt);
+    const lastTrackedTimelineItemSeconds = now() - startOfTrackedTimelineItemCurrentHour;
 
-    state.timelineItems[start].activitySeconds += firstTrackedTimelineItemSeconds / 1000;
+    firstTrackedTimelineItem.activitySeconds += firstTrackedTimelineItemSeconds / 1000;
 
-    state.timelineItems.slice(start + 1, end - 1).forEach(timelineItem => {
+    state.timelineItems.slice(firstTrackedTimelineItemIndex + 1, lastTrackedTimelineItemIndex - 1).forEach(timelineItem => {
       timelineItem.activitySeconds = 3600;
     });
 
-    state.timelineItems[end].activitySeconds = lastTrackedTimelineItemSeconds / 1000;
+    lastTrackedTimelineItem.activitySeconds = lastTrackedTimelineItemSeconds / 1000;
   }
 
   return state;
@@ -130,7 +140,7 @@ export function normalizePercentage(percentage) {
 }
 
 export function formatTime(seconds) {
-  const date = new Date;
+  const date = now();
 
   date.setTime(Math.abs(seconds) * 1000);
 

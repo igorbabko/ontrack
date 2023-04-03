@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
 import {
   id,
+  now,
   loadState,
   getCurrentPage,
   generateTimelineItems,
@@ -41,11 +42,11 @@ document.addEventListener('visibilitychange', () => {
     const trackedTimelineItem = timelineItems.value.find(({ startedTrackingAt }) => startedTrackingAt);
 
     if (trackedTimelineItem) {
-      trackedTimelineItem.startedTrackingAt = new Date;
+      trackedTimelineItem.startedTrackingAt = now();
     }
 
     localStorage.setItem('ontrack', JSON.stringify({
-      date: (new Date).toLocaleDateString(),
+      date: now().toLocaleDateString(),
       timelineItems: timelineItems.value,
       activities: activities.value,
     }));
@@ -54,7 +55,7 @@ document.addEventListener('visibilitychange', () => {
 
 // window.addEventListener('pagehide', () => {
 //   localStorage.setItem('ontrack', JSON.stringify({
-//     date: (new Date).toLocaleDateString(),
+//     date: now().toLocaleDateString(),
 //     timelineItems: timelineItems.value,
 //     activities: activities.value,
 //   }));
@@ -76,11 +77,11 @@ function updateTimelineItemStartedTrackingAt({ timelineItem, isTracked }) {
   // if (timelineItem.startedTrackingAt) {
   // timelineItem.startedTrackingAt = null;
   // } else {
-  // timelineItem.startedTrackingAt = (new Date).toJSON();
-  // timelineItem.startedTrackingAt = new Date;
+  // timelineItem.startedTrackingAt = now().toJSON();
+  // timelineItem.startedTrackingAt = now();
   // }
 
-  timelineItem.startedTrackingAt = isTracked ? new Date : null;
+  timelineItem.startedTrackingAt = isTracked ? now() : null;
 }
 
 function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {

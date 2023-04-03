@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watchPostEffect, onMounted, nextTick } from 'vue';
 import { PAGE_TIMELINE } from '../constants';
+import { now } from '../functions';
 
 const props = defineProps(['currentPage']);
 
@@ -31,9 +32,9 @@ function height() {
 }
 
 function seconds() {
-  const now = new Date;
+  const currentDate = now();
 
-  return now.getSeconds() + (60 * now.getMinutes()) + (60 * 60 * now.getHours());
+  return currentDate.getSeconds() + (60 * currentDate.getMinutes()) + (60 * 60 * currentDate.getHours());
 }
 </script>
 
