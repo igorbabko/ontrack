@@ -38,10 +38,10 @@ function shouldSyncTime() {
 }
 
 function syncTime() {
-  const firstTracked = getFirstTracked();
+  const firstTracked = getFirstTrackedTimelineItem();
   const firstTrackedIndex = state.timelineItems.indexOf(firstTracked);
 
-  const lastTracked = getLastTracked();
+  const lastTracked = getLastTrackedTimelineItem();
   const lastTrackedIndex = state.timelineItems.indexOf(lastTrackedIndex);
 
   if (firstTrackedIndex === lastTrackedIndex) {
@@ -49,40 +49,40 @@ function syncTime() {
     // console.log('diff: ', trackedTimelineItemSeconds);
     // console.log(': ', trackedTimelineItem.activitySeconds);
 
-    updateTrackedActivitySeconds(firstTracked, now - new Date(firstTracked.startedTrackingAt));
+    updateTrackedTimelineItemActivitySeconds(firstTracked, now - new Date(firstTracked.startedTrackingAt));
 
     // console.log(': ', firstTrackedTimelineItem.activitySeconds);
   } else if (firstTrackedIndex + 1 === lastTrackedIndex) {
     const trackedStartDate = getTimelineItemStartDate(firstTracked);
 
-    const trackedSeconds = getFirstAndLastTrackedSeconds(trackedStartDate, trackedStartDate, firstTracked);
+    const trackedSeconds = getFirstAndLastTrackedTimelineItemSeconds(trackedStartDate, trackedStartDate, firstTracked);
 
-    updateTrackedActivitySeconds(firstTracked, trackedSeconds.first);
-    updateTrackedActivitySeconds(lastTracked, trackedSeconds.last);
+    updateTrackedTimelineItemActivitySeconds(firstTracked, trackedSeconds.first);
+    updateTrackedTimelineItemActivitySeconds(lastTracked, trackedSeconds.last);
   } else {
     const nextTracked = state.timelineItems[firstTrackedIndex + 1];
 
-    const trackedSeconds = getFirstAndLastTrackedSeconds(
+    const trackedSeconds = getFirstAndLastTrackedTimelineItemSeconds(
       getTimelineItemStartDate(nextTracked),
       getTimelineItemStartDate(lastTracked),
       firstTracked
     );
 
-    updateTrackedActivitySeconds(firstTracked, trackedSeconds.first);
+    updateTrackedTimelineItemActivitySeconds(firstTracked, trackedSeconds.first);
 
-    updateTrackedActivitySecondsWithinRange(firstTrackedIndex + 1, lastTrackedIndex - 1);
+    updateTrackedTimelineItemActivitySecondsWithinRange(firstTrackedIndex + 1, lastTrackedIndex - 1);
 
-    updateTrackedActivitySeconds(lastTracked, trackedSeconds.last);
+    updateTrackedTimelineItemActivitySeconds(lastTracked, trackedSeconds.last);
   }
 
   return state;
 }
 
-function getFirstTracked() {
+function getFirstTrackedTimelineItem() {
   return state.timelineItems.find(({ startedTrackingAt }) => startedTrackingAt);
 }
 
-function getLastTracked() {
+function getLastTrackedTimelineItem() {
   const currentDate = now();
 
   // now.setHours(13);
@@ -90,17 +90,17 @@ function getLastTracked() {
   return state.timelineItems.find(({ hour }) => hour === currentDate.getHours());
 }
 
-function updateTrackedActivitySecondsWithinRange(start, end) {
+function updateTrackedTimelineItemActivitySecondsWithinRange(start, end) {
   state.timelineItems
     .slice(start, end)
-    .forEach(timelineItem => updateTrackedActivitySeconds(timelineItem, 3_600_000));
+    .forEach(timelineItem => updateTrackedTimelineItemActivitySeconds(timelineItem, 3_600_000));
 }
 
-function updateTrackedActivitySeconds(tracked, milliseconds) {
+function updateTrackedTimelineItemActivitySeconds(tracked, milliseconds) {
   tracked.activitySeconds += milliseconds / 1000;
 }
 
-function getFirstAndLastTrackedSeconds(nextTrackedStartDate, lastTrackedStartDate, firstTracked) {
+function getFirstAndLastTrackedTimelineItemSeconds(nextTrackedStartDate, lastTrackedStartDate, firstTracked) {
   return {
     first: nextTrackedStartDate - new Date(firstTracked.startedTrackingAt),
     last: now() - lastTrackedStartDate,
