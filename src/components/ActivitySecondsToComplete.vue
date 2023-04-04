@@ -10,7 +10,7 @@ const time = computed(() => {
   return `${sign}${formatTime(diff.value)}`;
 });
 
-const diff = computed(() => (getTotalActivitySeconds(props.activity, props.timelineItems) - props.activity.secondsToComplete)); // / 60;
+const diff = computed(() => (getTotalActivitySeconds(props.activity, props.timelineItems) - props.activity.secondsToComplete));
 </script>
 
 <template>

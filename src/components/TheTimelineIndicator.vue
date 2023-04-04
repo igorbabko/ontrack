@@ -10,7 +10,7 @@ const el = ref();
 onMounted(() => {
   updateHeight();
 
-  setInterval(updateHeight, 60 * 1000);
+  setInterval(updateHeight, 1000);
 });
 
 watchPostEffect(async () => {
@@ -22,10 +22,10 @@ watchPostEffect(async () => {
 });
 
 function updateHeight() {
-  el.value.style.top = `${height()}px`;
+  el.value.style.top = `${topOffset()}px`;
 }
 
-function height() {
+function topOffset() {
   const secondsPercentage = 100 * seconds() / 86400;
 
   return secondsPercentage * el.value.parentNode.getBoundingClientRect().height / 100;

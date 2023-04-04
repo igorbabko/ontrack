@@ -3,7 +3,7 @@ import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
 export function now() {
   const now = new Date;
 
-  now.setHours(8);
+  // now.setHours(13);
 
   return now;
 }
@@ -55,7 +55,7 @@ export function filterTrackedActivities(activities) {
 export function getTotalActivitySeconds(activity, timelineItems) {
   return timelineItems
     .filter((timelineItem) => timelineItem.activityId === activity.id)
-    .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.activitySeconds/* / 60 */) + totalSeconds), 0);
+    .reduce((totalSeconds, timelineItem) => Math.round((timelineItem.activitySeconds) + totalSeconds), 0);
 }
 
 export function getProgressColorClass(percentage) {
