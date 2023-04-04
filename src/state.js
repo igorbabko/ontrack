@@ -1,5 +1,5 @@
 import { APP_NAME } from './constants';
-import { now } from './functions';
+import { now, generateTimelineItems, generateActivities } from './functions';
 
 let state = null;
 
@@ -71,15 +71,17 @@ function syncTime() {
 
     // console.log(': ', firstTrackedTimelineItem.activitySeconds);
   } else if (firstTrackedIndex + 1 === lastTrackedIndex) {
-    const trackedStartDate = getTimelineItemStartDate(firstTracked);
+    const lastTrackedStartDate = getTimelineItemStartDate(lastTracked);
 
     const trackedSeconds = getFirstAndLastTrackedTimelineItemSeconds(
-      trackedStartDate,
-      trackedStartDate,
+      lastTrackedStartDate,
+      lastTrackedStartDate,
       firstTracked
     );
 
-    debugger;
+    console.log(trackedSeconds.first / 60, trackedSeconds.last / 60);
+
+    // debugger;
 
     updateTimelineItemActivitySeconds(firstTracked, trackedSeconds.first);
     updateTimelineItemActivitySeconds(lastTracked, trackedSeconds.last);
@@ -117,17 +119,23 @@ function updateTrackedTimelineItemActivitySecondsWithinRange(start, end) {
 
   state.timelineItems
     .slice(start, end + 1)
-    .forEach(timelineItem => updateTimelineItemActivitySeconds(timelineItem, 3_600_000));
+    .forEach(timelineItem => updateTimelineItemActivitySeconds(timelineItem, 3600));
 }
 
 function updateTimelineItemActivitySeconds(timelineItem, seconds) {
+  // debugger;
+
   timelineItem.activitySeconds += seconds;
 }
 
 function getFirstAndLastTrackedTimelineItemSeconds(nextTrackedStartDate, lastTrackedStartDate, firstTracked) {
+  console.log(nextTrackedStartDate, lastTrackedStartDate, new Date(firstTracked.startedTrackingAt));
+
+  // debugger;
+
   return {
-    first: (nextTrackedStartDate - new Date(firstTracked.startedTrackingAt)) / 1000,
-    last: (now() - lastTrackedStartDate) / 1000,
+    first: Math.round((nextTrackedStartDate - new Date(firstTracked.startedTrackingAt)) / 1000),
+    last: Math.round((now() - lastTrackedStartDate) / 1000),
   };
 }
 

@@ -25,7 +25,7 @@ if (props.isTracking && props.isCurrent) {
 }
 
 const time = computed(() => formatTime(seconds.value));
-const isStartButtonEnabled = computed(() => props.timelineItem.activityId && props.timelineItem.hour === props.currentTime.getHours());
+const isStartButtonEnabled = computed(() => props.timelineItem.hour === props.currentTime.getHours());
 
 watch(() => props.isCurrent, () => {
   if (props.isCurrent && props.isTracking) {

@@ -1,7 +1,11 @@
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
 
 export function now() {
-  return new Date;
+  const now = new Date;
+
+  now.setHours(8);
+
+  return now;
 }
 
 export function generateTimelineItems() {
