@@ -13,6 +13,39 @@ const props = defineProps({
   isCurrent: Boolean,
 });
 
+let currentSeconds;
+let startDate;
+let stopDate;
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    console.log('start');
+    // alert('visible');
+    if (props.isTracking) {
+      startDate = new Date;
+
+      const diff = startDate - stopDate;
+
+      emit('updateSeconds', diff / 1000);
+
+      seconds.value = currentSeconds + diff / 1000;
+
+      console.log(diff / 1000);
+    }
+
+    // stop();
+  } else {
+    // alert('hidden');
+    console.log('stop');
+
+    if (props.isTracking) {
+      currentSeconds = seconds.value;
+
+      stopDate = new Date();
+    }
+  }
+});
+
 const emit = defineEmits(['toggle', 'updateSeconds']);
 
 const seconds = ref(props.timelineItem.activitySeconds);
