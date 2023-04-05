@@ -11,36 +11,66 @@ const props = defineProps({
   currentTime: Object,
   isTracking: Boolean,
   isCurrent: Boolean,
+  // a: Boolean
 });
 
 let stopDate;
 
-function isSameHour(stopDate) {
-  if (!stopDate) return false;
+// function isSameHour(stopDate) {
+//   if (!stopDate) return false;
 
-  const stopDateWithHour = stopDate.toLocaleString(undefined, { hour12: false }).substring(0, 12);
+//   const stopDateWithHour = stopDate.toLocaleString(undefined, { hour12: false }).substring(0, 12);
 
-  const currentDate = now();
-  const currentDateWithHour = currentDate.toLocaleString(undefined, { hour12: false }).substring(0, 12);
+//   const currentDate = now();
+//   const currentDateWithHour = currentDate.toLocaleString(undefined, { hour12: false }).substring(0, 12);
 
-  console.log('stop: ' + stopDateWithHour);
-  console.log('current: ' + currentDateWithHour);
+//   console.log('stop: ' + stopDateWithHour);
+//   console.log('current: ' + currentDateWithHour);
 
-  return currentDateWithHour === stopDateWithHour;
-}
+//   return currentDateWithHour === stopDateWithHour;
+// }
+
+// let a = false;
 
 function syncSeconds() {
-  if (document.visibilityState === 'visible' && stopDate && isSameHour(stopDate)) {
-    seconds.value += Math.round((now() - stopDate) / 1000);
+  if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt && props.isCurrent) {
+    console.log('1111');
 
-    stopDate = null;
+    seconds.value += Math.round((now() - new Date(props.timelineItem.startedTrackingAt)) / 1000);
 
     start();
-  } else if (isRunning.value) {
-    stopDate = now();
+  } else if (document.visibilityState === 'visible' && props.isCurrent && props.isTracking) {
+    console.log('222222222222');
+    const a = now();
 
-    stop();
+    a.setMinutes(0);
+    a.setSeconds(0);
+
+    seconds.value += Math.round((now() - a) / 1000);
+
+    // start();
+  } else if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt) {
+    console.log('3333');
+
+    // stop();
+  } else if (isRunning.value) {
+    // emit('a');
+
+    pause();
   }
+
+
+  // if (document.visibilityState === 'visible' && stopDate && isSameHour(stopDate)) {
+  //   seconds.value += Math.round((now() - stopDate) / 1000);
+
+  //   stopDate = null;
+
+  //   start();
+  // } else if (isRunning.value) {
+  //   stopDate = now();
+
+  //   stop();
+  // }
 }
 
 document.addEventListener('visibilitychange', syncSeconds);
@@ -52,19 +82,24 @@ const isRunning = ref(false);
 
 let stopwatch = null;
 
-if (props.isTracking && props.isCurrent) {
-  start();
-}
+// if (props.isTracking && props.isCurrent) {
+//   start();
+// }
 
 const time = computed(() => formatTime(seconds.value));
 const isStartButtonEnabled = computed(() => props.timelineItem.hour === props.currentTime.getHours());
 
 watch(() => props.isCurrent, () => {
   if (props.isCurrent && props.isTracking) {
+    console.log('start');
     start();
   } else if (!props.isCurrent && isRunning.value) {
+    console.log('stop');
     stop();
   }
+  console.log('some');
+}, {
+  immediate: true
 });
 
 function start() {
@@ -77,6 +112,12 @@ function start() {
   }, 1000);
 
   emit('toggle', true);
+}
+
+function pause() {
+  isRunning.value = false;
+
+  clearInterval(stopwatch);
 }
 
 function stop() {

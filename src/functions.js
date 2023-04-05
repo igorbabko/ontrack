@@ -4,7 +4,7 @@ export function now() {
   const now = new Date;
 
   // now.setHours(13);
-  now.setMinutes(now.getMinutes() + 46);
+  now.setMinutes(now.getMinutes() + 24);
 
   return now;
 }
