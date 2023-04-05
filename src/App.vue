@@ -18,76 +18,23 @@ import TheProgress from './components/TheProgress.vue';
 
 let state = loadState();
 
-// alert('initial');
-
 const timelineItems = ref(state.timelineItems);
 const activities = ref(state.activities);
 const currentPage = ref(getCurrentPage());
 const timeline = ref();
 
-// window.addEventListener("focus", () => {
-//   console.log('focus');
-
-//   state = loadState();
-
-//   timelineItems.value = state.timelineItems;
-//   activities.value = state.activities;
-// });
-
-// window.addEventListener('blur', () => {
-//   console.log('blur');
-//   saveState(timelineItems.value, activities.value);
-// });
-
-// var visibilityHidden, visibilityChange;
-// Opera 12.10 and Firefox 18 and later support
-// if (typeof document.hidden !== "undefined") {
-//     visibilityHidden = "hidden";
-//     visibilityChange = "visibilitychange";
-// } else if (typeof document.mozHidden !== "undefined") {
-//     visibilityHidden = "mozHidden";
-//     visibilityChange = "mozvisibilitychange";
-// } else if (typeof document.msHidden !== "undefined") {
-//     visibilityHidden = "msHidden";
-//     visibilityChange = "msvisibilitychange";
-// } else if (typeof document.webkitHidden !== "undefined") {
-//     visibilityHidden = "webkitHidden";
-//     visibilityChange = "webkitvisibilitychange";
-// }
-
-// document.addEventListener(visibilityChange, function() {
-//   if (document[visibilityHidden]) {
-//     // alert('hidden');
-//     console.log('hidden');
-
-//     saveState(timelineItems.value, activities.value);
-//   } else {
-//     console.log('visible');
-//     // alert('visible');
-
-//     state = loadState();
-
-//     timelineItems.value = state.timelineItems;
-//     activities.value = state.activities;
-//   }
-// });
-
-document.addEventListener('visibilitychange', () => {
+function syncState() {
   if (document.visibilityState === 'visible') {
-    console.log('visible');
-    // alert('visible');
-
     state = loadState();
 
     timelineItems.value = state.timelineItems;
     activities.value = state.activities;
   } else {
-    // alert('hidden');
-    console.log('hidden');
-
     saveState(timelineItems.value, activities.value);
   }
-});
+}
+
+document.addEventListener('visibilitychange', syncState);
 
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 

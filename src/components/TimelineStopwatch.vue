@@ -15,7 +15,7 @@ const props = defineProps({
 
 let stopDate;
 
-function syncSecondsOnVisibilityChange() {
+function syncSeconds() {
   if (document.visibilityState === 'visible' && stopDate) {
     seconds.value += Math.round((new Date - stopDate) / 1000);
 
@@ -29,7 +29,7 @@ function syncSecondsOnVisibilityChange() {
   }
 }
 
-document.addEventListener('visibilitychange', syncSecondsOnVisibilityChange);
+document.addEventListener('visibilitychange', syncSeconds);
 
 const emit = defineEmits(['toggle', 'updateSeconds']);
 
