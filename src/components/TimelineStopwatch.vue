@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { formatTime } from '../functions';
+import { formatTime, now } from '../functions';
 import StopwatchButtonReset from './StopwatchButtonReset.vue';
 import StopwatchButtonStart from './StopwatchButtonStart.vue';
 import StopwatchButtonStop from './StopwatchButtonStop.vue';
@@ -15,15 +15,29 @@ const props = defineProps({
 
 let stopDate;
 
+function isSameHour(stopDate) {
+  if (!stopDate) return false;
+
+  const stopDateWithHour = stopDate.toLocaleString(undefined, { hour12: false }).substring(0, 12);
+
+  const currentDate = now();
+  const currentDateWithHour = currentDate.toLocaleString(undefined, { hour12: false }).substring(0, 12);
+
+  console.log('stop: ' + stopDateWithHour);
+  console.log('current: ' + currentDateWithHour);
+
+  return currentDateWithHour === stopDateWithHour;
+}
+
 function syncSeconds() {
-  if (document.visibilityState === 'visible' && stopDate) {
-    seconds.value += Math.round((new Date - stopDate) / 1000);
+  if (document.visibilityState === 'visible' && stopDate && isSameHour(stopDate)) {
+    seconds.value += Math.round((now() - stopDate) / 1000);
 
     stopDate = null;
 
     start();
   } else if (isRunning.value) {
-    stopDate = new Date();
+    stopDate = now();
 
     stop();
   }
