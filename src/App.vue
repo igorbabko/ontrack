@@ -109,6 +109,8 @@ function updateTimelineItemStartedTrackingAt({ timelineItem, isTracked }) {
 function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
   // console.log('aaaa', { timelineItem, activitySeconds });
 
+  console.log(activitySeconds);
+
   timelineItem.activitySeconds += activitySeconds;
 }
 

@@ -19,27 +19,32 @@ let stopDate;
 
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') {
-    console.log('start');
+    // console.log('start');
     // alert('visible');
-    if (props.isTracking) {
+    if (stopDate) {
       startDate = new Date;
 
-      const diff = startDate - stopDate;
+      const diff = Math.round((startDate - stopDate) / 1000);
 
-      emit('updateSeconds', diff / 1000);
+      // emit('updateSeconds', diff);
 
-      seconds.value = currentSeconds + diff / 1000;
+      seconds.value = currentSeconds + diff;
 
-      console.log(diff / 1000);
+      // console.log(diff / 1000);
+
+      start();
+
+      stopDate = null;
     }
 
     // stop();
   } else {
     // alert('hidden');
-    console.log('stop');
+    // console.log('stop');
 
-    if (props.isTracking) {
+    if (isRunning.value) {
       currentSeconds = seconds.value;
+      stop();
 
       stopDate = new Date();
     }

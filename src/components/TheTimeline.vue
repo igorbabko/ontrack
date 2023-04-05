@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watchEffect, nextTick } from 'vue';
+import { ref, computed, watchEffect, watchPostEffect, nextTick } from 'vue';
 import { PAGE_TIMELINE } from '../constants';
 import { now } from '../functions';
 import TimelineItem from './TimelineItem.vue';
@@ -24,7 +24,7 @@ watchEffect(() => {
   if (isMidnight.value) emit('midnight');
 });
 
-watchEffect(async () => {
+watchPostEffect(async () => { // todo test this scrolling more
   if (props.currentPage === PAGE_TIMELINE) {
     await nextTick();
 
