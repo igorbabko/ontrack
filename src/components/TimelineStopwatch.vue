@@ -13,43 +13,23 @@ const props = defineProps({
   isCurrent: Boolean,
 });
 
-let currentSeconds;
-let startDate;
 let stopDate;
 
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    // console.log('start');
-    // alert('visible');
-    if (stopDate) {
-      startDate = new Date;
+function syncSecondsOnVisibilityChange() {
+  if (document.visibilityState === 'visible' && stopDate) {
+    seconds.value += Math.round((new Date - stopDate) / 1000);
 
-      const diff = Math.round((startDate - stopDate) / 1000);
+    stopDate = null;
 
-      // emit('updateSeconds', diff);
+    start();
+  } else if (isRunning.value) {
+    stopDate = new Date();
 
-      seconds.value = currentSeconds + diff;
-
-      // console.log(diff / 1000);
-
-      start();
-
-      stopDate = null;
-    }
-
-    // stop();
-  } else {
-    // alert('hidden');
-    // console.log('stop');
-
-    if (isRunning.value) {
-      currentSeconds = seconds.value;
-      stop();
-
-      stopDate = new Date();
-    }
+    stop();
   }
-});
+}
+
+document.addEventListener('visibilitychange', syncSecondsOnVisibilityChange);
 
 const emit = defineEmits(['toggle', 'updateSeconds']);
 
