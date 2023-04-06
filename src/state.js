@@ -85,7 +85,9 @@ function syncTime() {
 
     updateTimelineItemActivitySeconds(firstTracked, trackedSeconds.first);
     updateTimelineItemActivitySeconds(lastTracked, trackedSeconds.last);
-  } else {
+  } else if (firstTrackedIndex < 23) {
+    console.log(firstTrackedIndex);
+
     const nextTracked = state.timelineItems[firstTrackedIndex + 1];
 
     const trackedSeconds = getFirstAndLastTrackedTimelineItemSeconds(
