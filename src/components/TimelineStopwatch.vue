@@ -30,7 +30,7 @@ let stopDate;
 //   return currentDateWithHour === stopDateWithHour;
 // }
 
-// let a = false;
+let pauseDate = null;
 
 function syncSeconds() {
   if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt && props.isCurrent) {
@@ -48,9 +48,16 @@ function syncSeconds() {
 
     seconds.value += Math.round((now() - a) / 1000);
 
-    // start();
+    start();
   } else if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt) {
     console.log('3333');
+
+    // const a = now();
+
+    // a.setMinutes(0);
+    // a.setSeconds(0);
+
+    // seconds.value += Math.round((now() - a) / 1000);
 
     // stop();
   } else if (isRunning.value) {
@@ -90,6 +97,8 @@ const time = computed(() => formatTime(seconds.value));
 const isStartButtonEnabled = computed(() => props.timelineItem.hour === props.currentTime.getHours());
 
 watch(() => props.isCurrent, () => {
+  if (document.visibilityState === 'hidden') return;
+
   if (props.isCurrent && props.isTracking) {
     console.log('start');
     start();

@@ -3,8 +3,10 @@ import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants';
 export function now() {
   const now = new Date;
 
-  // now.setHours(13);
-  now.setMinutes(now.getMinutes() + 24);
+  // now.setDate(7);
+  now.setHours(16);
+  now.setMinutes(now.getMinutes() + 10);
+  now.setSeconds(now.getSeconds() - 30);
 
   return now;
 }
