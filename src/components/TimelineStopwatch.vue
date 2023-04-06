@@ -52,12 +52,16 @@ function syncSeconds() {
   } else if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt) {
     console.log('3333');
 
-    // const a = now();
+    const a = now();
 
-    // a.setMinutes(0);
-    // a.setSeconds(0);
+    a.setMinutes(0);
+    a.setSeconds(0);
 
-    // seconds.value += Math.round((now() - a) / 1000);
+    const diff = Math.round((a - pauseDate) / 1000);
+
+    console.log('diff', diff);
+
+    seconds.value += diff;
 
     // stop();
   } else if (isRunning.value) {
@@ -127,6 +131,8 @@ function pause() {
   isRunning.value = false;
 
   clearInterval(stopwatch);
+
+  pauseDate = now();
 }
 
 function stop() {
