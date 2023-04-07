@@ -30,7 +30,7 @@ watch(() => props.isCurrent, () => {
 
   if (props.isCurrent && props.isTracking) {
     start();
-  } else if (!props.isCurrent && isRunning.value) {
+  } else if (isRunning.value) {
     stop();
   }
 }, {
