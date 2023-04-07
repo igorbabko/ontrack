@@ -16,19 +16,18 @@ const props = defineProps({
 let pauseDate = null;
 
 function syncSeconds() {
-  if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt && props.isCurrent) {
+  if (document.visibilityState === 'visible') {
+    if (props.timelineItem.startedTrackingAt && props.isCurrent) {
+      seconds.value += millisecondsToSeconds(now() - new Date(props.timelineItem.startedTrackingAt));
 
-    seconds.value += Math.round((now() - new Date(props.timelineItem.startedTrackingAt)) / 1000);
+      start();
+    } else if (props.isCurrent && props.isTracking) {
+      seconds.value += millisecondsToSeconds(now() - currentHourStartDate());
 
-    start();
-  } else if (document.visibilityState === 'visible' && props.isCurrent && props.isTracking) {
-    seconds.value += Math.round((now() - currentHourStartDate()) / 1000);
-
-    start();
-  } else if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt) {
-    const diff = Math.round((currentHourStartDate() - pauseDate) / 1000);
-
-    seconds.value += diff;
+      start();
+    } else if (props.timelineItem.startedTrackingAt) {
+      seconds.value += millisecondsToSeconds(currentHourStartDate() - pauseDate);
+    }
   } else if (isRunning.value) {
     pause();
   }

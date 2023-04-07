@@ -20,6 +20,10 @@ export function currentHourStartDate() {
   return date;
 }
 
+export function millisecondsToSeconds(ms) {
+  return Math.round(ms / 1000);
+}
+
 export function generateTimelineItems() {
   const timelineItems = [];
 
