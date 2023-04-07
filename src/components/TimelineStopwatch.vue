@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import { formatTime, now } from '../functions';
+import { formatTime, now, currentHourStartDate } from '../functions';
 import StopwatchButtonReset from './StopwatchButtonReset.vue';
 import StopwatchButtonStart from './StopwatchButtonStart.vue';
 import StopwatchButtonStop from './StopwatchButtonStop.vue';
@@ -20,33 +20,15 @@ function syncSeconds() {
 
     seconds.value += Math.round((now() - new Date(props.timelineItem.startedTrackingAt)) / 1000);
 
-    console.log('1111', seconds.value);
-
     start();
   } else if (document.visibilityState === 'visible' && props.isCurrent && props.isTracking) {
-    const a = now();
-
-    a.setMinutes(0);
-    a.setSeconds(0);
-
-    seconds.value += Math.round((now() - a) / 1000);
-
-    console.log('222222222222', seconds.value);
+    seconds.value += Math.round((now() - currentHourStartDate()) / 1000);
 
     start();
   } else if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt) {
-    const a = now();
-
-    a.setMinutes(0);
-    a.setSeconds(0);
-
-    const diff = Math.round((a - pauseDate) / 1000);
-
+    const diff = Math.round((currentHourStartDate() - pauseDate) / 1000);
 
     seconds.value += diff;
-
-    console.log('diff', diff);
-    console.log('3333', seconds.value);
   } else if (isRunning.value) {
     pause();
   }

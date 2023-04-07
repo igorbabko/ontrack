@@ -53,7 +53,7 @@ function scrollToTimelineItem(timelineItem, isSmooth = true) {
 
 <template>
   <div class="relative mt-7">
-    <TheTimelineIndicator :current-page="currentPage" />
+    <!-- <TheTimelineIndicator :current-page="currentPage" /> -->
     <ul>
       <TimelineItem
         v-for="timelineItem in timelineItems"

@@ -4,11 +4,20 @@ export function now() {
   const now = new Date;
 
   // now.setDate(8);
-  now.setHours(23);
-  now.setMinutes(now.getMinutes() - 8);
-  now.setSeconds(now.getSeconds() + 10);
+  now.setHours(16);
+  // now.setMinutes(now.getMinutes() - 20);
+  // now.setSeconds(now.getSeconds() + 10);
 
   return now;
+}
+
+export function currentHourStartDate() {
+  const date = now();
+
+  date.setMinutes(0);
+  date.setSeconds(0);
+
+  return date;
 }
 
 export function generateTimelineItems() {
