@@ -6,7 +6,7 @@ import { getTotalActivitySeconds, filterTrackedActivities, normalizePercentage, 
 const props = defineProps(['activities', 'timelineItems']);
 
 const progress = computed(() => {
-  const percentage = totalActivitySeconds.value * 100 / totalActivitySecondsToComplete.value;
+  const percentage = totalActivitySeconds.value * HUNDRED_PERCENT / totalActivitySecondsToComplete.value;
 
   return normalizePercentage(percentage);
 });
@@ -34,7 +34,7 @@ const progressColorClass = computed(() => getProgressColorClass(progress.value))
 
 <template>
   <a href="#progress" class="text-sm">
-    <div v-if="progress === 100" class="flex items-center gap-1">
+    <div v-if="progress === HUNDRED_PERCENT" class="flex items-center gap-1">
       Day complete!
       <CheckCircleIcon class="h-7 text-green-500" />
     </div>

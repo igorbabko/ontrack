@@ -10,7 +10,7 @@ const el = ref();
 onMounted(() => {
   updateHeight();
 
-  setInterval(updateHeight, 1000);
+  setInterval(updateHeight, MILLISECONDS_IN_SECOND);
 });
 
 watchPostEffect(async () => {
@@ -26,15 +26,15 @@ function updateHeight() {
 }
 
 function topOffset() {
-  const secondsPercentage = 100 * seconds() / 86400;
+  const secondsPercentage = HUNDRED_PERCENT * seconds() / SECONDS_IN_DAY;
 
-  return secondsPercentage * el.value.parentNode.getBoundingClientRect().height / 100;
+  return secondsPercentage * el.value.parentNode.getBoundingClientRect().height / HUNDRED_PERCENT;
 }
 
 function seconds() {
-  const currentDate = now();
+  const date = now();
 
-  return currentDate.getSeconds() + (60 * currentDate.getMinutes()) + (60 * 60 * currentDate.getHours());
+  return date.getSeconds() + (SECONDS_IN_MINUTE * date.getMinutes()) + (SECONDS_IN_MINUTE * MINUTES_IN_HOUR * date.getHours());
 }
 </script>
 

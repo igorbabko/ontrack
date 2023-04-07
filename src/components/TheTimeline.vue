@@ -18,7 +18,7 @@ const isTracking = computed(() => props.timelineItems.some(({ startedTrackingAt 
 
 const isMidnight = computed(() => currentTime.value.toTimeString().substring(0, 8) === '00:00:00');
 
-setInterval(() => currentTime.value = now(), 1000);
+setInterval(() => currentTime.value = now(), MILLISECONDS_IN_SECOND);
 
 watchEffect(() => {
   if (isMidnight.value) emit('midnight');

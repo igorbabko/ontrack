@@ -21,13 +21,13 @@ export function currentHourStartDate() {
 }
 
 export function millisecondsToSeconds(ms) {
-  return Math.round(ms / 1000);
+  return Math.round(ms / MILLISECONDS_IN_SECOND);
 }
 
 export function generateTimelineItems() {
   const timelineItems = [];
 
-  for (let hour = 0; hour < 24; hour++) {
+  for (let hour = 0; hour < HOURS_IN_DAY; hour++) {
     timelineItems.push({
       id: id(),
       hour,
@@ -50,12 +50,12 @@ export function generateActivities() {
     {
       id: id(),
       name: 'Training',
-      secondsToComplete: 3600,
+      secondsToComplete: SECONDS_IN_HOUR,
     },
     {
       id: id(),
       name: 'Reading',
-      secondsToComplete: 120 * 60,
+      secondsToComplete: 120 * SECONDS_IN_MINUTE,
     },
   ];
 }
@@ -75,9 +75,9 @@ export function getTotalActivitySeconds(activity, timelineItems) {
 }
 
 export function getProgressColorClass(percentage) {
-  if (percentage < 33) return 'bg-red-500';
-  if (percentage < 66) return 'bg-yellow-500';
-  if (percentage < 100) return 'bg-blue-500';
+  if (percentage < LOW_PERCENT) return 'bg-red-500';
+  if (percentage < MEDIUM_PERCENT) return 'bg-yellow-500';
+  if (percentage < HUNDRED_PERCENT) return 'bg-blue-500';
 
   return 'bg-green-500';
 }
@@ -85,13 +85,13 @@ export function getProgressColorClass(percentage) {
 export function normalizePercentage(percentage) {
   percentage = Math.floor(percentage);
 
-  return percentage < 100 ? percentage : 100;
+  return percentage < HUNDRED_PERCENT ? percentage : HUNDRED_PERCENT;
 }
 
 export function formatTime(seconds) {
   const date = now();
 
-  date.setTime(Math.abs(seconds) * 1000);
+  date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECOND);
 
   const utc = date.toUTCString();
 
@@ -114,14 +114,14 @@ export function generatePeriodSelectOptions() {
   ];
 
   return periodsInMinutes.map(periodInMinutes => ({
-    value: periodInMinutes * 60,
+    value: periodInMinutes * SECONDS_IN_MINUTE,
     label: generatePeriodSelectOptionLabel(periodInMinutes),
   }));
 }
 
 function generatePeriodSelectOptionLabel(periodInMinutes) {
-  const hours = Math.floor(periodInMinutes / 60);
-  const minutes = periodInMinutes % 60;
+  const hours = Math.floor(periodInMinutes / MINUTES_IN_HOUR);
+  const minutes = periodInMinutes % MINUTES_IN_HOUR;
 
   if (hours && minutes) {
     return `${hours}:${minutes}`;

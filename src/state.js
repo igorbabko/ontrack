@@ -106,7 +106,7 @@ function getLastTrackedTimelineItem() {
 function updateTrackedTimelineItemActivitySecondsWithinRange(start, end) {
   state.timelineItems
     .slice(start, end + 1)
-    .forEach(timelineItem => updateTimelineItemActivitySeconds(timelineItem, 3600));
+    .forEach(timelineItem => updateTimelineItemActivitySeconds(timelineItem, SECONDS_IN_HOUR));
 }
 
 function updateTimelineItemActivitySeconds(timelineItem, seconds) {

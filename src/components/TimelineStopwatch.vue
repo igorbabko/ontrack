@@ -64,7 +64,7 @@ function start() {
     emit('updateSeconds', 1);
 
     seconds.value++;
-  }, 1000);
+  }, MILLISECONDS_IN_SECOND);
 
   emit('toggle', true);
 }

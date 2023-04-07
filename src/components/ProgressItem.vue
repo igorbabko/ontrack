@@ -15,7 +15,7 @@ const progressColorClass = computed(() => getProgressColorClass(progress.value))
 
 const progress = computed(() => {
   const activitySeconds = getTotalActivitySeconds(props.activity, props.timelineItems);
-  const percentage = activitySeconds * 100 / props.activity.secondsToComplete;
+  const percentage = activitySeconds * HUNDRED_PERCENT / props.activity.secondsToComplete;
 
   return normalizePercentage(percentage);
 });
