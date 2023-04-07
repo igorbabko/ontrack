@@ -13,26 +13,6 @@ const props = defineProps({
   isCurrent: Boolean,
 });
 
-let pauseDate = null;
-
-function syncSeconds() {
-  if (document.visibilityState === 'visible') {
-    if (props.timelineItem.startedTrackingAt && props.isCurrent) {
-      seconds.value += millisecondsToSeconds(now() - new Date(props.timelineItem.startedTrackingAt));
-
-      start();
-    } else if (props.isCurrent && props.isTracking) {
-      seconds.value += millisecondsToSeconds(now() - currentHourStartDate());
-
-      start();
-    } else if (props.timelineItem.startedTrackingAt) {
-      seconds.value += millisecondsToSeconds(currentHourStartDate() - pauseDate);
-    }
-  } else if (isRunning.value) {
-    pause();
-  }
-}
-
 document.addEventListener('visibilitychange', syncSeconds);
 
 const emit = defineEmits(['toggle', 'updateSeconds']);
@@ -56,6 +36,26 @@ watch(() => props.isCurrent, () => {
 }, {
   immediate: true
 });
+
+let pauseDate = null;
+
+function syncSeconds() {
+  if (document.visibilityState === 'visible') {
+    if (props.timelineItem.startedTrackingAt && props.isCurrent) {
+      seconds.value += millisecondsToSeconds(now() - new Date(props.timelineItem.startedTrackingAt));
+
+      start();
+    } else if (props.isCurrent && props.isTracking) {
+      seconds.value += millisecondsToSeconds(now() - currentHourStartDate());
+
+      start();
+    } else if (props.timelineItem.startedTrackingAt) {
+      seconds.value += millisecondsToSeconds(currentHourStartDate() - pauseDate);
+    }
+  } else if (isRunning.value) {
+    pause();
+  }
+}
 
 function start() {
   isRunning.value = true;
