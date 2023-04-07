@@ -11,36 +11,19 @@ const props = defineProps({
   currentTime: Object,
   isTracking: Boolean,
   isCurrent: Boolean,
-  // a: Boolean
 });
-
-let stopDate;
-
-// function isSameHour(stopDate) {
-//   if (!stopDate) return false;
-
-//   const stopDateWithHour = stopDate.toLocaleString(undefined, { hour12: false }).substring(0, 12);
-
-//   const currentDate = now();
-//   const currentDateWithHour = currentDate.toLocaleString(undefined, { hour12: false }).substring(0, 12);
-
-//   console.log('stop: ' + stopDateWithHour);
-//   console.log('current: ' + currentDateWithHour);
-
-//   return currentDateWithHour === stopDateWithHour;
-// }
 
 let pauseDate = null;
 
 function syncSeconds() {
   if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt && props.isCurrent) {
-    console.log('1111');
 
     seconds.value += Math.round((now() - new Date(props.timelineItem.startedTrackingAt)) / 1000);
 
+    console.log('1111', seconds.value);
+
     start();
   } else if (document.visibilityState === 'visible' && props.isCurrent && props.isTracking) {
-    console.log('222222222222');
     const a = now();
 
     a.setMinutes(0);
@@ -48,10 +31,10 @@ function syncSeconds() {
 
     seconds.value += Math.round((now() - a) / 1000);
 
+    console.log('222222222222', seconds.value);
+
     start();
   } else if (document.visibilityState === 'visible' && props.timelineItem.startedTrackingAt) {
-    console.log('3333');
-
     const a = now();
 
     a.setMinutes(0);
@@ -59,29 +42,14 @@ function syncSeconds() {
 
     const diff = Math.round((a - pauseDate) / 1000);
 
-    console.log('diff', diff);
 
     seconds.value += diff;
 
-    // stop();
+    console.log('diff', diff);
+    console.log('3333', seconds.value);
   } else if (isRunning.value) {
-    // emit('a');
-
     pause();
   }
-
-
-  // if (document.visibilityState === 'visible' && stopDate && isSameHour(stopDate)) {
-  //   seconds.value += Math.round((now() - stopDate) / 1000);
-
-  //   stopDate = null;
-
-  //   start();
-  // } else if (isRunning.value) {
-  //   stopDate = now();
-
-  //   stop();
-  // }
 }
 
 document.addEventListener('visibilitychange', syncSeconds);
@@ -93,10 +61,6 @@ const isRunning = ref(false);
 
 let stopwatch = null;
 
-// if (props.isTracking && props.isCurrent) {
-//   start();
-// }
-
 const time = computed(() => formatTime(seconds.value));
 const isStartButtonEnabled = computed(() => props.timelineItem.hour === props.currentTime.getHours());
 
@@ -104,13 +68,10 @@ watch(() => props.isCurrent, () => {
   if (document.visibilityState === 'hidden') return;
 
   if (props.isCurrent && props.isTracking) {
-    console.log('start');
     start();
   } else if (!props.isCurrent && isRunning.value) {
-    console.log('stop');
     stop();
   }
-  console.log('some');
 }, {
   immediate: true
 });
