@@ -54,8 +54,6 @@ function updateTimelineItemStartedTrackingAt({ timelineItem, isTracked }) {
 }
 
 function updateTimelineItemActivitySeconds({ timelineItem, activitySeconds }) {
-  // console.log('aaaa', { timelineItem, activitySeconds });
-
   timelineItem.activitySeconds += activitySeconds;
 }
 
@@ -81,8 +79,6 @@ function deleteActivity(activity) {
 }
 
 function setActivitySecondsToComplete({ activity, secondsToComplete }) {
-  // console.log('bbb', { activity, secondsToComplete });
-
   activity.secondsToComplete = secondsToComplete;
 }
 
