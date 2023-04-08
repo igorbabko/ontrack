@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watchPostEffect, onMounted, nextTick } from 'vue';
-import { PAGE_TIMELINE } from '../constants';
+import { PAGE_TIMELINE, MILLISECONDS_IN_SECOND, HUNDRED_PERCENT, SECONDS_IN_DAY, SECONDS_IN_MINUTE, MINUTES_IN_HOUR } from '../constants';
 import { now } from '../functions';
 
 const props = defineProps(['currentPage']);

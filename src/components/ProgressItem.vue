@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import { HUNDRED_PERCENT } from '../constants';
 import { formatTime, getTotalActivitySeconds, normalizePercentage, getProgressColorClass } from '../functions';
 
 const props = defineProps(['activity', 'timelineItems']);

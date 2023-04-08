@@ -1,4 +1,4 @@
-import { APP_NAME } from './constants';
+import { APP_NAME, SECONDS_IN_HOUR } from './constants';
 import { now, millisecondsToSeconds, generateTimelineItems, generateActivities } from './functions';
 
 let state = null;

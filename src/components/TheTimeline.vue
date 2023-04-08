@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watchEffect, watchPostEffect, nextTick } from 'vue';
-import { PAGE_TIMELINE } from '../constants';
+import { PAGE_TIMELINE, MILLISECONDS_IN_SECOND } from '../constants';
 import { now } from '../functions';
 import TimelineItem from './TimelineItem.vue';
 import TheTimelineIndicator from './TheTimelineIndicator.vue';

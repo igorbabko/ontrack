@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { CheckCircleIcon } from '@heroicons/vue/24/solid';
+import { HUNDRED_PERCENT } from '../constants';
 import { getTotalActivitySeconds, filterTrackedActivities, normalizePercentage, getProgressColorClass } from '../functions';
 
 const props = defineProps(['activities', 'timelineItems']);
