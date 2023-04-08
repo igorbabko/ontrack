@@ -46,5 +46,5 @@ function seconds() {
 </script>
 
 <template>
-  <hr ref="el" class="absolute border-b-2 border-red-600 w-full z-10 opacity-50">
+  <hr ref="el" class="absolute border-b-2 border-red-600 w-full z-10 opacity-50 pointer-events-none">
 </template>
