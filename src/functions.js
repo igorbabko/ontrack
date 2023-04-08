@@ -16,7 +16,7 @@ export function now() {
   const now = new Date;
 
   // now.setDate(8);
-  now.setHours(16);
+  // now.setHours(16);
   // now.setMinutes(now.getMinutes() - 20);
   // now.setSeconds(now.getSeconds() + 10);
 
