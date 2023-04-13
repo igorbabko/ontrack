@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 import { MILLISECONDS_IN_SECOND } from '../constants';
-import { formatTime, now, currentHourStartDate } from '../functions';
+import { formatTime, now, currentHourStartDate, millisecondsToSeconds } from '../functions';
 import StopwatchButtonReset from './StopwatchButtonReset.vue';
 import StopwatchButtonStart from './StopwatchButtonStart.vue';
 import StopwatchButtonStop from './StopwatchButtonStop.vue';
