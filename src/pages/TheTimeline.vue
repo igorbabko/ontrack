@@ -1,5 +1,5 @@
 <script setup>
-import { HOURS_IN_DAY } from '../constants'
+import { isTimelineItemValid } from '../validators'
 import TimelineItem from '../components/TimelineItem.vue'
 
 defineProps({
@@ -7,9 +7,7 @@ defineProps({
     required: true,
     type: Array,
     validator(timelineItems) {
-      return timelineItems.every(
-        ({ hour }) => typeof hour === 'number' && hour >= 0 && hour < HOURS_IN_DAY
-      )
+      return timelineItems.every(isTimelineItemValid)
     }
   }
 })
