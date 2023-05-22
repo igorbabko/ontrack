@@ -1,14 +1,23 @@
 <script setup>
-import { ref } from 'vue'
-import { isTimelineItemValid, validateSelectOptions } from '../validators'
+import {
+  isTimelineItemValid,
+  isActivityValid,
+  validateSelectOptions,
+  validateActivities
+} from '../validators'
 import BaseSelect from './BaseSelect.vue'
 import TimelineHour from './TimelineHour.vue'
 
-defineProps({
+const props = defineProps({
   timelineItem: {
     required: true,
     type: Object,
     validator: isTimelineItemValid
+  },
+  activities: {
+    required: true,
+    type: Array,
+    validator: validateActivities
   },
   activitySelectOptions: {
     required: true,
@@ -17,7 +26,16 @@ defineProps({
   }
 })
 
-const selectedActivityId = ref(null)
+const emit = defineEmits({
+  selectActivity: isActivityValid
+})
+
+function selectActivity(id) {
+  emit(
+    'selectActivity',
+    props.activities.find((activity) => activity.id === id)
+  )
+}
 </script>
 
 <template>
@@ -25,9 +43,9 @@ const selectedActivityId = ref(null)
     <TimelineHour :hour="timelineItem.hour" />
     <BaseSelect
       placeholder="Rest"
-      :selected="selectedActivityId"
+      :selected="timelineItem.activityId"
       :options="activitySelectOptions"
-      @select="selectedActivityId = $event"
+      @select="selectActivity"
     />
   </li>
 </template>
