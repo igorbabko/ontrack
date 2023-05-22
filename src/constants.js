@@ -24,6 +24,8 @@ export const NAV_ITEMS = {
   [PAGE_PROGRESS]: ChartBarIcon
 }
 
+export const NULLABLE_ACTIVITY = { id: null }
+
 export const PERIOD_SELECT_OPTIONS = [
   {
     value: 1 * SECONDS_IN_HOUR,
