@@ -9,7 +9,7 @@ import BaseSelect from './BaseSelect.vue'
 defineProps({
   activity: {
     required: true,
-    type: String,
+    type: Object,
     validator: isActivityValid
   }
 })
