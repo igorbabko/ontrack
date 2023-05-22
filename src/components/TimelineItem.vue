@@ -3,7 +3,8 @@ import {
   isTimelineItemValid,
   isActivityValid,
   validateSelectOptions,
-  validateActivities
+  validateActivities,
+  isNull
 } from '../validators'
 import BaseSelect from './BaseSelect.vue'
 import TimelineHour from './TimelineHour.vue'
@@ -27,14 +28,13 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
-  selectActivity: isActivityValid
+  selectActivity(activity) {
+    return isNull(activity) || isActivityValid(activity)
+  }
 })
 
 function selectActivity(id) {
-  emit(
-    'selectActivity',
-    props.activities.find((activity) => activity.id === id)
-  )
+  emit('selectActivity', props.activities.find((activity) => activity.id === id) || null)
 }
 </script>
 
