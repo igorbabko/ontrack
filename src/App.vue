@@ -69,9 +69,9 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
 
 provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds)
 provide('setTimelineItemActivity', setTimelineItemActivity)
-provide('activitySelectOptions', activitySelectOptions.value)
+provide('activitySelectOptions', activitySelectOptions)
 provide('periodSelectOptions', generatePeriodSelectOptions())
-provide('timelineItems', timelineItems.value)
+provide('timelineItems', timelineItems)
 </script>
 
 <template>
