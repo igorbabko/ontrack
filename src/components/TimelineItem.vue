@@ -5,7 +5,6 @@ import {
   isTimelineItemValid,
   isActivityValid,
   isHourValid,
-  validateSelectOptions
 } from '../validators'
 import BaseSelect from './BaseSelect.vue'
 import TimelineHour from './TimelineHour.vue'
@@ -16,11 +15,6 @@ defineProps({
     required: true,
     type: Object,
     validator: isTimelineItemValid
-  },
-  activitySelectOptions: {
-    required: true,
-    type: Array,
-    validator: validateSelectOptions
   }
 })
 
@@ -29,6 +23,7 @@ const emit = defineEmits({
   scrollToHour: isHourValid
 })
 
+const activitySelectOptions = inject('activitySelectOptions')
 const activities = inject('activities')
 
 function selectActivity(id) {
