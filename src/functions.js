@@ -1,12 +1,11 @@
 import {
-  PAGE_TIMELINE,
   MILLISECONDS_IN_SECOND,
   SECONDS_IN_HOUR,
   SECONDS_IN_MINUTE,
   MINUTES_IN_HOUR,
   HOURS_IN_DAY
 } from './constants'
-import { isPageValid, isNull } from './validators'
+import { isNull } from './validators'
 
 export function formatSeconds(seconds) {
   const date = new Date()
@@ -16,18 +15,6 @@ export function formatSeconds(seconds) {
   const utc = date.toUTCString()
 
   return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)
-}
-
-export function normalizePageHash() {
-  const page = window.location.hash.slice(1)
-
-  if (isPageValid(page)) {
-    return page
-  }
-
-  window.location.hash = PAGE_TIMELINE
-
-  return PAGE_TIMELINE
 }
 
 export function normalizeSelectValue(value) {
