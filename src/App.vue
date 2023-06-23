@@ -2,6 +2,7 @@
 import { ref, computed, provide } from 'vue'
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS, NULLABLE_ACTIVITY } from './constants'
 import {
+  id,
   normalizePageHash,
   generateTimelineItems,
   generateActivities,
@@ -36,8 +37,12 @@ function goTo(page) {
   currentPage.value = page
 }
 
-function createActivity(activity) {
-  activities.value.push(activity)
+function createActivity(name) {
+  activities.value.push({
+    id: id(),
+    name,
+    secondsToComplete: 0
+  })
 }
 
 function deleteActivity(activity) {
@@ -70,6 +75,7 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
 provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds)
 provide('setActivitySecondsToComplete', setActivitySecondsToComplete)
 provide('setTimelineItemActivity', setTimelineItemActivity)
+provide('createActivity', createActivity)
 provide('activitySelectOptions', activitySelectOptions)
 provide('periodSelectOptions', generatePeriodSelectOptions())
 provide('timelineItems', timelineItems)
@@ -88,7 +94,6 @@ provide('timelineItems', timelineItems)
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"
       :activities="activities"
-      @create-activity="createActivity"
       @delete-activity="deleteActivity"
     />
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
