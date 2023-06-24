@@ -1,9 +1,8 @@
 <script setup>
-import { inject } from 'vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
-import { BUTTON_TYPE_DANGER } from '../constants'
+import { BUTTON_TYPE_DANGER, PERIOD_SELECT_OPTIONS } from '../constants'
 import { isActivityValid } from '../validators'
-import { setActivitySecondsToCompleteKey, periodSelectOptionsKey, deleteActivityKey } from '../keys'
+import { setActivitySecondsToComplete, deleteActivity } from '../activities'
 import BaseButton from './BaseButton.vue'
 import BaseSelect from './BaseSelect.vue'
 import ActivitySecondsToComplete from './ActivitySecondsToComplete.vue'
@@ -15,10 +14,6 @@ defineProps({
     validator: isActivityValid
   }
 })
-
-const setActivitySecondsToComplete = inject(setActivitySecondsToCompleteKey)
-const periodSelectOptions = inject(periodSelectOptionsKey)
-const deleteActivity = inject(deleteActivityKey)
 </script>
 
 <template>
@@ -33,7 +28,7 @@ const deleteActivity = inject(deleteActivityKey)
       <BaseSelect
         class="grow font-mono"
         placeholder="hh:mm"
-        :options="periodSelectOptions"
+        :options="PERIOD_SELECT_OPTIONS"
         :selected="activity.secondsToComplete || null"
         @select="setActivitySecondsToComplete(activity, $event)"
       />
