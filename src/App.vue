@@ -8,14 +8,12 @@ import {
   setActivitySecondsToComplete,
   activitySelectOptions,
   createActivity,
-  deleteActivity,
-  activities
+  deleteActivity
 } from './activities'
 import {
   updateTimelineItemActivitySeconds,
   resetTimelineItemActivities,
-  setTimelineItemActivity,
-  timelineItems
+  setTimelineItemActivity
 } from './timeline-items'
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
@@ -39,12 +37,8 @@ provide(keys.periodSelectOptionsKey, readonly(generatePeriodSelectOptions()))
   <TheHeader />
 
   <main class="flex flex-grow flex-col">
-    <TheTimeline
-      v-show="currentPage === PAGE_TIMELINE"
-      :timeline-items="timelineItems"
-      ref="timelineRef"
-    />
-    <TheActivities v-show="currentPage === PAGE_ACTIVITIES" :activities="activities" />
+    <TheTimeline v-show="currentPage === PAGE_TIMELINE" ref="timelineRef" />
+    <TheActivities v-show="currentPage === PAGE_ACTIVITIES" />
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
   </main>
 
