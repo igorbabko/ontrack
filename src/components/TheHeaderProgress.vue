@@ -1,6 +1,6 @@
 <script setup>
-import { PAGE_PROGRESS } from '../constants'
 import { ICON_CHECK_CIRCLE } from '../icons'
+import { PAGE_PROGRESS } from '../constants'
 import { navigate } from '../router'
 import BaseIcon from './BaseIcon.vue'
 </script>
