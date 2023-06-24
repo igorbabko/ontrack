@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import { SECONDS_IN_HOUR, NULLABLE_ACTIVITY } from './constants'
+import { SECONDS_IN_HOUR } from './constants'
 import { id } from './functions'
 
 export const activities = ref(generateActivities())
@@ -20,10 +20,6 @@ export function deleteActivity(activity) {
 
 export function setActivitySecondsToComplete(activity, secondsToComplete) {
   activity.secondsToComplete = secondsToComplete || 0
-}
-
-export function findActivityById(id) {
-  return activities.value.find((activity) => activity.id === id) || NULLABLE_ACTIVITY
 }
 
 function generateActivities() {

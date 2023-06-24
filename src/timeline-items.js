@@ -1,11 +1,11 @@
 import { ref } from 'vue'
 import { HOURS_IN_DAY } from './constants'
-import { findActivityById, activities } from './activities'
+import { activities } from './activities'
 
 export const timelineItems = ref(generateTimelineItems())
 
 export function setTimelineItemActivity(timelineItem, activityId) {
-  timelineItem.activityId = findActivityById(activityId).id
+  timelineItem.activityId = activityId
 }
 
 export function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
