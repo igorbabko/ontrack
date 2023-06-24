@@ -9,7 +9,7 @@ export function setTimelineItemActivity(timelineItem, activityId) {
 }
 
 export function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
-  timelineItem.activitySeconds += activitySeconds
+  timelineItem.activitySeconds = activitySeconds
 }
 
 export function resetTimelineItemActivities(activity) {
