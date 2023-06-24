@@ -1,60 +1,31 @@
 <script setup>
-import { ref, computed, provide, readonly } from 'vue'
-import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS, NULLABLE_ACTIVITY } from './constants'
-import {
-  id,
-  generateTimelineItems,
-  generateActivities,
-  generateActivitySelectOptions,
-  generatePeriodSelectOptions
-} from './functions'
+import { ref, provide, readonly } from 'vue'
+import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants'
+import { generateTimelineItems, generatePeriodSelectOptions } from './functions'
 import { currentPage, timelineRef } from './router'
 import * as keys from './keys'
+import {
+  setActivitySecondsToComplete,
+  activitySelectOptions,
+  findActivityById,
+  createActivity,
+  deleteActivity,
+  activities
+} from './activities'
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 import TheTimeline from './pages/TheTimeline.vue'
 import TheActivities from './pages/TheActivities.vue'
 import TheProgress from './pages/TheProgress.vue'
 
-const activities = ref(generateActivities())
-
 const timelineItems = ref(generateTimelineItems(activities.value))
-
-const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value))
-
-function createActivity(name) {
-  activities.value.push({
-    id: id(),
-    name,
-    secondsToComplete: 0
-  })
-}
-
-function deleteActivity(activity) {
-  timelineItems.value.forEach((timelineItem) => {
-    if (timelineItem.activityId === activity.id) {
-      timelineItem.activityId = null
-      timelineItem.activitySeconds = 0
-    }
-  })
-
-  activities.value.splice(activities.value.indexOf(activity), 1)
-}
 
 function setTimelineItemActivity(timelineItem, activityId) {
   timelineItem.activityId = findActivityById(activityId).id
 }
 
-function findActivityById(id) {
-  return activities.value.find((activity) => activity.id === id) || NULLABLE_ACTIVITY
-}
-
 function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
   timelineItem.activitySeconds += activitySeconds
-}
-
-function setActivitySecondsToComplete(activity, secondsToComplete) {
-  activity.secondsToComplete = secondsToComplete || 0
 }
 
 provide(keys.updateTimelineItemActivitySecondsKey, updateTimelineItemActivitySeconds)
