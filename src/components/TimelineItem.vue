@@ -1,6 +1,6 @@
 <script setup>
 import { isTimelineItemValid, isUndefined } from '../validators'
-import { setTimelineItemActivity } from '../timeline-items'
+import { updateTimelineItem } from '../timeline-items'
 import { activitySelectOptions } from '../activities'
 import BaseSelect from './BaseSelect.vue'
 import TimelineHour from './TimelineHour.vue'
@@ -26,7 +26,7 @@ const emit = defineEmits({
       placeholder="Rest"
       :selected="timelineItem.activityId"
       :options="activitySelectOptions"
-      @select="setTimelineItemActivity(timelineItem, $event)"
+      @select="updateTimelineItem(timelineItem, { activityId: $event })"
     />
     <TimelineStopwatch :timeline-item="timelineItem" />
   </li>
