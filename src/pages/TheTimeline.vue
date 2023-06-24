@@ -8,11 +8,7 @@ import {
 } from '../timeline-items'
 import TimelineItem from '../components/TimelineItem.vue'
 
-onActivated(() => {
-  console.log('activated')
-
-  scrollToCurrentHour(false)
-})
+onActivated(scrollToCurrentHour)
 </script>
 
 <template>
