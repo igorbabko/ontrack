@@ -1,11 +1,9 @@
 <script setup>
-import { ref, inject, nextTick } from 'vue'
+import { ref, nextTick } from 'vue'
 import { PlusIcon } from '@heroicons/vue/24/outline'
 import { id } from '../functions'
-import { createActivityKey } from '../keys'
+import { createActivity } from '../activities'
 import BaseButton from './BaseButton.vue'
-
-const createActivity = inject(createActivityKey)
 
 const name = ref('')
 
