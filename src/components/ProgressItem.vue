@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(['index'])
+const props = defineProps(['index', 'activity'])
 
 const color = ['red', 'yellow', 'blue', 'green'][props.index]
 const progress = [3, 50, 70, 100][props.index]
@@ -10,7 +10,7 @@ const timeProgress = ['03:00 / 30:00', '15:00 / 30:00', '21:00 / 30:00', '30:00 
 
 <template>
   <li class="flex flex-col gap-1 p-4">
-    <div class="truncate text-xl">Activity {{ index + 1 }}</div>
+    <div class="truncate text-xl">{{ activity.name }}</div>
     <div :class="`flex h-5 overflow-hidden rounded bg-neutral-200`">
       <div :class="`bg-${color}-500`" :style="`width: ${progress}%`" />
     </div>
