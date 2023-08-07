@@ -1,38 +1,16 @@
 <script setup>
-import {
-  CheckCircleIcon as CheckCircle,
-  ListBulletIcon as ListBullet,
-  ArrowPathIcon as ArrowPath,
-  ChartBarIcon as ChartBar,
-  ClockIcon as Clock,
-  TrashIcon as Trash,
-  XMarkIcon as XMark,
-  PauseIcon as Pause,
-  PlayIcon as Play,
-  PlusIcon as Plus
-} from '@heroicons/vue/24/outline'
+import { ICONS } from '../icons'
+import { isIconValid } from '../validators'
 
 defineProps({
   name: {
     required: true,
     type: String,
+    validator: isIconValid
   }
 })
-
-const icons = {
-  CheckCircle,
-  ListBullet,
-  ArrowPath,
-  ChartBar,
-  Clock,
-  Trash,
-  XMark,
-  Pause,
-  Play,
-  Plus
-}
 </script>
 
 <template>
-  <component :is="icons[name]" />
+  <component :is="ICONS[name]" />
 </template>
