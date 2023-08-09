@@ -26,7 +26,7 @@ function generateActivities() {
   return ['Coding', 'Reading', 'Training'].map((name, hours) => ({
     id: id(),
     name,
-    secondsToComplete: hours * SECONDS_IN_HOUR
+    secondsToComplete: 15 * 60 // hours * SECONDS_IN_HOUR
   }))
 }
 

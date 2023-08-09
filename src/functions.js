@@ -2,7 +2,9 @@ import {
   MILLISECONDS_IN_SECOND,
   SECONDS_IN_MINUTE,
   MINUTES_IN_HOUR,
-  HUNDRED_PERCENT
+  HUNDRED_PERCENT,
+  MEDIUM_PERCENT,
+  LOW_PERCENT
 } from './constants'
 import { isNull } from './validators'
 
@@ -28,6 +30,14 @@ export function normalizePercentage(percentage) {
   percentage = Math.floor(percentage)
 
   return percentage < HUNDRED_PERCENT ? percentage : HUNDRED_PERCENT
+}
+
+export function getProgressColorClass(percentage) {
+  if (percentage < LOW_PERCENT) return 'bg-red-500'
+  if (percentage < MEDIUM_PERCENT) return 'bg-yellow-500'
+  if (percentage < HUNDRED_PERCENT) return 'bg-blue-500'
+
+  return 'bg-green-500'
 }
 
 export function id() {
