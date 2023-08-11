@@ -1,4 +1,5 @@
 <script setup>
+import { watch } from 'vue'
 import { ICON_ARROW_PATH, ICON_PAUSE, ICON_PLAY } from '../icons'
 import {
   BUTTON_TYPE_SUCCESS,
@@ -7,6 +8,7 @@ import {
 } from '../constants'
 import { formatSeconds, currentHour } from '../functions'
 import { isTimelineItemValid } from '../validators'
+import { updateTimelineItem } from '../timeline-items'
 import { useStopwatch } from '../composables/stopwatch'
 import BaseButton from './BaseButton.vue'
 import BaseIcon from './BaseIcon.vue'
@@ -19,9 +21,21 @@ const props = defineProps({
   }
 })
 
-const { seconds, start, stop, reset } = useStopwatch(props.timelineItem)
-
 const isStartButtonDisabled = props.timelineItem.hour !== currentHour()
+
+const { seconds, start, stop, reset } = useStopwatch(
+  props.timelineItem.activitySeconds,
+  (seconds) => updateTimelineItemActivitySeconds(props.timelineItem.activitySeconds + seconds)
+)
+
+watch(
+  () => props.timelineItem.activityId,
+  () => updateTimelineItemActivitySeconds(seconds.value * 120)
+)
+
+function updateTimelineItemActivitySeconds(activitySeconds) {
+  updateTimelineItem(props.timelineItem, { activitySeconds })
+}
 </script>
 
 <template>
