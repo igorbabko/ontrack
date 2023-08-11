@@ -12,14 +12,20 @@ export function currentHour() {
   return new Date().getHours()
 }
 
-export function formatSeconds(seconds) {
+export function formatSeconds(seconds, withSign = false) {
   const date = new Date()
 
   date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECOND)
 
   const utc = date.toUTCString()
 
-  return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)
+  let sign = ''
+
+  if (withSign) {
+    sign = seconds < 0 ? '-' : '+'
+  }
+
+  return `${sign}${utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)}`
 }
 
 export function normalizeSelectValue(value) {

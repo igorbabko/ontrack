@@ -12,23 +12,14 @@ const props = defineProps({
   }
 })
 
-const classes = computed(
-  () => `flex items-center rounded px-2 font-mono text-xl ${colorClasses.value}`
-)
-
-const colorClasses = computed(() =>
+const classes = computed(() => [
+  'flex items-center rounded px-2 font-mono text-xl',
   secondsDiff.value < 0 ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600'
-)
+])
 
-const seconds = computed(() => `${sign.value}${formatSeconds(secondsDiff.value)}`)
-
-const sign = computed(() => (secondsDiff.value >= 0 ? '+' : '-'))
-
-const secondsDiff = computed(
-  () => getTotalActivitySeconds(props.activity) - props.activity.secondsToComplete
-)
+const secondsDiff = computed(() => getTotalActivitySeconds(props.activity) - props.activity.secondsToComplete)
 </script>
 
 <template>
-  <div :class="classes">{{ seconds }}</div>
+  <div :class="classes">{{ formatSeconds(secondsDiff, true) }}</div>
 </template>
