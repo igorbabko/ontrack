@@ -16,7 +16,8 @@ export function resetTimelineItemActivities(activity) {
     .filter((timelineItem) => hasActivity(timelineItem, activity))
     .forEach((timelineItem) => updateTimelineItem(timelineItem, {
       activityId: null,
-      activitySeconds: 0
+      // todo
+      // activitySeconds: 0
     }))
 }
 
