@@ -8,15 +8,15 @@ export const PAGE_PROGRESS = 'progress'
 export const NAV_ITEMS = [
   {
     page: PAGE_TIMELINE,
-    icon: ICON_CLOCK 
+    icon: ICON_CLOCK
   },
   {
     page: PAGE_ACTIVITIES,
-    icon: ICON_LIST_BULLET 
+    icon: ICON_LIST_BULLET
   },
   {
     page: PAGE_PROGRESS,
-    icon: ICON_CHART_BAR 
+    icon: ICON_CHART_BAR
   }
 ]
 
@@ -43,4 +43,6 @@ export const MIDNIGHT_HOUR = 0
 
 export const PERIOD_SELECT_OPTIONS = generatePeriodSelectOptions()
 
+export const LOW_PERCENT = 33
+export const MEDIUM_PERCENT = 66
 export const HUNDRED_PERCENT = 100
