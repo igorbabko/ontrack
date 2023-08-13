@@ -2,7 +2,11 @@
 import { computed } from 'vue'
 import { HUNDRED_PERCENT } from '../constants'
 import { getProgressColorClass } from '../functions'
-import { calculateTrackedActivitySeconds } from '../timeline-items'
+import {
+  calculateTrackedActivitySeconds,
+  filterTimelineItemsByActivity,
+  timelineItems
+} from '../timeline-items'
 import { calculateActivityCompletionPercentage } from '../activities'
 
 const props = defineProps(['index', 'activity'])
@@ -11,11 +15,14 @@ const timeProgress = ['03:00 / 30:00', '15:00 / 30:00', '21:00 / 30:00', '30:00 
   props.index
 ]
 
-const percentage = computed(() => {
-  const trackedActivitySeconds = calculateTrackedActivitySeconds(props.activity)
-
-  return calculateActivityCompletionPercentage(props.activity, trackedActivitySeconds)
-})
+const percentage = computed(() =>
+  calculateActivityCompletionPercentage(
+    props.activity,
+    calculateTrackedActivitySeconds(
+      filterTimelineItemsByActivity(timelineItems.value, props.activity)
+    )
+  )
+)
 </script>
 
 <template>
