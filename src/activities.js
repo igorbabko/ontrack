@@ -4,6 +4,12 @@ import { id } from './functions'
 
 export const activities = ref(generateActivities())
 
+export const totalActivitySecondsToComplete = computed(() => {
+  return trackedActivities.value
+    .map(({ secondsToComplete }) => secondsToComplete)
+    .reduce((total, seconds) => total + seconds, 0)
+})
+
 export const trackedActivities = computed(() =>
   activities.value.filter(({ secondsToComplete }) => secondsToComplete)
 )
@@ -24,6 +30,10 @@ export function deleteActivity(activity) {
 
 export function calculateActivityCompletionPercentage({ secondsToComplete }, trackedSeconds) {
   return Math.floor((trackedSeconds * HUNDRED_PERCENT) / secondsToComplete)
+}
+
+export function calculateCompletionPercentage(totalTrackedSeconds) {
+  return Math.floor((totalTrackedSeconds * HUNDRED_PERCENT) / totalActivitySecondsToComplete.value)
 }
 
 function generateActivities() {
