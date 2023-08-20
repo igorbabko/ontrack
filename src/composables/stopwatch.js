@@ -1,17 +1,13 @@
 import { ref } from 'vue'
 import { MILLISECONDS_IN_SECOND } from '../constants'
 
-export function useStopwatch(initialSeconds = 0, handleSecondsChange = null) {
+export function useStopwatch(initialSeconds = 0) {
   const seconds = ref(initialSeconds)
   const isRunning = ref(false)
   const temp = 120
 
   function start() {
-    isRunning.value = setInterval(() => {
-      seconds.value += temp
-
-      handleSecondsChange(seconds.value)
-    }, MILLISECONDS_IN_SECOND)
+    isRunning.value = setInterval(() => (seconds.value += temp), MILLISECONDS_IN_SECOND)
   }
 
   function stop() {
@@ -22,8 +18,6 @@ export function useStopwatch(initialSeconds = 0, handleSecondsChange = null) {
 
   function reset() {
     stop()
-
-    handleSecondsChange(-seconds.value)
 
     seconds.value = 0
   }
