@@ -1,8 +1,10 @@
 <script setup>
+import { watch } from 'vue'
 import { BUTTON_TYPE_SUCCESS, BUTTON_TYPE_WARNING, BUTTON_TYPE_DANGER } from '../constants'
 import { ICON_ARROW_PATH, ICON_PAUSE, ICON_PLAY } from '../icons'
-import { formatSeconds } from '../functions'
+import { formatSeconds, currentHour } from '../functions'
 import { isTimelineItemValid } from '../validators'
+import { updateTimelineItem } from '../timeline-items'
 import { useStopwatch } from '../composables/stopwatch'
 import BaseButton from './BaseButton.vue'
 import BaseIcon from './BaseIcon.vue'
@@ -15,7 +17,15 @@ const props = defineProps({
   }
 })
 
-const { seconds, isRunning, isDisabled, start, stop, reset } = useStopwatch(props.timelineItem)
+const { seconds, isRunning, start, stop, reset } = useStopwatch(
+  props.timelineItem.activitySeconds,
+  (seconds) => updateTimelineItem(props.timelineItem, { activitySeconds: seconds })
+)
+
+watch(
+  () => props.timelineItem.activityId,
+  () => updateTimelineItem(props.timelineItem, { activitySeconds: seconds.value })
+)
 </script>
 
 <template>
@@ -29,7 +39,12 @@ const { seconds, isRunning, isDisabled, start, stop, reset } = useStopwatch(prop
     <BaseButton v-if="isRunning" :type="BUTTON_TYPE_WARNING" @click="stop">
       <BaseIcon :name="ICON_PAUSE" />
     </BaseButton>
-    <BaseButton v-else :type="BUTTON_TYPE_SUCCESS" :disabled="isDisabled" @click="start">
+    <BaseButton
+      v-else
+      :type="BUTTON_TYPE_SUCCESS"
+      :disabled="timelineItem.hour !== currentHour()"
+      @click="start"
+    >
       <BaseIcon :name="ICON_PLAY" />
     </BaseButton>
   </div>
