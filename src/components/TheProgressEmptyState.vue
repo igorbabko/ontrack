@@ -5,8 +5,8 @@ import EmptyState from './EmptyState.vue'
 <template>
   <EmptyState>
     <template #image>
-      <img src="../assets/img/no_activities.svg" alt="No activities" class="h-48" />
+      <img src="../assets/img/no_tracked_activities.svg" alt="No tracked activities" class="h-48" />
     </template>
-    You don't have any activities
+    You don't have any tracked activities
   </EmptyState>
 </template>
