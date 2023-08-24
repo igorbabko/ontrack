@@ -8,8 +8,19 @@ import {
 } from './constants'
 import { isNull } from './validators'
 
+export function currentDate() {
+  const now = new Date;
+
+  // now.setDate(8);
+  now.setHours(23);
+  now.setMinutes(now.getMinutes() + 53);
+  // now.setSeconds(now.getSeconds() + 10);
+
+  return now;
+}
+
 export function currentHour() {
-  return new Date().getHours()
+  return currentDate().getHours()
 }
 
 export function formatSecondsWithSign(seconds) {
@@ -17,11 +28,11 @@ export function formatSecondsWithSign(seconds) {
 }
 
 export function formatSeconds(seconds) {
-  const date = new Date()
+  const now = currentDate() 
 
-  date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECOND)
+  now.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECOND)
 
-  const utc = date.toUTCString()
+  const utc = now.toUTCString()
 
   return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)
 }
