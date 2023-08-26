@@ -9,14 +9,14 @@ export function useTotalProgress() {
   const percentage = computed(() => calculateCompletionPercentage(totalTrackedSeconds.value))
 
   const totalTrackedSeconds = computed(() => {
-    return trackedActivities.value.reduce((total, activity) => {
-      let trackedSeconds = calculateTrackedActivitySeconds(timelineItems.value, activity)
-
-      trackedSeconds =
-        trackedSeconds < activity.secondsToComplete ? trackedSeconds : activity.secondsToComplete
-
-      return total + trackedSeconds
-    }, 0)
+    return trackedActivities.value
+      .map((activity) =>
+        Math.min(
+          calculateTrackedActivitySeconds(timelineItems.value, activity),
+          activity.secondsToComplete
+        )
+      )
+      .reduce((total, seconds) => total + seconds, 0)
   })
 
   return {
