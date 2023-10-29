@@ -12,8 +12,8 @@ export function currentDate() {
   const now = new Date;
 
   // now.setDate(8);
-  now.setHours(23);
-  now.setMinutes(now.getMinutes() + 53);
+  // now.setHours(23);
+  // now.setMinutes(now.getMinutes() + 53);
   // now.setSeconds(now.getSeconds() + 10);
 
   return now;
