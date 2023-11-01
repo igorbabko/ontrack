@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, onActivated, onDeactivated } from 'vue'
 import {
   MILLISECONDS_IN_SECOND,
   SECONDS_IN_MINUTE,
@@ -12,7 +12,15 @@ import { currentDate } from '../functions'
 const secondsSinceMidnight = ref(calculateSecondsSinceMidnight())
 const indicatorRef = ref()
 
-setInterval(() => (secondsSinceMidnight.value += 10 * 60), MILLISECONDS_IN_SECOND)
+let timer = null
+
+onActivated(() => {
+  secondsSinceMidnight.value = calculateSecondsSinceMidnight()
+
+  timer = setInterval(() => (secondsSinceMidnight.value += 10 * 60), MILLISECONDS_IN_SECOND)
+})
+
+onDeactivated(() => clearInterval(timer))
 
 const topOffset = computed(
   () => (secondsSinceMidnightInPercentage.value * getTimelineHeight()) / HUNDRED_PERCENT
