@@ -3,7 +3,7 @@ import { HUNDRED_PERCENT, MILLISECONDS_IN_SECOND, SECONDS_IN_DAY } from './const
 
 const currentDate = new Date()
 
-currentDate.setHours(23, 30)
+currentDate.setHours(0, 0)
 
 export const now = ref(currentDate)
 
