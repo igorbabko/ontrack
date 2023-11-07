@@ -1,7 +1,7 @@
 <script setup>
-import { ref, computed, onActivated, onDeactivated } from 'vue'
+import { ref, computed } from 'vue'
 import { HUNDRED_PERCENT } from '../constants'
-import { secondsSinceMidnightInPercentage, startTimer, stopTimer } from '../time'
+import { secondsSinceMidnightInPercentage } from '../time'
 
 const indicatorRef = ref()
 
@@ -12,9 +12,6 @@ const topOffset = computed(
 function getTimelineHeight() {
   return indicatorRef.value?.parentNode.getBoundingClientRect().height
 }
-
-onActivated(startTimer)
-onDeactivated(stopTimer)
 </script>
 
 <template>
