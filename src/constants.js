@@ -1,6 +1,8 @@
 import { ICON_CLOCK, ICON_LIST_BULLET, ICON_CHART_BAR } from './icons'
 import { generatePeriodSelectOptions } from './functions'
 
+export const APP_NAME = 'ontrack'
+
 export const PAGE_TIMELINE = 'timeline'
 export const PAGE_ACTIVITIES = 'activities'
 export const PAGE_PROGRESS = 'progress'
