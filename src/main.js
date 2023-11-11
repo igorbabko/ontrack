@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import * as storage from './storage'
 import { activities } from './activities'
 import { timelineItems } from './timeline-items'
+import { isToday } from './time'
 import App from './App.vue'
 
 import './assets/main.css'
@@ -15,8 +16,8 @@ document.addEventListener('visibilitychange', () => {
 function loadState() {
   const state = storage.load()
 
-  timelineItems.value = state.timelineItems
-  activities.value = state.activities
+  timelineItems.value = isToday(new Date(state.date)) ? state.timelineItems : timelineItems.value
+  activities.value = state.activities || activities.value
 }
 
 function saveState() {
