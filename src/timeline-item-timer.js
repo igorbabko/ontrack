@@ -34,3 +34,9 @@ watchEffect(() => {
     stopTimelineItemTimer(activeTimelineItem.value)
   }
 })
+
+export function toggleTimelineItemTimer(shouldStart = true) {
+  shouldStart
+    ? startTimelineItemTimer(activeTimelineItem.value)
+    : stopTimelineItemTimer(activeTimelineItem.value)
+}

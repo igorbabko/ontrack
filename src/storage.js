@@ -1,7 +1,16 @@
 import { APP_NAME } from './constants'
 import { endOfHour, isToday, toSeconds, today } from './time'
-import { timelineItems } from './timeline-items'
 import { activities } from './activities'
+import { activeTimelineItem, timelineItems } from './timeline-items'
+import { toggleTimelineItemTimer } from './timeline-item-timer'
+
+export function syncState(shouldLoad = true) {
+  shouldLoad ? loadState() : saveState()
+
+  if (activeTimelineItem.value) {
+    toggleTimelineItemTimer(shouldLoad)
+  }
+}
 
 export function loadState() {
   const serializedState = localStorage.getItem(APP_NAME)
