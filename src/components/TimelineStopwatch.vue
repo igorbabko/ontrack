@@ -32,10 +32,10 @@ watchEffect(() => {
   }
 })
 
-watchEffect(() =>
-  updateTimelineItem(props.timelineItem, {
-    activitySeconds: seconds.value
-  })
+watchEffect(() => updateTimelineItem(props.timelineItem, { activitySeconds: seconds.value }))
+
+watch(isRunning, () =>
+  updateTimelineItem(props.timelineItem, { isActive: Boolean(isRunning.value) })
 )
 
 watch(isRunning, () =>
