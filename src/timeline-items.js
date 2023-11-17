@@ -1,5 +1,5 @@
-import { computed, ref, watchEffect } from 'vue'
-import { HOURS_IN_DAY, MIDNIGHT_HOUR, MILLISECONDS_IN_SECOND } from './constants'
+import { computed, ref } from 'vue'
+import { HOURS_IN_DAY, MIDNIGHT_HOUR } from './constants'
 import { now } from './time'
 
 export const timelineItemRefs = ref([])
@@ -38,38 +38,6 @@ export function scrollToHour(hour, isSmooth = true) {
 
   el.scrollIntoView({ behavior: isSmooth ? 'smooth' : 'instant' })
 }
-
-export const timelineItemTimer = ref(false)
-
-export function startTimelineItemTimer(timelineItem) {
-  updateTimelineItem(timelineItem, { isActive: true })
-
-  timelineItemTimer.value = setInterval(() => {
-    updateTimelineItem(timelineItem, {
-      activitySeconds: timelineItem.activitySeconds + 1
-    })
-  }, MILLISECONDS_IN_SECOND)
-}
-
-export function stopTimelineItemTimer(timelineItem) {
-  updateTimelineItem(timelineItem, { isActive: false })
-
-  clearInterval(timelineItemTimer.value)
-
-  timelineItemTimer.value = false
-}
-
-export function resetTimelineItemTimer(timelineItem) {
-  updateTimelineItem(timelineItem, { activitySeconds: 0 })
-
-  stopTimelineItemTimer(timelineItem)
-}
-
-watchEffect(() => {
-  if (activeTimelineItem.value && activeTimelineItem.value.hour !== now.value.getHours()) {
-    stopTimelineItemTimer(activeTimelineItem.value)
-  }
-})
 
 function filterTimelineItemsByActivity(timelineItems, { id }) {
   return timelineItems.filter(({ activityId }) => activityId === id)
