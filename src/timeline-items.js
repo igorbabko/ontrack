@@ -1,10 +1,14 @@
-import { ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { HOURS_IN_DAY, MIDNIGHT_HOUR, MILLISECONDS_IN_SECOND } from './constants'
 import { now } from './time'
 
 export const timelineItemRefs = ref([])
 
 export const timelineItems = ref(generateTimelineItems())
+
+export const activeTimelineItem = computed(() =>
+  timelineItems.value.find(({ isActive }) => isActive)
+)
 
 export function updateTimelineItem(timelineItem, fields) {
   return Object.assign(timelineItem, fields)
@@ -35,23 +39,37 @@ export function scrollToHour(hour, isSmooth = true) {
   el.scrollIntoView({ behavior: isSmooth ? 'smooth' : 'instant' })
 }
 
-let timelineItemTimer = null
+export const timelineItemTimer = ref(false)
 
-export function startTimelineItemTimer(activeTimelineItem) {
-  timelineItemTimer = setInterval(() => {
-    updateTimelineItem(activeTimelineItem, {
-      activitySeconds: activeTimelineItem.activitySeconds + 1
+export function startTimelineItemTimer(timelineItem) {
+  updateTimelineItem(timelineItem, { isActive: true })
+
+  timelineItemTimer.value = setInterval(() => {
+    updateTimelineItem(timelineItem, {
+      activitySeconds: timelineItem.activitySeconds + 1
     })
   }, MILLISECONDS_IN_SECOND)
 }
 
-export function stopTimelineItemTimer() {
-  clearInterval(timelineItemTimer)
+export function stopTimelineItemTimer(timelineItem) {
+  updateTimelineItem(timelineItem, { isActive: false })
+
+  clearInterval(timelineItemTimer.value)
+
+  timelineItemTimer.value = false
 }
 
-export function findActiveTimelineItem() {
-  return timelineItems.value.find(({ isActive }) => isActive)
+export function resetTimelineItemTimer(timelineItem) {
+  updateTimelineItem(timelineItem, { activitySeconds: 0 })
+
+  stopTimelineItemTimer(timelineItem)
 }
+
+watchEffect(() => {
+  if (activeTimelineItem.value && activeTimelineItem.value.hour !== now.value.getHours()) {
+    stopTimelineItemTimer(activeTimelineItem.value)
+  }
+})
 
 function filterTimelineItemsByActivity(timelineItems, { id }) {
   return timelineItems.filter(({ activityId }) => activityId === id)
