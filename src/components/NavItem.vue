@@ -16,7 +16,7 @@ const props = defineProps({
 
 const classes = computed(() => [
   'flex flex-col items-center p-2 text-xs capitalize',
-  { 'bg-gray-200': props.navItem.page === currentPage.value }
+  props.navItem.page === currentPage.value ? 'bg-gray-200' : 'hover:bg-gray-100'
 ])
 
 function handleClick() {
