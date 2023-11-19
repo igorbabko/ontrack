@@ -1,14 +1,42 @@
 import { computed, ref } from 'vue'
 import { HOURS_IN_DAY, MIDNIGHT_HOUR } from './constants'
-import { now } from './time'
+import { endOfHour, isToday, now, toSeconds, today } from './time'
 
 export const timelineItemRefs = ref([])
 
-export const timelineItems = ref(generateTimelineItems())
+export const timelineItems = ref([])
 
 export const activeTimelineItem = computed(() =>
   timelineItems.value.find(({ isActive }) => isActive)
 )
+
+export function initializeTimelineItems(state) {
+  const lastActiveAt = new Date(state.lastActiveAt)
+
+  if (isToday(lastActiveAt)) {
+    timelineItems.value = syncIdleSeconds(state.timelineItems, lastActiveAt)
+  } else if (state.timelineItems) {
+    timelineItems.value = resetTimelineItems(state.timelineItems)
+  } else {
+    timelineItems.value = generateTimelineItems()
+  }
+}
+
+function syncIdleSeconds(timelineItems, lastActiveAt) {
+  const activeTimelineItem = timelineItems.find(({ isActive }) => isActive)
+
+  if (activeTimelineItem) {
+    activeTimelineItem.activitySeconds += calculateIdleSeconds(lastActiveAt)
+  }
+
+  return timelineItems
+}
+
+function calculateIdleSeconds(lastActiveAt) {
+  return lastActiveAt.getHours() === today().getHours()
+    ? toSeconds(today() - lastActiveAt)
+    : toSeconds(endOfHour(lastActiveAt) - lastActiveAt)
+}
 
 export function updateTimelineItem(timelineItem, fields) {
   return Object.assign(timelineItem, fields)
