@@ -2,13 +2,13 @@ import { APP_NAME } from './constants'
 import { today } from './time'
 import { activities, initializeActivities } from './activities'
 import { timelineItems, initializeTimelineItems, activeTimelineItem } from './timeline-items'
-import { toggleTimelineItemTimer } from './timeline-item-timer'
+import { startTimelineItemTimer, stopTimelineItemTimer } from './timeline-item-timer'
 
 export function syncState(shouldLoad = true) {
   shouldLoad ? loadState() : saveState()
 
   if (activeTimelineItem.value) {
-    toggleTimelineItemTimer(shouldLoad)
+    shouldLoad ? startTimelineItemTimer() : stopTimelineItemTimer()
   }
 }
 
