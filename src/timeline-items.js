@@ -29,6 +29,14 @@ export function calculateTrackedActivitySeconds(timelineItems, activity) {
     .reduce((total, seconds) => Math.round(total + seconds), 0)
 }
 
+export function resetTimelineItems(timelineItems) {
+  return timelineItems.map((timelineItem) => ({
+    ...timelineItem,
+    activitySeconds: 0,
+    isActive: false
+  }))
+}
+
 export function scrollToCurrentHour(isSmooth = false) {
   scrollToHour(now.value.getHours(), isSmooth)
 }
