@@ -8,9 +8,7 @@ export function syncState(shouldLoad = true) {
   shouldLoad ? loadState() : saveState()
 
   if (activeTimelineItem.value) {
-    shouldLoad
-      ? startTimelineItemTimer(activeTimelineItem.value)
-      : stopTimelineItemTimer(activeTimelineItem.value)
+    shouldLoad ? startTimelineItemTimer() : stopTimelineItemTimer()
   }
 }
 
