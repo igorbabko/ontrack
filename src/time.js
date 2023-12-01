@@ -17,13 +17,7 @@ const secondsSinceMidnight = computed(() => (now.value - midnight.value) / MILLI
 const midnight = computed(() => new Date(now.value).setHours(0, 0, 0, 0))
 
 export function today() {
-  const today = new Date()
-
-  // today.setHours(11)
-  // today.setMinutes(59)
-  // today.setSeconds(55)
-
-  return today
+  return new Date()
 }
 
 export function tomorrow() {
@@ -53,8 +47,5 @@ export function toSeconds(milliseconds) {
 }
 
 export function startCurrentDateTimer() {
-  // currentDateTimer = setInterval(() => (now.value = today()), MILLISECONDS_IN_SECOND)
-  setInterval(() => {
-    now.value = new Date(now.value.getTime() + MILLISECONDS_IN_SECOND)
-  }, MILLISECONDS_IN_SECOND)
+  setInterval(() => (now.value = today()), MILLISECONDS_IN_SECOND)
 }
